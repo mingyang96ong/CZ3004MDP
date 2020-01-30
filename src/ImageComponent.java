@@ -9,12 +9,16 @@ public abstract class ImageComponent extends JLabel{
 	private ImageIcon imageIcon;
 	private int height, width;
 	public ImageComponent(String path, int width, int height) {
+		this.height = height;
+		this.width = width;
+		setImage(path);
+	}
+	
+	public void setImage(String path) {
 		imageIcon = new ImageIcon(path);
 		setSize(width, height);
 		setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));
 		setVisible(true);
-		this.height = height;
-		this.width = width;
 	}
 	
 	public void moveTo(int pixel, String command) {

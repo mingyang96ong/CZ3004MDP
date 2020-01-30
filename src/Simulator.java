@@ -1,45 +1,36 @@
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
-import java.util.Random;
+
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
 public class Simulator {
-	public final static String TITLE = "Simulator";
+	public final static String TITLE = "Group 15 Simulator";
 	public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	public static Random r = new Random();
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame(TITLE);
+		frame.setIconImage(new ImageIcon(Constant.SIMULATORICONIMAGEPATH).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 		frame.setLayout(null);
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		boolean simulation = true; // May be used in the future
 		
-		// THE ORDER OF ADDING THE ROBOT INTO THE FRAME MATTERS OTHERWISE IT WILL APPEAR UNDERNEATH THE GRID
-		ImageComponent robotImage = new RobotImageComponent(".\\images\\robot.png", Constant.ROBOTWIDTH, Constant.ROBOTHEIGHT);
-		frame.add(robotImage);
-		frame.setForeground(robotImage.getForeground());
-		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2, Constant.MARGINTOP + Constant.GRIDHEIGHT/2);
+		/* Set the starting position by the center block 
+		 * The value can only range from 1, 1 to 18, 13
+		 */
 		
-		int[][] gridvalue = new int [Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
+		SimulatorRobot sr = new SimulatorRobot(frame, 20, 15); 
 		
-		for (int i = 0; i < Constant.BOARDWIDTH; i++) {
-			for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
-				gridvalue[i][j] = r.nextInt(Constant.POSSIBLEGRIDLABELS.length);
-				if (j != Constant.BOARDHEIGHT - 1) {
-					System.out.print(gridvalue[i][j] + ", " );
-				}
-				else {
-					System.out.print(gridvalue[i][j]);
-				}
-			}
-			System.out.println();
-		}
+		/* This is to create a fake map for the exploration run.
+		Map map = new Map();
+		map.generateRandomMap();
+		map.print();
+		*/
 		
-		
-		
-		SimulatorMap smap = new SimulatorMap(frame, new Map(gridvalue));
-		AddJButtonActionListener AL = new AddJButtonActionListener(frame, robotImage);
 		frame.setVisible(true);
 
 	}
