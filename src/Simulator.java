@@ -22,14 +22,22 @@ public class Simulator {
 		/* Set the starting position by the center block 
 		 * The value can only range from 1, 1 to 18, 13
 		 */
+		// NORTH, EAST, SOUTH, WEST
+		SimulatorRobot sr = new SimulatorRobot(frame, 0, 0, Constant.POSSIBLEROBOTDIRECTION[2]); 
 		
-		SimulatorRobot sr = new SimulatorRobot(frame, 20, 15); 
+//		This is to create a fake map for the exploration run.
+//		int x = 1;
+//		int y = 1;
+//		RobotImageComponent robotImage = new RobotImageComponent(Constant.ROBOTIMAGEPATH, Constant.ROBOTWIDTH, Constant.ROBOTHEIGHT);
+//		frame.add(robotImage);
+//		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
+//		
+//		Map map = new Map();
+//		map.generateRandomMap();
+//		map.print();
+//		
+//		SimulatorMap smap = SimulatorMap.getInstance(frame, map);
 		
-		/* This is to create a fake map for the exploration run.
-		Map map = new Map();
-		map.generateRandomMap();
-		map.print();
-		*/
 		
 		frame.setVisible(true);
 

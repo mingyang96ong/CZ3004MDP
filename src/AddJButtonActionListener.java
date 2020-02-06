@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,20 +8,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddJButtonActionListener implements ActionListener{
 	private JFrame frame;
 	private int x = 1000;
 	private int y = 200;
-	private ImageComponent robotImage;
+	private SimulatorRobot r;
 	private ArrayList<JButton> Buttons = new ArrayList<JButton>();
+	private HashMap<String, JLabel> Labels = new HashMap<String, JLabel>();
 	private Timer t = new Timer();
+	private int step = 1;
 	
-	public AddJButtonActionListener(JFrame frame, ImageComponent robotImage) {
+	public AddJButtonActionListener(JFrame frame, SimulatorRobot r) {
 		this.frame = frame;
-		this.robotImage = robotImage;
+		this.r = r;
 		
 		// Create the UI Component
 		JLabel l = new JLabel("Manual Control:");
@@ -28,12 +33,22 @@ public class AddJButtonActionListener implements ActionListener{
 		JButton left = new JButton();
 		JButton down = new JButton();
 		JButton up = new JButton();
+		JButton update = new JButton();
+		JButton checkMap = new JButton();
+		JButton toggleMap = new JButton();
+		JButton resetRobot = new JButton();
+		JLabel robotView = new JLabel("Robot's View");
+		JLabel simulatedMap = new JLabel("Simulated Map");
 		
 		// Set Icon or Image to the UI Component
 		right.setIcon(new ImageIcon(new ImageIcon(".\\images\\right.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
 		left.setIcon(new ImageIcon(new ImageIcon(".\\images\\left.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
 		down.setIcon(new ImageIcon(new ImageIcon(".\\images\\down.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
 		up.setIcon(new ImageIcon(new ImageIcon(".\\images\\up.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
+		update.setText("Update");
+		checkMap.setText("Check Map");
+		toggleMap.setText("Toggle Map");
+		resetRobot.setText("Restart");
 		
 		// For the Button to do something, you need to add the button to this Action Listener and set the command for the ActionListener to receive
 		right.addActionListener(this);
@@ -44,6 +59,14 @@ public class AddJButtonActionListener implements ActionListener{
 		down.setActionCommand("Down");
 		up.addActionListener(this);
 		up.setActionCommand("Up");
+		update.addActionListener(this);
+		update.setActionCommand("Update");
+		checkMap.addActionListener(this);
+		checkMap.setActionCommand("Check Map");
+		toggleMap.addActionListener(this);
+		toggleMap.setActionCommand("Toggle Map");
+		resetRobot.addActionListener(this);
+		resetRobot.setActionCommand("Restart");
 		
 		
 		// Set the size (x, y, width, height) of the UI label
@@ -53,6 +76,14 @@ public class AddJButtonActionListener implements ActionListener{
 		right.setBounds(x + 100, y, 50, 50);
 		up.setBounds(x + 100, y - 100, 50, 50);
 		down.setBounds(x + 100, y, 50, 50);
+		update.setBounds(x + 200, y + 200, 100, 100);
+		checkMap.setBounds(x + 200, y + 200, 100, 100);
+		toggleMap.setBounds(x, y + 100, 150, 100);
+		resetRobot.setBounds(x + 200, y + 100, 150, 100 );
+		robotView.setFont(new Font(robotView.getFont().getName(), Font.BOLD, 30));
+		robotView.setBounds(x + 100, y - 100, 200, 50);
+		simulatedMap.setFont(new Font(simulatedMap.getFont().getName(), Font.BOLD, 30));
+		simulatedMap.setBounds(x + 100, y - 100, 300, 50);
 		
 		// Set location of the UI component
 		l.setLocation(x, y - 100);
@@ -60,6 +91,12 @@ public class AddJButtonActionListener implements ActionListener{
 		right.setLocation(x + 100, y);
 		up.setLocation(x + 50, y - 50);
 		down.setLocation(x + 50, y);
+		update.setLocation(x + 200, y - 50);
+		checkMap.setLocation(x + 350, y - 50);
+		toggleMap.setLocation(x, y + 100);
+		resetRobot.setLocation(x + 200, y + 100);
+		robotView.setLocation(x - 600, y - 185);
+		simulatedMap.setLocation(x - 600, y - 185);
 		
 		// Add the UI component to the frame
 		frame.add(l);
@@ -67,6 +104,12 @@ public class AddJButtonActionListener implements ActionListener{
 		frame.add(left);
 		frame.add(up);
 		frame.add(down);
+		frame.add(update);
+		frame.add(checkMap);
+		frame.add(toggleMap);
+		frame.add(resetRobot);
+		frame.add(robotView);
+		frame.add(simulatedMap);
 		
 		// Set Visibility of UI Component
 		l.setVisible(true);
@@ -74,12 +117,27 @@ public class AddJButtonActionListener implements ActionListener{
 		left.setVisible(true);
 		up.setVisible(true);
 		down.setVisible(true);
+		update.setVisible(true);
+		checkMap.setVisible(true);
+		toggleMap.setVisible(true);
+		resetRobot.setVisible(true);
+		robotView.setVisible(true);
+		simulatedMap.setVisible(false);
 		
-		// Add to the list of buttons
+		// Add button to the list of buttons
 		Buttons.add(right);
 		Buttons.add(left);
 		Buttons.add(up);
 		Buttons.add(down);
+		Buttons.add(update);
+		Buttons.add(checkMap);
+		Buttons.add(toggleMap);
+		Buttons.add(resetRobot);
+		
+		// Add label to the hashmap
+		Labels.put("l", l);
+		Labels.put("robotView", robotView);
+		Labels.put("simulatedMap", simulatedMap);
 	}
 	
 	public void disableButtons() {
@@ -94,44 +152,90 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 	}
 	
+//	public void moveRight() {
+//		for (int i = 0; i < Constant.GRIDWIDTH; i++) {
+//			t.schedule(new MoveImageWithButtonTask(robotImage, "Right", 1, this), delay * (i + 1));
+//		}
+//		t.schedule(new MoveImageWithButtonTask(robotImage, "Enable", 1, this), delay * (step * Constant.GRIDWIDTH + 1));
+//	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 		// TODO Auto-generated method stub
-		int step = 1;
-		int delay = 50;
 		if (action.equals("Right")) {
 			System.out.println("Right clicked");
 			disableButtons();
-			for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
-				t.schedule(new MoveImageWithButtonTask(robotImage, "Right", 1, this), delay * (i + 1));
+			if (!Labels.get("robotView").isVisible()) {
+				Labels.get("robotView").setVisible(true);
+				Labels.get("simulatedMap").setVisible(false);
 			}
-			t.schedule(new MoveImageWithButtonTask(robotImage, "Enable", 1, this), delay * (step * Constant.GRIDWIDTH + 1));
+			r.moveRight();
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
 		if (action.equals("Left")) {
 			System.out.println("Left clicked");
 			disableButtons();
-			for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
-				t.schedule(new MoveImageWithButtonTask(robotImage, "Left", 1, this), delay * (i + 1));
+			if (!Labels.get("robotView").isVisible()) {
+				Labels.get("robotView").setVisible(true);
+				Labels.get("simulatedMap").setVisible(false);
 			}
-			t.schedule(new MoveImageWithButtonTask(robotImage, "Enable", 1, this), delay * (step * Constant.GRIDWIDTH + 1));
+			r.moveLeft();
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
 		if (action.equals("Up")) {
 			System.out.println("Up clicked");
 			disableButtons();
-			for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
-				t.schedule(new MoveImageWithButtonTask(robotImage, "Up", 1, this), delay * (i + 1));
+			if (!Labels.get("robotView").isVisible()) {
+				Labels.get("robotView").setVisible(true);
+				Labels.get("simulatedMap").setVisible(false);
 			}
-			t.schedule(new MoveImageWithButtonTask(robotImage, "Enable", 1, this), delay * (step * Constant.GRIDWIDTH + 1));
+			r.moveUp();
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 
 		}
 		if (action.equals("Down")) {
 			System.out.println("Down clicked");
 			disableButtons();
-			for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
-				t.schedule(new MoveImageWithButtonTask(robotImage, "Down", 1, this), delay * (i + 1));
+			if (!Labels.get("robotView").isVisible()) {
+				Labels.get("robotView").setVisible(true);
+				Labels.get("simulatedMap").setVisible(false);
 			}
-			t.schedule(new MoveImageWithButtonTask(robotImage, "Enable", 1, this), delay * (step * Constant.GRIDWIDTH + 1));
+			r.moveDown();
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
+		}
+		if (action.contentEquals("Update")) {
+			disableButtons();
+			if (!Labels.get("robotView").isVisible()) {
+				Labels.get("robotView").setVisible(true);
+				Labels.get("simulatedMap").setVisible(false);
+			}
+			r.updateMap();
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
+		}
+		if (action.contentEquals("Check Map")) {
+			disableButtons();
+			JOptionPane.showMessageDialog(null, r.checkMap(), "Result of checking map", JOptionPane.INFORMATION_MESSAGE);
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
+		}
+		if (action.contentEquals("Toggle Map")) {
+			disableButtons();
+			if (r.toggleMap().compareTo("robot") == 0) {
+				Labels.get("robotView").setVisible(true);
+				Labels.get("simulatedMap").setVisible(false);
+			}
+			else {
+				Labels.get("robotView").setVisible(false);
+				Labels.get("simulatedMap").setVisible(true);
+			}
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
+		}
+		if (action.contentEquals("Restart")) {
+			disableButtons();
+			Labels.get("robotView").setVisible(true);
+			Labels.get("simulatedMap").setVisible(false);
+			r.restartRobot();
+			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
 	}
 }

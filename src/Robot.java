@@ -2,9 +2,7 @@
 public abstract class Robot {
 	
 	// This assumes the Robot have 3 front sensors, 2 left sensor and 1 right far sensor
-	protected String [] leftSensors = new String[2];
-	protected String [] frontSensor = new String[3];
-	protected String rightSensor = "";
+	protected Sensor sensor;
 	
 	protected String direction;
 	
@@ -12,9 +10,21 @@ public abstract class Robot {
 	
 	protected Map map;
 	
-	public abstract void getSensorValues();
+	public Robot(int x, int y, String direction) {
+		this.x = checkValidX(x);
+		this.y = checkValidY(y);
+		this.direction = direction;
+	}
 	
-	public abstract void setDirection(String direction);
+	protected abstract String[] getSensorValues();
+	public abstract void moveUp();
+	public abstract void moveRight();
+	public abstract void moveDown();
+	public abstract void moveLeft();
+	
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
 	
 	protected int checkValidX(int x) {
 		if (x >= Constant.BOARDWIDTH - 1) {
@@ -38,15 +48,92 @@ public abstract class Robot {
 		return y;
 	}
 	
-//	public String getDirection() {
-//		return direction;
-//	}
-//	
-//	public int[] getPosition() {
-//		return new int[] {x, y};
-//	}
-//	
-//	public Map getMap() {
-//		return map;
-//	}
+	public String getDirection() {
+		return direction;
+	}
+	
+	public int[] getPosition() {
+		return new int[] {x, y};
+	}
+	
+
+	
+	public void updateMap() {
+		Map newMap = map;
+		System.out.println(this.x);
+		System.out.println(this.y);
+		String[] sensorValues = getSensorValues(); // THIS VALUES IS BY CM (GRID * 10)
+		int [][] sensorLocation = sensor.sensorLocation;
+		int [][] sensorDirection = sensor.sensorDirection;
+		int sensorDirectionValueX, sensorDirectionValueY;
+		int s, e;
+		System.out.print("The SensorValues are: \n");
+		for (int i = 0; i < sensorValues.length; i ++) {
+			System.out.print(sensorValues[i]);
+			if (i != sensorValues.length - 1 ) {
+				System.out.print(" ");
+			}
+		}
+		System.out.println("\n");
+		
+		
+		for (int i = 0; i < sensorValues.length; i++) {
+			int value = (int)(Math.ceil(Double.parseDouble(sensorValues[i])/ 10));
+			boolean found = false;
+			if (i < sensorValues.length-1) {
+				if (i < 3) {
+					sensorDirectionValueX = sensorDirection[0][0];
+					sensorDirectionValueY = sensorDirection[0][1];
+				}
+				else {
+					sensorDirectionValueX = sensorDirection[1][0];
+					sensorDirectionValueY = sensorDirection[1][1];
+				}
+				s = Constant.SHORTSENSORMINRANGE;
+				e = Constant.SHORTSENSORMAXRANGE;
+			}
+			else {
+				sensorDirectionValueX = sensorDirection[2][0];
+				sensorDirectionValueY = sensorDirection[2][1];
+				s = Constant.FARSENSORMINRANGE;
+				e = Constant.FARSENSORMAXRANGE;
+			}
+			
+			
+			for (int g = s; g < e && !found; g++) {
+				int x = this.x + sensorLocation[i][0] + sensorDirectionValueX * g;
+				int y = this.y + sensorLocation[i][1] + sensorDirectionValueY * g;
+				String gridType = newMap.getGrid(x, y);
+//				System.out.println("x : "+ x);
+//				System.out.println("y : "+ y);
+////				System.out.println(!found);
+//				System.out.println("g : "+ g);
+//				System.out.println("value : "+ value);
+				if (g >= value ) {
+					found = true;
+					if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) {
+						// Means it is the obstacle and u cannot see anything behind the obstacle
+						newMap.setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
+					}
+					if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[1]) == 0) {
+						System.out.println("ERROR in ROBOT UPDATE MAP: EXPECTED OBSTACLE BUT ALREADY LABELLED EXPLORED");
+					}
+				}
+				else {
+					if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) {
+						// Means it is unexplored
+						newMap.setGrid(x, y, Constant.POSSIBLEGRIDLABELS[1]);
+					}
+					if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[2]) == 0) {
+						System.out.println("ERROR in ROBOT UPDATE MAP: EXPECTED EXPLORED BUT ALREADY LABELLED OBSTACLE");
+					}
+				}
+			}
+		}
+		newMap.print();
+	}
+	
+	public Map getMap() {
+		return map;
+	}
 }

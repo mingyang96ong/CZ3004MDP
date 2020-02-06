@@ -1,8 +1,11 @@
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.util.HashMap;
 
 public class SimulatorMap{
 	private ImageComponent[][] gridCells = new ImageComponent[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
+	private JLabel[] axis = new JLabel[Constant.BOARDWIDTH + Constant.BOARDHEIGHT];
 	private JFrame frame;
 	private Map map;
 	private static SimulatorMap simulatorMap = null;
@@ -14,6 +17,21 @@ public class SimulatorMap{
 			gridToImagePath.put(Constant.POSSIBLEGRIDLABELS[i], Constant.GRIDIMAGEPATH[i]);
 		}
 		initializeMapOnUI(frame);
+		for (int i = 0; i < axis.length; i++) {
+			if (i < Constant.BOARDWIDTH) {
+				axis[i] = new JLabel("" + i);
+				axis[i].setBounds(Constant.MARGINLEFT + 15 + i * Constant.GRIDWIDTH, Constant.MARGINTOP - 30, 20, 20);
+				axis[i].setLocation(Constant.MARGINLEFT + 15 + i * Constant.GRIDWIDTH, Constant.MARGINTOP - 30);
+			}
+			else {
+				axis[i] = new JLabel("" + (i-Constant.BOARDWIDTH));
+				axis[i].setBounds(Constant.MARGINLEFT - 25, Constant.MARGINTOP  + (i-Constant.BOARDWIDTH) * Constant.GRIDHEIGHT, 20, 20);
+				axis[i].setLocation(Constant.MARGINLEFT - 25, Constant.MARGINTOP  + (i-Constant.BOARDWIDTH) * Constant.GRIDHEIGHT);
+			}
+			frame.add(axis[i]);
+			axis[i].setVisible(true);
+		}
+			
 	}
 	
 	
@@ -51,7 +69,7 @@ public class SimulatorMap{
 	
 	public void setMap(Map map) {
 		updateMapOnUI(this.map, map);
-		this.map = map;
+		this.map = map.copy();
 	}
 	
 	private void createUIGrid(int i, int j, String path) {
@@ -76,4 +94,7 @@ public class SimulatorMap{
 		return frame;
 	}
 	
+	public Map getMap() {
+		return map;
+	}
 }
