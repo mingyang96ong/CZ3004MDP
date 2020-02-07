@@ -19,8 +19,9 @@ public abstract class Sensor {
 			}
 		
 		}
-		sensorLocation[0] = new int[] {sensorDirection[0][0]+ Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][0], 
-										sensorDirection[0][1]+ Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][1]};
+		
+		sensorLocation[0] = new int[] {sensorDirection[0][0] + Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][0], 
+										sensorDirection[0][1] + Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][1]};
 		sensorLocation[1] = sensorDirection[0];
 		sensorLocation[2] = new int[] {sensorDirection[0][0]+ Constant.SENSORDIRECTION[(i+1) % Constant.SENSORDIRECTION.length][0], 
 										sensorDirection[0][1]+ Constant.SENSORDIRECTION[(i+1) % Constant.SENSORDIRECTION.length][1]};

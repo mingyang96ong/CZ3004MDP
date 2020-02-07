@@ -8,12 +8,16 @@ public class Constant {
 	public static final int STARTPOINTWIDTH = 3;
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
-	public static final int SHORTSENSORMINRANGE = 1;
-	public static final int SHORTSENSORMAXRANGE = 3;
-	public static final int FARSENSORMINRANGE = 2;
-	public static final int FARSENSORMAXRANGE = 7;
+	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.
+	public static final int SHORTSENSORMAXRANGE = 3; // This is in number of grid.
+	public static final int SHORTSENSOROFFSET = 3; // This is in cm.
+	public static final int FARSENSORMINRANGE = 2; // This is in number of grid.
+	public static final int FARSENSORMAXRANGE = 7; // This is in number of grid.
+	public static final int FARSENSOROFFSET = 13; // This is in cm.
+	
 	public static final int[][] SENSORPLACEMENTNORTH = new int[][]{{-1, -1}, {0, -1}, {1, -1},
 																   {1, 1}, {1, -1}, {-1, -1}};
+																   
 	public static final int[][] SENSORDIRECTION = new int [][]{{0, -1},
 														       {1, 0},
 														       {0, 1},
