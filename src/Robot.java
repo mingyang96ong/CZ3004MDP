@@ -77,10 +77,10 @@ public abstract class Robot {
 		System.out.println("\n");
 		
 		
+		
 		for (int i = 0; i < sensorValues.length; i++) {
 			boolean no_obstacle = false;
 			int value = Integer.parseInt(sensorValues[i]);
-			System.out.println("here");
 			if (i < sensorValues.length-1) {
 				if (i < 3) {
 					sensorDirectionValueX = sensorDirection[0][0];
@@ -103,8 +103,7 @@ public abstract class Robot {
 			if (value > e) {
 				no_obstacle = true;
 			}
-			System.out.println("here2");
-			for (int d = (e-10) + s, g = e/10; d > 0; d = d - 10, g--) {
+			for (int d = s, g = 1; d <= e; d = d + 10, g++) {
 				int x = this.x + sensorLocation[i][0] + sensorDirectionValueX * g;
 				int y = this.y + sensorLocation[i][1] + sensorDirectionValueY * g;
 				String gridType = newMap.getGrid(x, y);
@@ -113,15 +112,13 @@ public abstract class Robot {
 //				System.out.println(!found);
 				System.out.println("g : "+ g);
 				System.out.println("value : "+ value);
-				System.out.println("d: " + d);
-				if (no_obstacle) {
-					updateMapGridExplored(newMap, x, y, gridType);
-				}
-				else if (value < d) {
-					continue;
+				System.out.println("d: " + d + "\n");
+				if (value >= d && value < d + 10 && value <= e) {
+					updateMapGridObstacle(newMap, x, y, gridType);
+					break;
 				}
 				else {
-					updateMapGridObstacle(newMap, x, y, gridType);
+					updateMapGridExplored(newMap, x, y, gridType);
 					no_obstacle = true;
 				}
 			}
