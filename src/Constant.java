@@ -1,4 +1,4 @@
-
+	
 public class Constant {
 	
 	// Used for all Real and Simulator Events
@@ -8,7 +8,25 @@ public class Constant {
 	public static final int STARTPOINTWIDTH = 3;
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
+	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.
+	public static final int SHORTSENSORMAXRANGE = 3; // This is in number of grid.
+	public static final int SHORTSENSOROFFSET = 3; // This is in cm.
+	public static final int FARSENSORMINRANGE = 2; // This is in number of grid.
+	public static final int FARSENSORMAXRANGE = 7; // This is in number of grid.
+	public static final int FARSENSOROFFSET = 13; // This is in cm.
 	
+	public static final int[][] SENSORPLACEMENTNORTH = new int[][]{{-1, -1}, {0, -1}, {1, -1},
+																   {1, 1}, {1, -1}, {-1, -1}};
+																   
+	public static final int[][] SENSORDIRECTION = new int [][]{{0, -1},
+														       {1, 0},
+														       {0, 1},
+														       {-1, 0}};
+	
+	// For Timertask in UI Simulator
+	public static final int DELAY = 15;
+	
+														       
 	// For Generating Random Map for Simulator
 	public static final int MAXOBSTACLECOUNT = 16;
 	
@@ -19,6 +37,11 @@ public class Constant {
 	public static final int MARGINTOP = 100;
 	public static final String SIMULATORICONIMAGEPATH = ".\\images\\simulator_icon.ico";
 	
+	
+	// Used in Map and possibly used in real run and simulator
+	public static final String[] POSSIBLEGRIDLABELS = new String[]{"Unexplored", "Explored", "Obstacle", "Waypoint", "Startpoint", "Endpoint"};
+	public static final String[] POSSIBLEROBOTDIRECTION = new String[]{"North", "East", "South", "West"};
+	
 	// Image path for UI Simulator
 	public static final String UNEXPLOREDIMAGEPATH = ".\\images\\unexplored_grid.png";
 	public static final String EXPLOREDIMAGEPATH = ".\\images\\explored_grid.png";
@@ -27,6 +50,11 @@ public class Constant {
 	public static final String STARTPOINTIMAGEPATH = ".\\images\\start_grid.png";
 	public static final String ENDPOINTIMAGEPATH = ".\\images\\end_grid.png";
 	public static final String ROBOTIMAGEPATH = ".\\images\\robot.png";
+	public static final String ROBOTNIMAGEPATH = ".\\images\\robotN.png";
+	public static final String ROBOTEIMAGEPATH = ".\\images\\robotE.png";
+	public static final String ROBOTSIMAGEPATH = ".\\images\\robotS.png";
+	public static final String ROBOTWIMAGEPATH = ".\\images\\robotW.png";
+	
 	
 	public static final String[] GRIDIMAGEPATH = new String[]{UNEXPLOREDIMAGEPATH,
 															  EXPLOREDIMAGEPATH,
@@ -35,9 +63,11 @@ public class Constant {
 															  STARTPOINTIMAGEPATH,
 															  ENDPOINTIMAGEPATH};
 	
-	// Used in Map and possibly used in real run and simulator
-	public static final String[] POSSIBLEGRIDLABELS = new String[]{"Unexplored", "Explored", "Obstacle", "Waypoint", "Startpoint", "Endpoint"};
-	public static final String[] POSSIBLEROBOTDIRECTION = new String[]{"North", "East", "South", "West"};
+	public static final String[] ROBOTIMAGEPATHS = new String[] {ROBOTNIMAGEPATH,
+																 ROBOTEIMAGEPATH,
+																 ROBOTSIMAGEPATH,
+																 ROBOTWIMAGEPATH};
+	
 
 	
 	// Avoid changing these values below

@@ -15,6 +15,7 @@ public abstract class ImageComponent extends JLabel{
 	}
 	
 	public void setImage(String path) {
+		setVisible(false);
 		imageIcon = new ImageIcon(path);
 		setSize(width, height);
 		setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(width, height, Image.SCALE_DEFAULT)));

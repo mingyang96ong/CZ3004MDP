@@ -31,8 +31,13 @@ public class Map{
 		}
 	}
 	
+	public Map copy() {
+		return new Map(this.grid);
+	}
+	
 	public void print() {
-		System.out.println("The current map is: ");
+		System.out.println("The current map is: \n");
+		
 		for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
 			for (int i = 0; i < Constant.BOARDWIDTH; i++) {
 				if (i != Constant.BOARDWIDTH - 1) {
@@ -44,10 +49,15 @@ public class Map{
 			}
 			System.out.println();
 		}
+		System.out.println("");
 	}
 	
 	public void initializeMap(String[][] grid) {
-		this.grid = grid;
+		for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
+			for (int i = 0; i < Constant.BOARDWIDTH; i++) {
+				setGrid(i, j, grid[i][j]);
+			}
+		}
 	}
 	
 	
@@ -75,33 +85,56 @@ public class Map{
 		}
 	}
 	
-	private void setGrid(int x, int y, String command) {
+	public void setGrid(int x, int y, String command) {
+		
+		if (x < 0 || x >= Constant.BOARDWIDTH || y < 0 || y >= Constant.BOARDHEIGHT) {
+			return;
+		}
+		
 		for (int i = 0; i < Constant.POSSIBLEGRIDLABELS.length; i++) {
 			if (command.toUpperCase().compareTo(Constant.POSSIBLEGRIDLABELS[i].toUpperCase()) == 0) {
 				grid[x][y] = command;
 				return;
 			}
 		}
-		System.out.println("error when setting grid");
+		System.out.println("grid label error when setting grid");
 		
 	}
 	
 	public void generateRandomMap() {
-		int i = 0;
-		while (i <= Constant.MAXOBSTACLECOUNT) {
+		int k = 0;
+		
+		for (int i = 0; i< Constant.BOARDWIDTH; i++) {
+			for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
+				// Set the start point grids
+				if (i < Constant.STARTPOINTWIDTH && j < Constant.STARTPOINTHEIGHT) {
+					setGrid(i, j, Constant.POSSIBLEGRIDLABELS[4]);
+				}
+				// Set the end point grids
+				else if (i >= Constant.BOARDWIDTH - Constant.ENDPOINTWIDTH && j >= Constant.BOARDHEIGHT - Constant.ENDPOINTHEIGHT) {
+					setGrid(i, j, Constant.POSSIBLEGRIDLABELS[5]);
+				}
+				// Set the remaining grids explored
+				else {
+					setGrid(i, j, Constant.POSSIBLEGRIDLABELS[1]);
+				}
+			}
+		}
+		
+		while (k <= Constant.MAXOBSTACLECOUNT) {
 			int x = r.nextInt(Constant.BOARDWIDTH);
 			int y = r.nextInt(Constant.BOARDHEIGHT);
-			if (getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) {
-				
-				if (i == Constant.MAXOBSTACLECOUNT) {
-					// Randomly set one way point
-					setGrid(x, y, Constant.POSSIBLEGRIDLABELS[3]);
-				}
-				else {
-					// Randomly set the obstacle
-					setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
-				}
-				i++;
+			if (getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[1]) == 0) {
+//				if (i == Constant.MAXOBSTACLECOUNT) {
+//					// Randomly set one way point
+//					setGrid(x, y, Constant.POSSIBLEGRIDLABELS[3]);
+//				}
+//				else {
+//					// Randomly set the obstacle
+//					setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
+//				}
+				setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
+				k++;
 			}
 			
 		}
@@ -118,6 +151,25 @@ public class Map{
 	}
 	
 	protected String getGrid(int x, int y) {
+		
+		// If the x, y is outside the board, it returns an obstacle.
+		if (x < 0 || x >= Constant.BOARDWIDTH || y < 0 || y >= Constant.BOARDHEIGHT) {
+			return Constant.POSSIBLEGRIDLABELS[2];
+		}
 		return grid[x][y];
+	}
+	
+	// Only for simulator purposes
+	public static boolean compare(Map a, Map b) {
+		String [][]a_grid = a.getGridMap();
+		String [][]b_grid = b.getGridMap();
+		for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
+			for (int i = 0; i < Constant.BOARDWIDTH; i++) {
+				if (a_grid[i][j].compareTo(b_grid[i][j])!=0) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
