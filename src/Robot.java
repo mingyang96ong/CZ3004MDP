@@ -4,7 +4,7 @@ public abstract class Robot {
 	// This assumes the Robot have 3 front sensors, 2 left sensor and 1 right far sensor
 	protected Sensor sensor;
 	
-	protected String direction;
+	private String direction;
 	
 	protected int x, y;
 	
@@ -17,10 +17,9 @@ public abstract class Robot {
 	}
 	
 	protected abstract String[] getSensorValues();
-	public abstract void moveUp();
-	public abstract void moveRight();
-	public abstract void moveDown();
-	public abstract void moveLeft();
+	public abstract void forward();
+	public abstract void rotateRight();
+	public abstract void rotateLeft();
 	
 	public void setDirection(String direction) {
 		this.direction = direction;
@@ -58,7 +57,7 @@ public abstract class Robot {
 	
 
 	
-	public void updateMap() {
+	public boolean[] updateMap() {
 		Map newMap = map;
 		System.out.println(this.x);
 		System.out.println(this.y);
@@ -66,6 +65,7 @@ public abstract class Robot {
 		int [][] sensorLocation = sensor.sensorLocation;
 		int [][] sensorDirection = sensor.sensorDirection;
 		int sensorDirectionValueX, sensorDirectionValueY, s, e;
+		boolean isObstacle[] = new boolean[6];
 		
 		System.out.print("The SensorValues are: \n");
 		for (int i = 0; i < sensorValues.length; i ++) {
@@ -102,19 +102,24 @@ public abstract class Robot {
 			
 			if (value > e) {
 				no_obstacle = true;
+				isObstacle[i] = false;
 			}
 			for (int d = s, g = 1; d <= e; d = d + 10, g++) {
 				int x = this.x + sensorLocation[i][0] + sensorDirectionValueX * g;
 				int y = this.y + sensorLocation[i][1] + sensorDirectionValueY * g;
 				String gridType = newMap.getGrid(x, y);
-				System.out.println("x : "+ x);
-				System.out.println("y : "+ y);
-//				System.out.println(!found);
-				System.out.println("g : "+ g);
-				System.out.println("value : "+ value);
-				System.out.println("d: " + d + "\n");
+//				System.out.println("x : "+ x);
+//				System.out.println("y : "+ y);
+////				System.out.println(!found);
+//				System.out.println("g : "+ g);
+//				System.out.println("value : "+ value);
+//				System.out.println("d: " + d + "\n");
+				
 				if (value >= d && value < d + 10 && value <= e) {
 					updateMapGridObstacle(newMap, x, y, gridType);
+					if (g == 1) {
+						isObstacle[i] = true;
+					}
 					break;
 				}
 				else {
@@ -124,6 +129,7 @@ public abstract class Robot {
 			}
 		}
 		newMap.print();
+		return isObstacle;
 	}
 	
 	private void updateMapGridObstacle(Map newMap, int x, int y, String gridType) {
@@ -151,5 +157,18 @@ public abstract class Robot {
 	
 	public Map getMap() {
 		return map;
+	}
+	
+	public void setTrueMap(Map map) {
+		this.sensor.setTrueMap(map);
+	}
+	
+	public int getDirectionIndex() { 		
+		for (int i = 0; i < Constant.POSSIBLEROBOTDIRECTION.length; i ++) {
+			if (this.direction.compareTo(Constant.POSSIBLEROBOTDIRECTION[i]) == 0) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }

@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class SimulatorSensor extends Sensor{
 	// Simulate the Ardurino sensor
@@ -10,6 +9,10 @@ public class SimulatorSensor extends Sensor{
 		trueMap = new Map();
 		trueMap.generateRandomMap();
 		trueMap.print();
+	}
+	
+	public SimulatorSensor(Map map) {
+		trueMap = map;
 	}
 	
 	private void updateSensorsValue(int x, int y, String direction) {
@@ -81,4 +84,9 @@ public class SimulatorSensor extends Sensor{
 	public Map getTrueMap() {
 		return trueMap;
 	}
+	
+	public void setTrueMap(Map map) {
+		trueMap = map;
+	}
+
 }

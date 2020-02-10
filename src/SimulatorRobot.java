@@ -36,7 +36,7 @@ public class SimulatorRobot extends Robot{
 	protected String[] getSensorValues() {
 		// TODO Auto-generated method stub
 		// FL, FM, FR, RB, RF, LF
-		String[] sensorValues = sensor.getAllSensorsValue(this.x, this.y, this.direction);
+		String[] sensorValues = sensor.getAllSensorsValue(this.x, this.y, getDirection());
 		return sensorValues;
 	}
 
@@ -52,16 +52,18 @@ public class SimulatorRobot extends Robot{
 		}
 	}
 	
-	public void updateMap() {
-		super.updateMap();
+	public boolean[] updateMap() {
+		boolean[] isObstacle = super.updateMap();
 		smap.setMap(map);
+		return isObstacle;
 	}
 	
-	@Override
+	
+	
 	public void moveUp() {
 		// TODO Auto-generated method stub
 		int step = 1;
-		if (this.direction.compareTo(Constant.POSSIBLEROBOTDIRECTION[0]) != 0) {
+		if (getDirection().compareTo(Constant.POSSIBLEROBOTDIRECTION[0]) != 0) {
 			setDirection(Constant.POSSIBLEROBOTDIRECTION[0]);
 			updateMap();
 		}
@@ -75,11 +77,10 @@ public class SimulatorRobot extends Robot{
 	}
 	
 
-	@Override
 	public void moveRight() {
 		// TODO Auto-generated method stub
 		int step = 1;
-		if (this.direction.compareTo(Constant.POSSIBLEROBOTDIRECTION[1]) != 0) {
+		if (getDirection().compareTo(Constant.POSSIBLEROBOTDIRECTION[1]) != 0) {
 			setDirection(Constant.POSSIBLEROBOTDIRECTION[1]);
 			updateMap();
 		}
@@ -92,11 +93,10 @@ public class SimulatorRobot extends Robot{
 		}
 	}
 	
-	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
 		int step = 1;
-		if (this.direction.compareTo(Constant.POSSIBLEROBOTDIRECTION[2]) != 0) {
+		if (getDirection().compareTo(Constant.POSSIBLEROBOTDIRECTION[2]) != 0) {
 			setDirection(Constant.POSSIBLEROBOTDIRECTION[2]);
 			updateMap();
 		}
@@ -109,11 +109,10 @@ public class SimulatorRobot extends Robot{
 		}
 	}
 
-	@Override
 	public void moveLeft() {
 		// TODO Auto-generated method stub
 		int step = 1;
-		if (this.direction.compareTo(Constant.POSSIBLEROBOTDIRECTION[3]) != 0) {
+		if (getDirection().compareTo(Constant.POSSIBLEROBOTDIRECTION[3]) != 0) {
 			setDirection(Constant.POSSIBLEROBOTDIRECTION[3]);
 			updateMap();
 		}
@@ -153,9 +152,52 @@ public class SimulatorRobot extends Robot{
 		this.y = checkValidY(0);
 		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
 		setDirection(Constant.POSSIBLEROBOTDIRECTION[2]);
-		System.out.println(this.direction);
 		this.sensor = new SimulatorSensor();
 		this.map = new Map();
 		smap.setMap(map);
+	}
+
+	@Override
+	public void forward() {
+		// TODO Auto-generated method stub
+		int directionIndex = super.getDirectionIndex(), step = 1;
+		String s;
+		this.x = checkValidX(this.x + Constant.SENSORDIRECTION[directionIndex][0]);
+		this.y = checkValidX(this.y + Constant.SENSORDIRECTION[directionIndex][1]);
+		switch (directionIndex) {
+			case 0:
+				s = "Up";
+				break;
+			case 1:
+				s = "Right";
+				break;
+			case 2:
+				s = "Down";
+				break;
+			case 3:
+				s = "Left";
+				break;
+			default:
+				s = "Error";
+		}
+		for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
+			t.schedule(new MoveImageTask(robotImage, s, 1), delay * (i + 1));
+		}
+	}
+
+	@Override
+	public void rotateRight() {
+		// TODO Auto-generated method stub
+		int directionIndex = super.getDirectionIndex();
+		// In the actual robot, this will also send the command to rotate right
+		setDirection(Constant.POSSIBLEROBOTDIRECTION[(directionIndex+1) % Constant.POSSIBLEROBOTDIRECTION.length]);
+	}
+
+	@Override
+	public void rotateLeft() {
+		// TODO Auto-generated method stub
+		int directionIndex = super.getDirectionIndex();
+		// In the actual robot, this will also send the command to rotate left
+		setDirection(Constant.POSSIBLEROBOTDIRECTION[(directionIndex-1+Constant.POSSIBLEROBOTDIRECTION.length) % Constant.POSSIBLEROBOTDIRECTION.length]);
 	}
 }

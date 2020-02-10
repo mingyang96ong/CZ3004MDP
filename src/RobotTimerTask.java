@@ -12,8 +12,5 @@ public class RobotTimerTask extends TimerTask{
 		if (command == "Update") {
 			r.updateMap();
 		}
-		// TODO Auto-generated method stub
-		r.moveRight();
 	}
-	
 }

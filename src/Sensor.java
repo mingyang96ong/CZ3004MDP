@@ -17,7 +17,6 @@ public abstract class Sensor {
 				sensorDirection[0] = Constant.SENSORDIRECTION[i];
 				break;
 			}
-		
 		}
 		
 		sensorLocation[0] = new int[] {sensorDirection[0][0] + Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][0], 
@@ -39,4 +38,5 @@ public abstract class Sensor {
 	
 	public abstract String[] getAllSensorsValue(int x, int y, String direction);
 	public abstract Map getTrueMap(); 	// Only for simulator
+	public abstract void setTrueMap(Map map); // Only for simulator to load map
 }
