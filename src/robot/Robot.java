@@ -8,13 +8,13 @@ public abstract class Robot {
 	// This assumes the Robot have 3 front sensors, 2 left sensor and 1 right far sensor
 	protected Sensor sensor;
 	
-	private String direction;
+	private int direction;
 	
 	protected int x, y;
 	
 	protected Map map;
 	
-	public Robot(int x, int y, String direction) {
+	public Robot(int x, int y, int direction) {
 		this.x = checkValidX(x);
 		this.y = checkValidY(y);
 		this.direction = direction;
@@ -25,7 +25,7 @@ public abstract class Robot {
 	public abstract void rotateRight();
 	public abstract void rotateLeft();
 	
-	public void setDirection(String direction) {
+	public void setDirection(int direction) {
 		this.direction = direction;
 	}
 	
@@ -51,7 +51,7 @@ public abstract class Robot {
 		return y;
 	}
 	
-	public String getDirection() {
+	public int getDirection() {
 		return direction;
 	}
 	
@@ -83,7 +83,6 @@ public abstract class Robot {
 		
 		
 		for (int i = 0; i < sensorValues.length; i++) {
-			boolean no_obstacle = false;
 			int value = Integer.parseInt(sensorValues[i]);
 			if (i < sensorValues.length-1) {
 				if (i < 3) {
@@ -105,7 +104,6 @@ public abstract class Robot {
 			}
 			
 			if (value > e) {
-				no_obstacle = true;
 				isObstacle[i] = false;
 			}
 			for (int d = s, g = 1; d <= e; d = d + 10, g++) {
@@ -128,7 +126,6 @@ public abstract class Robot {
 				}
 				else {
 					updateMapGridExplored(newMap, x, y, gridType);
-					no_obstacle = true;
 				}
 			}
 		}
@@ -166,13 +163,5 @@ public abstract class Robot {
 	public void setTrueMap(Map map) {
 		this.sensor.setTrueMap(map);
 	}
-	
-	public int getDirectionIndex() { 		
-		for (int i = 0; i < Constant.POSSIBLEROBOTDIRECTION.length; i ++) {
-			if (this.direction.compareTo(Constant.POSSIBLEROBOTDIRECTION[i]) == 0) {
-				return i;
-			}
-		}
-		return -1;
-	}
+
 }

@@ -18,7 +18,7 @@ public class SimulatorSensor extends Sensor{
 		trueMap = map;
 	}
 	
-	private void updateSensorsValue(int x, int y, String direction) {
+	private void updateSensorsValue(int x, int y, int direction) {
 		// sensorValue will have this: FL, FC, FR, RB, RF, LF
 		
 		String [] sensorValue = new String[6];
@@ -66,7 +66,7 @@ public class SimulatorSensor extends Sensor{
 		}
 	}
 	
-	public String[] getAllSensorsValue(int x, int y, String direction) {
+	public String[] getAllSensorsValue(int x, int y, int direction) {
 		// This is to simulate getting values from Arduino
 		updateSensorsValue(x, y, direction);
 		sensorArray = sensorValue.split(" ");

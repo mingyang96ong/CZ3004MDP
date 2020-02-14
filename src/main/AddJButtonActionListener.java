@@ -22,9 +22,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import config.Constant;
+import exploration.ExplorationThread;
 import robot.SimulatorRobot;
 import map.Map;
 import timertask.EnableButtonTask;
+import policyiteration.PolicyIterationThread;
+import policyiteration.PolicyIteration;
 
 public class AddJButtonActionListener implements ActionListener{
 	private JFrame frame;
@@ -36,6 +39,8 @@ public class AddJButtonActionListener implements ActionListener{
 	private HashMap  <String, String> filePath= new HashMap<String, String>();
 	private Timer t = new Timer();
 	private int step = 1;
+	private Map loadedMap;
+	private PolicyIteration pi;
 	
 	public AddJButtonActionListener(JFrame frame, SimulatorRobot r) {
 		this.frame = frame;
@@ -56,6 +61,7 @@ public class AddJButtonActionListener implements ActionListener{
 		JLabel robotView = new JLabel("Robot's View");
 		JLabel simulatedMap = new JLabel("Simulated Map");
 		JButton exploration = new JButton();
+		JButton policyIteration = new JButton();
 		JComboBox <String> arenaMap = new JComboBox<String>(arr);
 		
 		// Set Icon or Image to the UI Component
@@ -67,6 +73,7 @@ public class AddJButtonActionListener implements ActionListener{
 		toggleMap.setText("Toggle Map");
 		resetRobot.setText("Restart");
 		exploration.setText("Exploration");
+		policyIteration.setText("Policy Iteration");
 		
 		// For the Button to do something, you need to add the button to this Action Listener and set the command for the ActionListener to receive
 		right.addActionListener(this);
@@ -85,6 +92,8 @@ public class AddJButtonActionListener implements ActionListener{
 		resetRobot.setActionCommand("Restart");
 		exploration.addActionListener(this);
 		exploration.setActionCommand("Exploration");
+		policyIteration.addActionListener(this);
+		policyIteration.setActionCommand("Policy Iteration");
 		arenaMap.addActionListener(this);
 		arenaMap.setActionCommand("Load Map");
 		arenaMap.setSelectedIndex(-1); //  This line will print null in console
@@ -104,6 +113,7 @@ public class AddJButtonActionListener implements ActionListener{
 		robotView.setBounds(x - 600, y - 185, 200, 50);
 		simulatedMap.setBounds(x + 100, y - 100, 300, 50);
 		exploration.setBounds(x, y + 50, 110, 50);
+		policyIteration.setBounds(x + 150, y + 50, 150, 50);
 		arenaMap.setBounds(x + 200, y + 160, 120, 30);
 		
 		// Set fonts for the labels
@@ -124,6 +134,7 @@ public class AddJButtonActionListener implements ActionListener{
 		robotView.setLocation(x - 600, y - 185);
 		simulatedMap.setLocation(x - 600, y - 185);
 		exploration.setLocation(x, y + 50);
+		policyIteration.setLocation(x + 150, y + 50);
 		arenaMap.setLocation(x + 200, y + 160);
 		
 		// Add the UI component to the frame
@@ -139,6 +150,7 @@ public class AddJButtonActionListener implements ActionListener{
 		frame.add(robotView);
 		frame.add(simulatedMap);
 		frame.add(exploration);
+		frame.add(policyIteration);
 		frame.add(arenaMap);
 		
 		// Set Visibility of UI Component
@@ -154,6 +166,7 @@ public class AddJButtonActionListener implements ActionListener{
 		robotView.setVisible(true);
 		simulatedMap.setVisible(false);
 		exploration.setVisible(true);
+		policyIteration.setVisible(true);
 		arenaMap.setVisible(true);
 		
 		// Add button to the list of buttons
@@ -165,6 +178,7 @@ public class AddJButtonActionListener implements ActionListener{
 		Buttons.add(toggleMap);
 		Buttons.add(resetRobot);
 		Buttons.add(exploration);
+		Buttons.add(policyIteration);
 		Buttons.add(arenaMap);
 		
 		// Add label to the hashmap
@@ -240,8 +254,8 @@ public class AddJButtonActionListener implements ActionListener{
 			throw new Exception("The format of the " + fileName + " does not match the board format.");
 		}
 		br.close();
-		Map map = new Map(grid);
-		return map;
+		loadedMap = new Map(grid);
+		return loadedMap;
 	}
 	
 	public void disableButtons() {
@@ -327,6 +341,7 @@ public class AddJButtonActionListener implements ActionListener{
 			JOptionPane.showMessageDialog(null, r.checkMap(), "Result of checking map", JOptionPane.INFORMATION_MESSAGE);
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
+		
 		if (action.contentEquals("Toggle Map")) {
 			disableButtons();
 			if (r.toggleMap().compareTo("robot") == 0) {
@@ -339,6 +354,7 @@ public class AddJButtonActionListener implements ActionListener{
 			}
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
+		
 		if (action.contentEquals("Restart")) {
 			disableButtons();
 			Labels.get("robotView").setVisible(true);
@@ -346,12 +362,10 @@ public class AddJButtonActionListener implements ActionListener{
 			r.restartRobot();
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
-//		if (action.contentEquals("Exploration")) {
-//			disableButtons();
-//			Exploration E = new Exploration();
-//			E.Exploration(r);
-//			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
-//		}
+		
+		if (action.contentEquals("Exploration")) {
+			ExplorationThread et = new ExplorationThread(r);
+		}
 		
 		if (action.contentEquals("Load Map")) {
 			JComboBox <String> arenaMap = (JComboBox <String>)e.getSource();
@@ -382,6 +396,10 @@ public class AddJButtonActionListener implements ActionListener{
 			}
 			
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
+		}
+		if (action.contentEquals("Policy Iteration")) {
+			PolicyIterationThread tt = new PolicyIterationThread(r, loadedMap);
+			
 		}
 	}
 }

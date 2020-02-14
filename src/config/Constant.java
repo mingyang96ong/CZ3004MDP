@@ -41,7 +41,22 @@ public class Constant {
 	
 	// Used in Map and possibly used in real run and simulator
 	public static final String[] POSSIBLEGRIDLABELS = new String[]{"Unexplored", "Explored", "Obstacle", "Waypoint", "Startpoint", "Endpoint"};
-	public static final String[] POSSIBLEROBOTDIRECTION = new String[]{"North", "East", "South", "West"};
+	
+	// Map labels
+	public static final int UNEXPLORED = 0;
+	public static final int EXPLORED = 1;
+	public static final int OBSTACLE = 2;
+	public static final int WAYPOINT = 3;
+	public static final int STARTPOINT = 4;
+	public static final int ENDPOINT = 5;
+	
+	// Map directions
+	public static final int NORTH = 0;
+	public static final int EAST = 1;
+	public static final int SOUTH = 2;
+	public static final int WEST = 3;
+	public static final int[] START = {1,1};
+	
 	
 	// Image path for UI Simulator
 	public static final String UNEXPLOREDIMAGEPATH = ".\\images\\unexplored_grid.png";

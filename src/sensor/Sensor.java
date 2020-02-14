@@ -13,14 +13,9 @@ public abstract class Sensor {
 	public int[][] sensorDirection = new int[3][2]; // Assume NORTH is the direction, Represent front, left and right sensor direction
 	
 	
-	public void updateSensorDirection(String direction) {
-		int i = 0;
-		for (i = 0; i < Constant.POSSIBLEROBOTDIRECTION.length; i++) {
-			if (direction.compareTo(Constant.POSSIBLEROBOTDIRECTION[i]) == 0){
-				sensorDirection[0] = Constant.SENSORDIRECTION[i];
-				break;
-			}
-		}
+	public void updateSensorDirection(int direction) {
+		int i = direction;
+		sensorDirection[0] = Constant.SENSORDIRECTION[i];
 		
 		sensorLocation[0] = new int[] {sensorDirection[0][0] + Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][0], 
 										sensorDirection[0][1] + Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][1]};
@@ -39,7 +34,7 @@ public abstract class Sensor {
 										Constant.SENSORDIRECTION[((i-1) % Constant.SENSORDIRECTION.length + Constant.SENSORDIRECTION.length) % Constant.SENSORDIRECTION.length][1]};
 	}
 	
-	public abstract String[] getAllSensorsValue(int x, int y, String direction);
+	public abstract String[] getAllSensorsValue(int x, int y, int direction);
 	public abstract Map getTrueMap(); 	// Only for simulator
 	public abstract void setTrueMap(Map map); // Only for simulator to load map
 }
