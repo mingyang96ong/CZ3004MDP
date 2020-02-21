@@ -6,6 +6,7 @@ import sensor.Sensor;
 public abstract class Robot {
 	
 	// This assumes the Robot have 3 front sensors, 2 left sensor and 1 right far sensor
+	
 	protected Sensor sensor;
 	
 	private int direction;
@@ -63,25 +64,23 @@ public abstract class Robot {
 	
 	public boolean[] updateMap() {
 		Map newMap = map;
-		System.out.println(this.x);
-		System.out.println(this.y);
+//		System.out.println(this.x);
+//		System.out.println(this.y);
 		String[] sensorValues = getSensorValues(); // THIS VALUES IS BY CM (GRID * 10)
 		int [][] sensorLocation = sensor.sensorLocation;
 		int [][] sensorDirection = sensor.sensorDirection;
 		int sensorDirectionValueX, sensorDirectionValueY, s, e;
 		boolean isObstacle[] = new boolean[6];
 		
-		System.out.print("The SensorValues are: \n");
-		for (int i = 0; i < sensorValues.length; i ++) {
-			System.out.print(sensorValues[i]);
-			if (i != sensorValues.length - 1 ) {
-				System.out.print(" ");
-			}
-		}
-		System.out.println("\n");
-		
-		
-		
+//		System.out.print("The SensorValues are: \n");
+//		for (int i = 0; i < sensorValues.length; i ++) {
+//			System.out.print(sensorValues[i]);
+//			if (i != sensorValues.length - 1 ) {
+//				System.out.print(" ");
+//			}
+//		}
+//		System.out.println("\n");
+
 		for (int i = 0; i < sensorValues.length; i++) {
 			int value = Integer.parseInt(sensorValues[i]);
 			if (i < sensorValues.length-1) {
@@ -110,13 +109,7 @@ public abstract class Robot {
 				int x = this.x + sensorLocation[i][0] + sensorDirectionValueX * g;
 				int y = this.y + sensorLocation[i][1] + sensorDirectionValueY * g;
 				String gridType = newMap.getGrid(x, y);
-//				System.out.println("x : "+ x);
-//				System.out.println("y : "+ y);
-////				System.out.println(!found);
-//				System.out.println("g : "+ g);
-//				System.out.println("value : "+ value);
-//				System.out.println("d: " + d + "\n");
-				
+
 				if (value >= d && value < d + 10 && value <= e) {
 					updateMapGridObstacle(newMap, x, y, gridType);
 					if (g == 1) {
@@ -134,11 +127,13 @@ public abstract class Robot {
 	}
 	
 	private void updateMapGridObstacle(Map newMap, int x, int y, String gridType) {
+		
 		if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) {
 			// Means it is the obstacle and u cannot see anything behind the obstacle
 			// Prevent overwriting waypoint
 			newMap.setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
 		}
+		
 		if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[1]) == 0) {
 			// Just for debugging simulator sensor and update map
 			System.out.println("ERROR in ROBOT UPDATE MAP: EXPECTED OBSTACLE BUT ALREADY LABELLED EXPLORED");
@@ -146,11 +141,13 @@ public abstract class Robot {
 	}
 	
 	private void updateMapGridExplored(Map newMap, int x, int y, String gridType) {
+		
 		if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) {
 			// Means it is unexplored
 			// Prevent overwriting waypoint
 			newMap.setGrid(x, y, Constant.POSSIBLEGRIDLABELS[1]);
 		}
+		
 		if (gridType.compareTo(Constant.POSSIBLEGRIDLABELS[2]) == 0) {
 			System.out.println("ERROR in ROBOT UPDATE MAP: EXPECTED EXPLORED BUT ALREADY LABELLED OBSTACLE");
 		}
@@ -160,8 +157,19 @@ public abstract class Robot {
 		return map;
 	}
 	
+	public void setWaypoint(int x, int y) {
+		this.map.setWayPoint(x, y);
+	}
+	
+	public int[] getWaypoint() {
+		return map.getWayPoint();
+	}
+	
 	public void setTrueMap(Map map) {
 		this.sensor.setTrueMap(map);
 	}
-
+	
+	public String[] getMDFString() {
+		return map.getMDFString();
+	}
 }

@@ -18,7 +18,7 @@ public class SimulatorRobot extends Robot{
 	private SimulatorMap smap;
 	private AddJButtonActionListener buttonListener;
 	private Timer t = new Timer();
-	private int delay = 25;
+	private int delay = Constant.DELAY;
 	
 	public SimulatorRobot(JFrame frame, int x, int y, int direction) {
 		super(x, y, direction);
@@ -40,6 +40,13 @@ public class SimulatorRobot extends Robot{
 		robotImage = new RobotImageComponent(Constant.ROBOTIMAGEPATH, Constant.ROBOTWIDTH, Constant.ROBOTHEIGHT);
 		frame.add(robotImage);
 		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
+	}
+	
+	public void resetRobotPositionOnUI() {
+		this.x = checkValidX(1);
+		this.y = checkValidY(1);
+		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
+		
 	}
 
 	protected String[] getSensorValues() {
@@ -79,7 +86,12 @@ public class SimulatorRobot extends Robot{
 			updateMap();
 		}
 	}
-
+	
+	public void setWaypoint(int x, int y) {
+		super.setWaypoint(x, y);
+		this.toggleMap();
+		this.toggleMap();
+	}
 	
 	
 	// Simulator purposes
@@ -122,16 +134,16 @@ public class SimulatorRobot extends Robot{
 		this.x = checkValidX(this.x + Constant.SENSORDIRECTION[this.getDirection()][0]);
 		this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
 		switch (this.getDirection()) {
-			case 0:
+			case Constant.NORTH:
 				s = "Up";
 				break;
-			case 1:
+			case Constant.EAST:
 				s = "Right";
 				break;
-			case 2:
+			case Constant.SOUTH:
 				s = "Down";
 				break;
-			case 3:
+			case Constant.WEST:
 				s = "Left";
 				break;
 			default:
@@ -146,7 +158,7 @@ public class SimulatorRobot extends Robot{
 	public void rotateRight() {
 		// TODO Auto-generated method stub
 		// In the actual robot, this will also send the command to rotate right
-		setDirection((this.getDirection()+1) % 4);
+		setDirection((this.getDirection() + 1) % 4);
 	}
 
 	@Override
@@ -158,5 +170,11 @@ public class SimulatorRobot extends Robot{
 	
 	public void setMap(Map map) {
 		this.map = map;
+	}
+	
+	public void restartRobotUI() {
+		t.cancel();
+		t.purge();
+		t = new Timer();
 	}
 }

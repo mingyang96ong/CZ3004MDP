@@ -14,4 +14,6 @@ public class ExplorationThread extends Thread{
 		Exploration e = new Exploration();
 		e.Exploration(r);
 	}
+	
+	
 }

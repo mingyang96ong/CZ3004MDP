@@ -24,6 +24,14 @@ public class Constant {
 														       {0, 1},
 														       {-1, 0}};
 	
+	
+   	// For Instructing Robot
+   	public static final int LEFT = 0;
+   	public static final int FORWARD = 1;
+   	public static final int RIGHT = 2;
+   	public static final int BACKWARD = 3;
+	
+   	
 	// For Timertask in UI Simulator
 	public static final int DELAY = 15;
 	
@@ -56,6 +64,7 @@ public class Constant {
 	public static final int SOUTH = 2;
 	public static final int WEST = 3;
 	public static final int[] START = {1,1};
+	public static final int[] END = {18,13};
 	
 	
 	// Image path for UI Simulator
@@ -69,7 +78,7 @@ public class Constant {
 	public static final String ROBOTNIMAGEPATH = ".\\images\\robotN.png";
 	public static final String ROBOTEIMAGEPATH = ".\\images\\robotE.png";
 	public static final String ROBOTSIMAGEPATH = ".\\images\\robotS.png";
-	public static final String ROBOTWIMAGEPATH = ".\\images\\robotW.png";
+	public static final String ROBOTWIMAGEPATH = ".\\images\\robotW.png";	
 	
 	
 	public static final String[] GRIDIMAGEPATH = new String[]{UNEXPLOREDIMAGEPATH,
@@ -78,6 +87,7 @@ public class Constant {
 															  WAYPOINTIMAGEPATH,
 															  STARTPOINTIMAGEPATH,
 															  ENDPOINTIMAGEPATH};
+	
 	
 	public static final String[] ROBOTIMAGEPATHS = new String[] {ROBOTNIMAGEPATH,
 																 ROBOTEIMAGEPATH,
@@ -94,7 +104,19 @@ public class Constant {
 	
 	// Values in PolicyIteration
 	public static final double NORMALREWARD = -0.04;
-	public static final double ENDREWARD = 10;
-	public static final double WAYPOINTREWARD = 5;
-	public static final double OBSTACLEREWARD = -3;
+	public static final double ENDREWARD = 100;
+	public static final double WAYPOINTREWARD = ENDREWARD * 1.1; // 110
+	public static final double OBSTACLEREWARD = -100 * ENDREWARD; // - 10 000
+	
+	public static final double TURNCOST_NW = NORMALREWARD * 0.1; // -0.08
+//	public static final double TURNCOST_W = NORMALREWARD * 200; // -8
+	public static final double TURNCOST_W = NORMALREWARD * 0.1; // -8
+	
+	
+	// Connection Constants
+	
+	public static final String IP_ADDRESS = "127.0.0.1";
+	//public static final String IP_ADDRESS = "192.168.15.15";
+	public static final int PORT = 8080;
+	
 }

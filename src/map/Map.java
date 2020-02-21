@@ -1,4 +1,5 @@
 package map;
+import java.util.ArrayList;
 import java.util.Random;
 import config.Constant;
 
@@ -8,6 +9,8 @@ public class Map{
 	// Note that grid is by x, y coordinate and this is opposite of the Array position in Java
 	
 	private String[][] grid = new String[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
+	private int[] waypoint = new int[] {-1, -1};
+	
 	
 	// Only used for simulation
 	public static Random r = new Random();
@@ -95,7 +98,13 @@ public class Map{
 		
 		for (int i = 0; i < Constant.POSSIBLEGRIDLABELS.length; i++) {
 			if (command.toUpperCase().compareTo(Constant.POSSIBLEGRIDLABELS[i].toUpperCase()) == 0) {
-				grid[x][y] = command;
+				if (i == 3) {
+					setWayPoint(x, y);
+				}
+				else {
+					grid[x][y] = command;
+				}
+				
 				return;
 			}
 		}
@@ -145,7 +154,26 @@ public class Map{
 	}
 	
 	public void setWayPoint(int x, int y) {
-		setGrid(x, y, Constant.POSSIBLEGRIDLABELS[3]);
+		if (x >= Constant.BOARDWIDTH - 1 || x <= 0 || y >= Constant.BOARDHEIGHT - 1 || y <= 0 
+			|| (getGrid(x, y) != null && getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[1]) != 0)) {
+			return;
+		}
+		if (this.waypoint[0] == -1 && this.waypoint[1] == -1) {
+			grid[x][y] =  Constant.POSSIBLEGRIDLABELS[3];
+			this.waypoint[0] = x;
+			this.waypoint[1] = y;
+		}
+		else {
+			grid[this.waypoint[0]][this.waypoint[1]] =  Constant.POSSIBLEGRIDLABELS[1]; // This set to explored, assuming we set waypoint after exploration
+			grid[x][y] =  Constant.POSSIBLEGRIDLABELS[3];
+			this.waypoint[0] = x;
+			this.waypoint[1] = y;
+		}
+		
+	}
+	
+	public int[] getWayPoint() {
+		return waypoint;
 	}
 	
 	protected String[][] getGridMap() {
@@ -173,5 +201,69 @@ public class Map{
 			}
 		}
 		return true;
+	}
+	
+	public String[] getMDFString() {
+		String MDFBitStringPart1 = "11", MDFBitStringPart2 = "";
+		String temp1 = "", temp2 = "";
+		ArrayList <String> tempArr = new ArrayList<String> ();
+		System.out.println("11");
+		String[] MDFHexString = new String[2];
+		for (int j = 0; j < Constant.BOARDWIDTH; j++) {
+			for (int i = 0; i < Constant.BOARDHEIGHT; i++) {
+//				if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) {
+//					MDFBitStringPart1 += "0";
+//				}
+//				else {
+//					MDFBitStringPart1 += "1";
+//				}
+				if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[2])==0) { // Obstacle
+					MDFBitStringPart1 += "1";
+					MDFBitStringPart2 += "1";
+					temp1 += "1";
+					temp2 += "1";
+					
+				}
+				else if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) { // Unexplored
+					MDFBitStringPart1 += "0";
+					temp1 += "0";
+				}
+				else {
+					MDFBitStringPart1 += "1";
+					MDFBitStringPart2 += "0";
+					temp1 += "1";
+					temp2 += "0";
+				}
+				
+			}
+			System.out.println(temp1);
+			tempArr.add(temp2);
+			temp1 = "";
+			temp2 = "";
+		}
+		System.out.println("11\n");
+		
+		
+		for (String s : tempArr) {
+			System.out.println(s);
+		}
+		
+		MDFBitStringPart1 += "11";
+		
+		
+		System.out.println(MDFBitStringPart2);
+		for (int i = 0; i < MDFBitStringPart1.length(); i += 4) {
+			MDFHexString[0] += Integer.toString(Integer.parseInt(MDFBitStringPart1.substring(i, i + 4), 2), 16);
+		}
+
+		MDFBitStringPart2 += "0".repeat(MDFBitStringPart2.length() % 8);
+		
+		for (int i = 0; i < MDFBitStringPart2.length(); i += 4) {
+			MDFHexString[1] += Integer.toString(Integer.parseInt(MDFBitStringPart2.substring(i, i + 4), 2), 16);
+		}
+		
+		
+		return MDFHexString;
+
 	}
 }

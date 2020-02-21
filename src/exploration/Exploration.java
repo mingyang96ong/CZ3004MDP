@@ -1,89 +1,111 @@
 package exploration;
 
 import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
 
-import robot.SimulatorRobot;
+import robot.Robot;
 import map.Map;
 import config.Constant;
+import astarpathfinder.AStarPathFinder;
 
 public class Exploration {
 
-    public void Exploration(SimulatorRobot robot){
+    public void Exploration(Robot robot){
+
+        AStarPathFinder astar = new AStarPathFinder();
+        robot.setDirection(2);
+
         do {
-            System.out.println("Exploration started!");
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            }
-            catch (Exception e){
-                System.out.println(e.getMessage());
-            }
-            if (check_right_empty(robot)) {
-                robot.rotateRight();
-                if (check_front_empty(robot)) {
-                    robot.forward();
-                    continue;
-                }
-                else {
-                    robot.rotateLeft();
-                }
-            }
-            if (check_front_empty(robot)) {
-                robot.forward();
-                continue;
-            }
-            robot.rotateLeft();
-            if (check_front_empty(robot)) {
-                robot.forward();
-                continue;
-            }
-            robot.rotateLeft();
-            if (check_front_empty(robot)) {
-                robot.forward();
-            }
-            else {
-                System.out.println("Error during exploration phase 1. All 4 sides blocked.");
-            }
+            System.out.println("Phase 1");
+            move(robot);
         } while (!at_start(robot));
 
-        while (!is_exploration_complete(robot)) {
+        int[] unexplored = unexplored(robot, Constant.START);
+//        System.out.println(Arrays.toString(unexplored));
+//        astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false);
+//        robot.updateMap();
+
+        while (unexplored != null) {
             // fastest path to nearest unexplored square
+            System.out.println("Phase 2");
+            astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false);
+            unexplored = unexplored(robot, unexplored);
+            robot.updateMap();
         }
 
         if (!at_start(robot)) {
-            // fastest path to start point
+//            // fastest path to start point
+            System.out.println("Phase 3");
+            System.out.println(Arrays.toString(robot.getPosition()));
+            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true);
         }
 
-        // signal completion
+        System.out.println("Exploration Complete!");
         // generate MDF String to confirm final map
     };
 
-    private boolean check_right_empty(SimulatorRobot robot) {
+    private boolean move(Robot robot) {
+        System.out.println(Arrays.toString(robot.getPosition()));
+
+        try {
+            TimeUnit.SECONDS.sleep((long) 0.9);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        if (check_right_empty(robot)) {
+            robot.rotateRight();
+            if (check_front_empty(robot)) {
+                robot.forward();
+                return true;
+            } else {
+                robot.rotateLeft();
+            }
+        }
+        if (check_front_empty(robot)) {
+            robot.forward();
+            return true;
+        }
+        robot.rotateLeft();
+        if (check_front_empty(robot)) {
+            robot.forward();
+            return true;
+        }
+        robot.rotateLeft();
+        if (check_front_empty(robot)) {
+            robot.forward();
+        } else {
+            System.out.println("Error during exploration phase 1. All 4 sides blocked.");
+        }
+        return true;
+    }
+
+    private boolean check_right_empty(Robot robot) {
         boolean[] obstacles = robot.updateMap();
         return (!obstacles[3]) && (!obstacles[4]);
     }
 
-    private boolean check_front_empty(SimulatorRobot robot){
+    public boolean check_front_empty(Robot robot){
         boolean[] obstacles = robot.updateMap();
         return (!obstacles[0]) && (!obstacles[1]) && (!obstacles[2]);
     };
 
-    private boolean at_start(SimulatorRobot robot){
+    private boolean at_start(Robot robot){
         int[] pos = robot.getPosition();
-        if (pos == Constant.START)
-            return true;
-        return false;
+        return (Arrays.equals(pos,Constant.START));
     };
 
-    private boolean is_exploration_complete(SimulatorRobot robot) {
+    private int[] unexplored(Robot robot, int[] start) {
         Map map = robot.getMap();
-        for (int i=0; i<Constant.BOARDWIDTH; i++) {
-            for (int j=0; j<Constant.BOARDHEIGHT; j++) {
+        for (int i=start[0]; i<Constant.BOARDWIDTH; i++) {
+            for (int j=start[1]; j<Constant.BOARDHEIGHT; j++) {
                 if (map.getGrid(i,j).equals("Unexplored")) {
-                    return false;
+                    return new int[] {i,j};
                 }
             }
         }
-        return true;
+        return null;
     }
 }
 

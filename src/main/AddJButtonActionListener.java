@@ -13,9 +13,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import astarpathfinder.FastestPathThread;
 
 import java.util.Timer;
 import java.util.ArrayList;
@@ -24,6 +29,7 @@ import java.util.HashMap;
 import config.Constant;
 import exploration.ExplorationThread;
 import robot.SimulatorRobot;
+import textfieldformatter.NumberFormatter;
 import map.Map;
 import timertask.EnableButtonTask;
 import policyiteration.PolicyIterationThread;
@@ -31,26 +37,40 @@ import policyiteration.PolicyIteration;
 
 public class AddJButtonActionListener implements ActionListener{
 	private JFrame frame;
+	private ImageIcon dialogIcon = new ImageIcon(new ImageIcon(Constant.ROBOTNIMAGEPATH).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
 	private int x = 1000;
 	private int y = 200;
 	private SimulatorRobot r;
 	private ArrayList<JComponent> Buttons = new ArrayList<JComponent>();
-	private HashMap<String, JLabel> Labels = new HashMap<String, JLabel>();
-	private HashMap  <String, String> filePath= new HashMap<String, String>();
+	private HashMap	<String, JLabel> Labels = new HashMap<String, JLabel>();
+	private HashMap	<String, String> filePath= new HashMap<String, String>();
+	private HashMap <String, JTextField> TextFields = new HashMap <String, JTextField>();
 	private Timer t = new Timer();
 	private int step = 1;
 	private Map loadedMap;
 	private PolicyIteration pi;
+	private ArrayList<Thread> threadList = new ArrayList<Thread>();
 	
 	public AddJButtonActionListener(JFrame frame, SimulatorRobot r) {
 		this.frame = frame;
 		this.r = r;
 		String[] arr = getArenaMapFileNames();
 		
-		
 		// Create the UI Component
 		JLabel mcLabel = new JLabel("Manual Control:");
 		JLabel loadMapLabel = new JLabel("Select the map you wish to load:");
+		JLabel robotView = new JLabel("Robot's View");
+		JLabel simulatedMap = new JLabel("Simulated Map");
+			// Way point UI
+		JLabel waypointLabel = new JLabel("Set waypoint: ");
+		JTextField waypointX = new JTextField();
+		JTextField waypointY = new JTextField();
+		waypointX.setHorizontalAlignment(SwingConstants.RIGHT);
+		waypointY.setHorizontalAlignment(SwingConstants.RIGHT);
+		waypointX.setDocument(new NumberFormatter());
+		waypointY.setDocument(new NumberFormatter());
+		JButton updateWaypoint = new JButton();
+		
 		JButton right = new JButton();
 		JButton left = new JButton();
 		JButton up = new JButton();
@@ -58,10 +78,10 @@ public class AddJButtonActionListener implements ActionListener{
 		JButton checkMap = new JButton();
 		JButton toggleMap = new JButton();
 		JButton resetRobot = new JButton();
-		JLabel robotView = new JLabel("Robot's View");
-		JLabel simulatedMap = new JLabel("Simulated Map");
 		JButton exploration = new JButton();
-		JButton policyIteration = new JButton();
+		JButton fastestPath = new JButton();
+		JButton returnToStart = new JButton();
+		JButton printMDF = new JButton();
 		JComboBox <String> arenaMap = new JComboBox<String>(arr);
 		
 		// Set Icon or Image to the UI Component
@@ -72,8 +92,13 @@ public class AddJButtonActionListener implements ActionListener{
 		checkMap.setText("Check Map");
 		toggleMap.setText("Toggle Map");
 		resetRobot.setText("Restart");
+		returnToStart.setText("Return To Start");
 		exploration.setText("Exploration");
-		policyIteration.setText("Policy Iteration");
+		fastestPath.setText("Fastest Path");
+		updateWaypoint.setText("Set Waypoint");
+		printMDF.setText("MDF String");
+		waypointX.setText("-1");
+		waypointY.setText("-1");
 		
 		// For the Button to do something, you need to add the button to this Action Listener and set the command for the ActionListener to receive
 		right.addActionListener(this);
@@ -92,8 +117,14 @@ public class AddJButtonActionListener implements ActionListener{
 		resetRobot.setActionCommand("Restart");
 		exploration.addActionListener(this);
 		exploration.setActionCommand("Exploration");
-		policyIteration.addActionListener(this);
-		policyIteration.setActionCommand("Policy Iteration");
+		fastestPath.addActionListener(this);
+		fastestPath.setActionCommand("Fastest Path");
+		updateWaypoint.addActionListener(this);
+		updateWaypoint.setActionCommand("Waypoint");
+		returnToStart.addActionListener(this);
+		returnToStart.setActionCommand("Return");
+		printMDF.addActionListener(this);
+		printMDF.setActionCommand("MDF String");
 		arenaMap.addActionListener(this);
 		arenaMap.setActionCommand("Load Map");
 		arenaMap.setSelectedIndex(-1); //  This line will print null in console
@@ -102,7 +133,11 @@ public class AddJButtonActionListener implements ActionListener{
 		// Set the size (x, y, width, height) of the UI label
 		
 		mcLabel.setBounds(x, y - 100, 100, 50);
-		loadMapLabel.setBounds(x, y + 150, 300, 50);
+		waypointLabel.setBounds(x, y + 150, 100, 50);
+		waypointX.setBounds(x + 80, y + 165, 25, 25);
+		waypointY.setBounds(x + 120, y + 165, 25, 25);
+		updateWaypoint.setBounds(x + 250, y + 160, 120, 50);
+		loadMapLabel.setBounds(x, y + 250, 300, 50);
 		left.setBounds(x + 100, y - 100, 50, 50);
 		right.setBounds(x + 200, y - 100, 50, 50);
 		up.setBounds(x + 150, y - 100, 50, 50);
@@ -113,8 +148,10 @@ public class AddJButtonActionListener implements ActionListener{
 		robotView.setBounds(x - 600, y - 185, 200, 50);
 		simulatedMap.setBounds(x + 100, y - 100, 300, 50);
 		exploration.setBounds(x, y + 50, 110, 50);
-		policyIteration.setBounds(x + 150, y + 50, 150, 50);
-		arenaMap.setBounds(x + 200, y + 160, 120, 30);
+		arenaMap.setBounds(x + 200, y + 260, 120, 30);
+		fastestPath.setBounds(x + 150, y + 50, 110, 50);
+		returnToStart.setBounds(x + 300, y + 50, 140, 50);
+		printMDF.setBounds(x, y + 300, 100, 50);
 		
 		// Set fonts for the labels
 		mcLabel.setFont(new Font(mcLabel.getFont().getName(), Font.ITALIC, 13));
@@ -123,7 +160,11 @@ public class AddJButtonActionListener implements ActionListener{
 		
 		// Set location of the UI component
 		mcLabel.setLocation(x, y - 100);
-		loadMapLabel.setLocation(x, y + 150);
+		waypointLabel.setLocation(x, y + 150);
+		waypointX.setLocation(x + 80, y + 165);
+		waypointY.setLocation(x + 120, y + 165);
+		updateWaypoint.setLocation(x + 200, y + 160);
+		loadMapLabel.setLocation(x, y + 250);
 		left.setLocation(x + 100, y - 100);
 		right.setLocation(x + 200, y - 100);
 		up.setLocation(x + 150, y - 100);
@@ -134,8 +175,12 @@ public class AddJButtonActionListener implements ActionListener{
 		robotView.setLocation(x - 600, y - 185);
 		simulatedMap.setLocation(x - 600, y - 185);
 		exploration.setLocation(x, y + 50);
-		policyIteration.setLocation(x + 150, y + 50);
-		arenaMap.setLocation(x + 200, y + 160);
+		arenaMap.setLocation(x + 200, y + 260);
+		fastestPath.setLocation(x + 150, y + 50);
+		returnToStart.setLocation(x + 300, y + 50);
+		printMDF.setLocation(x, y + 300);
+		
+		
 		
 		// Add the UI component to the frame
 		frame.add(mcLabel);
@@ -150,8 +195,14 @@ public class AddJButtonActionListener implements ActionListener{
 		frame.add(robotView);
 		frame.add(simulatedMap);
 		frame.add(exploration);
-		frame.add(policyIteration);
 		frame.add(arenaMap);
+		frame.add(fastestPath);
+		frame.add(waypointLabel);
+		frame.add(waypointX);
+		frame.add(waypointY);
+		frame.add(updateWaypoint);
+		frame.add(returnToStart);
+		frame.add(printMDF);
 		
 		// Set Visibility of UI Component
 		mcLabel.setVisible(true);
@@ -166,8 +217,13 @@ public class AddJButtonActionListener implements ActionListener{
 		robotView.setVisible(true);
 		simulatedMap.setVisible(false);
 		exploration.setVisible(true);
-		policyIteration.setVisible(true);
 		arenaMap.setVisible(true);
+		fastestPath.setVisible(true);
+		waypointLabel.setVisible(true);
+		waypointX.setVisible(true);
+		waypointY.setVisible(true);
+		updateWaypoint.setVisible(true);
+		returnToStart.setVisible(true);
 		
 		// Add button to the list of buttons
 		Buttons.add(right);
@@ -178,14 +234,22 @@ public class AddJButtonActionListener implements ActionListener{
 		Buttons.add(toggleMap);
 		Buttons.add(resetRobot);
 		Buttons.add(exploration);
-		Buttons.add(policyIteration);
 		Buttons.add(arenaMap);
+		Buttons.add(fastestPath);
+		Buttons.add(returnToStart);
+		Buttons.add(printMDF);
+		Buttons.add(updateWaypoint);
 		
-		// Add label to the hashmap
+		// Add label to the hash map of labels
 		Labels.put("mcLabel", mcLabel);
 		Labels.put("loadMapLabel", loadMapLabel);
 		Labels.put("robotView", robotView);
 		Labels.put("simulatedMap", simulatedMap);
+		
+		// Add text field to the hash map of text fields
+		TextFields.put("waypointX", waypointX);
+		TextFields.put("waypointY", waypointY);
+		
 	}
 	
 	public String[] getArenaMapFileNames() {
@@ -225,6 +289,7 @@ public class AddJButtonActionListener implements ActionListener{
 				throw new Exception("The format of the " + fileName + " does not match the board format.");
 			}
 			for (int i = 0; i < line.length(); i++) {
+				
 				switch(line.charAt(i)) {
 					case 'S':
 						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[4];
@@ -242,6 +307,7 @@ public class AddJButtonActionListener implements ActionListener{
 					case 'O':
 						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[2];
 						break;
+						
 					default:
 						throw new Exception("There is unrecognised character symbol in " + fileName + ".");
 				}
@@ -276,6 +342,18 @@ public class AddJButtonActionListener implements ActionListener{
 //		}
 //		t.schedule(new MoveImageWithButtonTask(robotImage, "Enable", 1, this), delay * (step * Constant.GRIDWIDTH + 1));
 //	}
+	
+	private void stopAllThreads() {
+		for (int i = 0; i<threadList.size(); i ++) {
+			Thread tmp = threadList.get(0);
+			if (tmp.isAlive()) {
+				tmp.stop();
+			}
+		}
+		r.restartRobotUI();
+
+		threadList = new ArrayList<Thread>();
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -313,16 +391,7 @@ public class AddJButtonActionListener implements ActionListener{
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 
 		}
-//		if (action.equals("Down")) {
-//			System.out.println("Down clicked");
-//			disableButtons();
-//			if (!Labels.get("robotView").isVisible()) {
-//				Labels.get("robotView").setVisible(true);
-//				Labels.get("simulatedMap").setVisible(false);
-//			}
-//			r.moveDown();
-//			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
-//		}
+
 		if (action.contentEquals("Update")) {
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
@@ -338,6 +407,7 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 		if (action.contentEquals("Check Map")) {
 			disableButtons();
+			
 			JOptionPane.showMessageDialog(null, r.checkMap(), "Result of checking map", JOptionPane.INFORMATION_MESSAGE);
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
@@ -359,12 +429,14 @@ public class AddJButtonActionListener implements ActionListener{
 			disableButtons();
 			Labels.get("robotView").setVisible(true);
 			Labels.get("simulatedMap").setVisible(false);
+			stopAllThreads();
 			r.restartRobot();
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
 		
 		if (action.contentEquals("Exploration")) {
 			ExplorationThread et = new ExplorationThread(r);
+			threadList.add(et);
 		}
 		
 		if (action.contentEquals("Load Map")) {
@@ -397,9 +469,40 @@ public class AddJButtonActionListener implements ActionListener{
 			
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
-		if (action.contentEquals("Policy Iteration")) {
-			PolicyIterationThread tt = new PolicyIterationThread(r, loadedMap);
-			
+		
+		if (action.contentEquals("Fastest Path")) {
+			String result = (String)JOptionPane.showInputDialog(null, "Choose algorithm", "Fastest Path", JOptionPane.QUESTION_MESSAGE, this.dialogIcon, new String[] {"A* Search", "Policy Iteration"}, "A* Search");
+			if (result != null) { // Handle cases where users pressed cancel or cross
+				if (result.compareTo("A* Search") == 0) {
+					FastestPathThread tt = new FastestPathThread(r, loadedMap);
+					threadList.add(tt);
+				}
+				else {
+					PolicyIterationThread tt = new PolicyIterationThread(r, loadedMap);
+					threadList.add(tt);
+				}
+			}
+		}
+		
+		if (action.contentEquals("Waypoint")) {
+			int result = JOptionPane.showConfirmDialog(null, "Update waypoint?", "Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, this.dialogIcon);
+			if (result == JOptionPane.YES_OPTION) {
+				int x = Integer.parseInt(TextFields.get("waypointX").getText());
+				int y = Integer.parseInt(TextFields.get("waypointY").getText());
+				
+				r.setWaypoint(x, y);
+			}
+		}
+		
+		if (action.contentEquals("Return")) {
+			r.resetRobotPositionOnUI();
+		}
+		
+		if (action.contentEquals("MDF String")) {
+			r.setMap(loadedMap);
+			String [] MDFString = r.getMDFString();
+			System.out.println(MDFString[0]);
+			System.out.println(MDFString[1]);
 		}
 	}
 }

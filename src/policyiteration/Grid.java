@@ -47,6 +47,23 @@ public abstract class Grid {
 	}
 	
 	public void printPolicy() {
-		System.out.print(" " + policy +  " |");
+		String p;
+		switch (policy) {
+			case Constant.NORTH:
+				p = "^";
+				break;
+			case Constant.EAST:
+				p = ">";
+				break;
+			case Constant.SOUTH:
+				p = "v";
+				break;
+			case Constant.WEST:
+				p = "<";
+				break;
+			default:
+				p = "" + policy;
+		}
+		System.out.print(" " + p +  " |");
 	}
 }
