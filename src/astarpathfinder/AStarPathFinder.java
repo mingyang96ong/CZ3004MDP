@@ -3,7 +3,9 @@ package astarpathfinder;
 import robot.Robot;
 import map.Map;
 import config.Constant;
+import connection.ConnectionSocket;
 import exploration.Exploration;
+import exploration.ExplorationThread;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -49,26 +51,36 @@ public class AStarPathFinder {
 
         int[] path = get_path(robot, cur);
         System.out.println(Arrays.toString(path));
-
-        move(robot, path);
-        System.out.println("Finished Fastest Path");
-        return true;
+        if ((ExplorationThread.getRunning() || FastestPathThread.getRunning())) {
+	        move(robot, path);
+	        System.out.println("Finished Fastest Path");
+	        return true;
+        }
+        else{
+        	System.out.println("Fastest Path terminated");
+        	return false;
+        }
     }
 
     private boolean move(Robot robot, int[] path) {
         Exploration ex = new Exploration();
 
         for (int direction : path) {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            }
-            catch (Exception e){
-                System.out.println(e.getMessage());
+        	if (!ConnectionSocket.checkConnection()) {
+	            try {
+	                TimeUnit.MILLISECONDS.sleep(500);
+	            }
+	            catch (Exception e){
+	                System.out.println(e.getMessage());
+	            }
+        	}
+            if (!(ExplorationThread.getRunning() || FastestPathThread.getRunning())) {
+            	return false;
             }
 
             if (direction == Constant.FORWARD) {
                 if (ex.check_front_empty(robot)) {
-                    robot.forward();
+                    robot.forward(1);
                 } else {
                     return false;
                 }
@@ -76,7 +88,7 @@ public class AStarPathFinder {
                 robot.updateMap();
                 robot.rotateRight();
                 if (ex.check_front_empty(robot)) {
-                    robot.forward();
+                    robot.forward(1);
                 } else {
                     return false;
                 }
@@ -84,7 +96,7 @@ public class AStarPathFinder {
                 robot.updateMap();
                 robot.rotateLeft();
                 if (ex.check_front_empty(robot)) {
-                    robot.forward();
+                    robot.forward(1);
                 } else {
                     return false;
                 }
@@ -94,7 +106,7 @@ public class AStarPathFinder {
                 robot.updateMap();
                 robot.rotateRight();
                 if (ex.check_front_empty(robot)) {
-                    robot.forward();
+                    robot.forward(1);
                 } else {
                     return false;
                 }
@@ -223,7 +235,7 @@ public class AStarPathFinder {
         return open;
     }
 
-    private boolean is_valid(Robot robot, int[] pos){
+    public boolean is_valid(Robot robot, int[] pos){
         Map map = robot.getMap();
         int x = pos[0];
         int y = pos[1];

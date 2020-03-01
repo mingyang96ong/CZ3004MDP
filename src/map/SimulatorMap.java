@@ -1,6 +1,7 @@
 package map;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import config.Constant;
 import imagecomponent.*;
 

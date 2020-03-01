@@ -4,11 +4,13 @@ import java.util.Timer;
 import javax.swing.JFrame;
 
 import config.Constant;
+import exploration.ExplorationThread;
 import map.*;
 import imagecomponent.RobotImageComponent;
 import imagecomponent.ImageComponent;
+import sensor.Sensor;
 import sensor.SimulatorSensor;
-import main.AddJButtonActionListener;
+import simulator.AddJButtonActionListener;
 import timertask.MoveImageTask;
 
 public class SimulatorRobot extends Robot{
@@ -21,7 +23,8 @@ public class SimulatorRobot extends Robot{
 	private int delay = Constant.DELAY;
 	
 	public SimulatorRobot(JFrame frame, int x, int y, int direction) {
-		super(x, y, direction);
+		super();
+		initialise(x, y, direction);
 		this.frame = frame;
 		this.sensor = new SimulatorSensor();
 		
@@ -50,15 +53,12 @@ public class SimulatorRobot extends Robot{
 	}
 
 	protected String[] getSensorValues() {
-		// TODO Auto-generated method stub
 		// FL, FM, FR, RB, RF, LF
 		String[] sensorValues = sensor.getAllSensorsValue(this.x, this.y, getDirection());
 		return sensorValues;
 	}
 
-	@Override
 	public void setDirection(int direction) {
-		// TODO Auto-generated method stub
 		super.setDirection(direction);
 		robotImage.setImage(Constant.ROBOTIMAGEPATHS[direction]);
 	}
@@ -71,26 +71,25 @@ public class SimulatorRobot extends Robot{
 	
 	
 	
-	public void moveUp() {
-		// TODO Auto-generated method stub
-		int step = 1;
-		if (getDirection() == Constant.NORTH) {
-			setDirection(Constant.NORTH);
-			updateMap();
-		}
-		else {
-			this.y = checkValidY(this.y - 1);
-			for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
-				t.schedule(new MoveImageTask(robotImage, "Up", 1), delay * (i + 1));
-			}
-			updateMap();
-		}
-	}
+//	public void moveUp() {
+//		// TODO Auto-generated method stub
+//		int step = 1;
+//		if (getDirection() == Constant.NORTH) {
+//			setDirection(Constant.NORTH);
+//			updateMap();
+//		}
+//		else {
+//			this.y = checkValidY(this.y - 1);
+//			for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
+//				t.schedule(new MoveImageTask(robotImage, "Up", 1), delay * (i + 1));
+//			}
+//			updateMap();
+//		}
+//	}
 	
 	public void setWaypoint(int x, int y) {
 		super.setWaypoint(x, y);
-		this.toggleMap();
-		this.toggleMap();
+		smap.setMap(map);
 	}
 	
 	
@@ -127,9 +126,7 @@ public class SimulatorRobot extends Robot{
 	}
 
 	@Override
-	public void forward() {
-		// TODO Auto-generated method stub
-		int step = 1;
+	public void forward(int step) {
 		String s;
 		this.x = checkValidX(this.x + Constant.SENSORDIRECTION[this.getDirection()][0]);
 		this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
@@ -149,6 +146,7 @@ public class SimulatorRobot extends Robot{
 			default:
 				s = "Error";
 		}
+		toggleValid();
 		for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
 			t.schedule(new MoveImageTask(robotImage, s, 1), delay * (i + 1));
 		}
@@ -156,14 +154,12 @@ public class SimulatorRobot extends Robot{
 
 	@Override
 	public void rotateRight() {
-		// TODO Auto-generated method stub
 		// In the actual robot, this will also send the command to rotate right
 		setDirection((this.getDirection() + 1) % 4);
 	}
 
 	@Override
 	public void rotateLeft() {
-		// TODO Auto-generated method stub
 		// In the actual robot, this will also send the command to rotate left
 		setDirection((this.getDirection() + 3) % 4);
 	}

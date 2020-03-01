@@ -22,7 +22,6 @@ public class SimulatorSensor extends Sensor{
 		// sensorValue will have this: FL, FC, FR, RB, RF, LF
 		
 		String [] sensorValue = new String[6];
-		updateSensorDirection(direction);
 		
 		
 		// "North", "East", "South", "West"
@@ -33,7 +32,7 @@ public class SimulatorSensor extends Sensor{
 			if (sensorValue[1] == null && trueMap.getGrid(x+sensorLocation[1][0] + i * sensorDirection[0][0], y+sensorLocation[1][1] + i * sensorDirection[0][1]).compareTo(Constant.POSSIBLEGRIDLABELS[2]) == 0) {
 				sensorValue[1] = getSensorValue(i, "SHORT");
 			}
-			if (sensorValue[2] == null && trueMap.getGrid(x+sensorLocation[2][0] + i * sensorDirection[0][0], y+sensorLocation[2][1] + i * sensorDirection[0][1]).compareTo(Constant.POSSIBLEGRIDLABELS[2]) == 0) {
+			if (sensorValue[2] == null && trueMap.getGrid(x+sensorLocation[2][0] + i * sensorDirection[0][0], y+sensorLocation[2][1] + i * sensorDirection[0][1]).compareTo(Constant.POSSIBLEGRIDLABELS[2]) == 0){
 				sensorValue[2] = getSensorValue(i, "SHORT");
 			}
 			if (sensorValue[3] == null && trueMap.getGrid(x+sensorLocation[3][0] + i * sensorDirection[1][0], y+sensorLocation[3][1] + i * sensorDirection[1][1]).compareTo(Constant.POSSIBLEGRIDLABELS[2]) == 0) {
@@ -56,10 +55,10 @@ public class SimulatorSensor extends Sensor{
 	
 	private String getSensorValue(int i, String mode) {
 		if (mode.toUpperCase().compareTo("SHORT") == 0) {
-			return "" + ((i-1) * 10 + Constant.SHORTSENSOROFFSET);
+			return "" + ((i-1) * 10 + Constant.SHORTSENSOROFFSET) + ".0";
 		}
 		else if (mode.toUpperCase().compareTo("FAR") == 0) {
-			return "" + ((i-1) * 10 + Constant.FARSENSOROFFSET);
+			return "" + ((i-1) * 10 + Constant.FARSENSOROFFSET) + ".0";
 		}
 		else {
 			return "";
@@ -78,7 +77,7 @@ public class SimulatorSensor extends Sensor{
 		for (int i = 0; i < arr.length; i++) {
 			if (arr[i] == null) {
 				// As long as they are greater than FARSENSORMAXRANGE THEY CAN BE DEEMED AS NO OBSTACLE
-				arr[i] = "" + (Constant.FARSENSORMAXRANGE * 10 + Constant.FARSENSOROFFSET + 1);
+				arr[i] = "" + (Constant.FARSENSORMAXRANGE * 10 + Constant.FARSENSOROFFSET + 1) + ".0";
 			}
 		}
 		return arr;

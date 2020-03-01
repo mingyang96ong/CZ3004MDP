@@ -1,8 +1,11 @@
 package connection;
+//package connection;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -13,6 +16,8 @@ public class ConnectionSocket {
     private Socket socket              = null; 
     private DataInputStream  input     = null; 
     private DataOutputStream output    = null;
+    private InputStream  din     = null; 
+    private PrintStream dout    = null;
     private static ConnectionSocket cs = null;
     
     private ConnectionSocket() {
@@ -27,31 +32,43 @@ public class ConnectionSocket {
     	return cs;
     }
     
-    public void connectToRPI() {
+    public static boolean checkConnection() {
+    	if (cs == null) {
+    		return false;
+    	}
+    	return true;
+    }
+    
+    public boolean connectToRPI() {
+    	boolean result = true;
     	if (socket == null) {
 	    	try {
-	    		socket = new Socket(Constant.IP_ADDRESS, Constant.PORT);
-	    		
+	    		socket = new Socket(Constant.IP_ADDRESS, Constant.PORT);	
 	    		System.out.println("Connected to " + Constant.IP_ADDRESS + ":" + Integer.toString(Constant.PORT));
-	    		
-	    		input  = new DataInputStream(socket.getInputStream()); 
-	    		
-	    		output = new DataOutputStream(socket.getOutputStream()); 
+//	    		input  = new DataInputStream(socket.getInputStream()); 
+//	    		output = new DataOutputStream(socket.getOutputStream());
+	    		din  = socket.getInputStream(); 
+	    		dout = new PrintStream(socket.getOutputStream()); 
 	    		
 	    	}
 	    	catch(UnknownHostException UHEx) { 
 	    		System.out.println("UnknownHostException in ConnectionSocket connectToRPI Function"); 
+	    		result = false;
 	        } 
 	    	catch (IOException IOEx) {
 	    		System.out.println("IOException in ConnectionSocket connectToRPI Function");
+	    		result = false;
 	    	}
     	}
+    	return result;
     }
     
     public void sendMessage(String message) {
     	try {
-    		output.writeUTF(message);
-    		output.flush();
+    		dout.write(message.getBytes());
+    		dout.flush();
+//    		output.writeUTF(message);
+//    		output.flush();
     		System.out.println('"' + message + '"' + " sent successfully");
     	}
     	catch (IOException IOEx) {
@@ -60,14 +77,29 @@ public class ConnectionSocket {
     }
     
     public String receiveMessage() {
-    	String message = "";
+//    	String message = "";
+    	byte[] byteData = new byte[2048];
     	try {
-    		message = input.readUTF();
+    		int size = 0;
+    		din.read(byteData);
+    		
+    		// This is to get rid of junk bytes
+    		while (size < 2048) {
+    			if (byteData[size] == 0) {
+    				break;
+    			}
+    			size++;
+    		}
+    		String message = new String(byteData, 0, size, "UTF-8");
+//    		System.out.println(size);
+    		
+//    		message = input.readUTF();
+    		return message;
     	}
     	catch (IOException IOEx) {
     		System.out.println("IOException in ConnectionSocket receiveMessage Function");
     	}
-    	return message;
+    	return "Error";
     }
     
     public void closeConnection() {

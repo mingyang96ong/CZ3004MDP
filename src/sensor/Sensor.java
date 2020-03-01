@@ -9,11 +9,11 @@ public abstract class Sensor {
 	// Short sensor range = 10-50
 	// FL, FC, FR, RB, RF, LF
 	
-	public int[][] sensorLocation = new int[6][2];
-	public int[][] sensorDirection = new int[3][2]; // Assume NORTH is the direction, Represent front, left and right sensor direction
+	public static int[][] sensorLocation = new int[6][2];
+	public static int[][] sensorDirection = new int[3][2]; // Assume NORTH is the direction, Represent front, left and right sensor direction
 	
 	
-	public void updateSensorDirection(int direction) {
+	public static void updateSensorDirection(int direction) {
 		int i = direction;
 		sensorDirection[0] = Constant.SENSORDIRECTION[i];
 		

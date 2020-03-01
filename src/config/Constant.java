@@ -49,6 +49,7 @@ public class Constant {
 	
 	// Used in Map and possibly used in real run and simulator
 	public static final String[] POSSIBLEGRIDLABELS = new String[]{"Unexplored", "Explored", "Obstacle", "Waypoint", "Startpoint", "Endpoint"};
+	public static final String WALL =  "Wall";
 	
 	// Map labels
 	public static final int UNEXPLORED = 0;
@@ -112,11 +113,28 @@ public class Constant {
 //	public static final double TURNCOST_W = NORMALREWARD * 200; // -8
 	public static final double TURNCOST_W = NORMALREWARD * 0.1; // -8
 	
+	public static final int TIME = -1;
+	public static final int PERCENTAGE = 100;
 	
 	// Connection Constants
-	
 	public static final String IP_ADDRESS = "127.0.0.1";
-	//public static final String IP_ADDRESS = "192.168.15.15";
+//	public static final String IP_ADDRESS = "192.168.15.15";
 	public static final int PORT = 8080;
+	
+	public static final String START_EXPLORATION = "ES|";
+	public static final String FASTEST_PATH = "FS|";
+	public static final String SEND_ARENA = "SendArena";
+	public static final String INITIALISING = "starting";
+	public static final String SETWAYPOINT = "waypoint";
+	public static final String SENSE_ALL = "Z|";
+	public static final String TURN_LEFT = "A|";
+	public static final String TURN_RIGHT = "D|";
+	public static final String END_TOUR = "N";
+	
+	// Connection Acknowledge
+	public static final String FORWARD_ACK = "W D|";
+	public static final String LEFT_ACK = "A D|";
+	public static final String RIGHT_ACK = "D D|";
+	public static final String IMAGE_ACK = "D";
 	
 }

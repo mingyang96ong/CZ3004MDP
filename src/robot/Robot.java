@@ -15,19 +15,32 @@ public abstract class Robot {
 	
 	protected Map map;
 	
-	public Robot(int x, int y, int direction) {
+	private boolean validObstacleValue;
+	
+	protected boolean[] isObstacle = new boolean[6];
+	
+	public Robot() {
+	}
+	
+	public void initialise(int x, int y, int direction) {
 		this.x = checkValidX(x);
 		this.y = checkValidY(y);
 		this.direction = direction;
+		this.validObstacleValue = false;
 	}
 	
 	protected abstract String[] getSensorValues();
-	public abstract void forward();
+	public abstract void forward(int step);
 	public abstract void rotateRight();
 	public abstract void rotateLeft();
 	
+	public void captureImage() {
+		return;
+	}
+	
 	public void setDirection(int direction) {
 		this.direction = direction;
+		toggleValid();
 	}
 	
 	protected int checkValidX(int x) {
@@ -63,26 +76,30 @@ public abstract class Robot {
 
 	
 	public boolean[] updateMap() {
+		if (validObstacleValue) {
+			return this.isObstacle;
+		}
 		Map newMap = map;
 //		System.out.println(this.x);
 //		System.out.println(this.y);
+		Sensor.updateSensorDirection(this.getDirection());
 		String[] sensorValues = getSensorValues(); // THIS VALUES IS BY CM (GRID * 10)
-		int [][] sensorLocation = sensor.sensorLocation;
-		int [][] sensorDirection = sensor.sensorDirection;
+		int [][] sensorLocation = Sensor.sensorLocation;
+		int [][] sensorDirection = Sensor.sensorDirection;
 		int sensorDirectionValueX, sensorDirectionValueY, s, e;
 		boolean isObstacle[] = new boolean[6];
 		
-//		System.out.print("The SensorValues are: \n");
-//		for (int i = 0; i < sensorValues.length; i ++) {
-//			System.out.print(sensorValues[i]);
-//			if (i != sensorValues.length - 1 ) {
-//				System.out.print(" ");
-//			}
-//		}
-//		System.out.println("\n");
+		System.out.print("The SensorValues are: \n");
+		for (int i = 0; i < sensorValues.length; i ++) {
+			System.out.print(sensorValues[i]);
+			if (i != sensorValues.length - 1 ) {
+				System.out.print(" ");
+			}
+		}
+		System.out.println("\n");
 
 		for (int i = 0; i < sensorValues.length; i++) {
-			int value = Integer.parseInt(sensorValues[i]);
+			double value = Double.parseDouble(sensorValues[i]);
 			if (i < sensorValues.length-1) {
 				if (i < 3) {
 					sensorDirectionValueX = sensorDirection[0][0];
@@ -122,7 +139,14 @@ public abstract class Robot {
 				}
 			}
 		}
+		for (int i = 0; i < isObstacle.length; i++) {
+			System.out.print(isObstacle[i]);
+			System.out.print(" ");
+		}
+		System.out.println();
 		newMap.print();
+		System.arraycopy(isObstacle, 0, this.isObstacle, 0, isObstacle.length);
+		validObstacleValue = true;
 		return isObstacle;
 	}
 	
@@ -171,5 +195,9 @@ public abstract class Robot {
 	
 	public String[] getMDFString() {
 		return map.getMDFString();
+	}
+	
+	protected void toggleValid() {
+		validObstacleValue = false;
 	}
 }

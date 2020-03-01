@@ -1,6 +1,7 @@
 package timertask;
 import java.util.TimerTask;
-import main.AddJButtonActionListener;
+
+import simulator.AddJButtonActionListener;
 
 public class EnableButtonTask extends TimerTask{
 	private AddJButtonActionListener AL;

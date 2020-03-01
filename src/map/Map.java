@@ -1,6 +1,7 @@
 package map;
 import java.util.ArrayList;
 import java.util.Random;
+
 import config.Constant;
 
 public class Map{
@@ -204,19 +205,15 @@ public class Map{
 	}
 	
 	public String[] getMDFString() {
+		
 		String MDFBitStringPart1 = "11", MDFBitStringPart2 = "";
 		String temp1 = "", temp2 = "";
 		ArrayList <String> tempArr = new ArrayList<String> ();
 		System.out.println("11");
-		String[] MDFHexString = new String[2];
+		String[] MDFHexString = new String[] {"","",""};
 		for (int j = 0; j < Constant.BOARDWIDTH; j++) {
 			for (int i = 0; i < Constant.BOARDHEIGHT; i++) {
-//				if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) {
-//					MDFBitStringPart1 += "0";
-//				}
-//				else {
-//					MDFBitStringPart1 += "1";
-//				}
+
 				if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[2])==0) { // Obstacle
 					MDFBitStringPart1 += "1";
 					MDFBitStringPart2 += "1";
@@ -259,8 +256,18 @@ public class Map{
 		MDFBitStringPart2 += "0".repeat(MDFBitStringPart2.length() % 8);
 		
 		for (int i = 0; i < MDFBitStringPart2.length(); i += 4) {
-			MDFHexString[1] += Integer.toString(Integer.parseInt(MDFBitStringPart2.substring(i, i + 4), 2), 16);
+			MDFHexString[2] += Integer.toString(Integer.parseInt(MDFBitStringPart2.substring(i, i + 4), 2), 16);
 		}
+		
+		int length = 0;
+		for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
+			for (int i = 0; i < Constant.BOARDWIDTH; i++) {
+				if (grid[i][j] != Constant.POSSIBLEGRIDLABELS[0]) {
+					length++;
+				}
+			}
+		}
+		MDFHexString[1] = Integer.toString(length);
 		
 		
 		return MDFHexString;

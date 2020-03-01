@@ -55,7 +55,8 @@ public class ConnectionServer {
 	
     public void sendMessage(String message) {
     	try {
-    		output.writeUTF(message);
+    		output.write(message.getBytes());
+//    		output.writeUTF(message);
     		output.flush();
     		System.out.println('"' + message + '"' + " sent successfully");
     	}
@@ -66,8 +67,19 @@ public class ConnectionServer {
     
     public String receiveMessage() {
     	String message = "";
+    	byte[] byteData = new byte[2048];
     	try {
-    		message = input.readUTF();
+    		int size = 0;
+    		input.read(byteData);
+    		
+    		// This is to get rid of junk bytes
+    		while (size < 2048) {
+    			if (byteData[size] == 0) {
+    				break;
+    			}
+    			size++;
+    		}
+    		message = new String(byteData, 0, size, "UTF-8");
     	}
     	catch (IOException IOEx) {
     		System.out.println("IOException in ConnectionServer receiveMessage Function");
