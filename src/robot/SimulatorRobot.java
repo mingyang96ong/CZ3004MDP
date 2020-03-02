@@ -1,5 +1,6 @@
 package robot;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
@@ -172,5 +173,14 @@ public class SimulatorRobot extends Robot{
 		t.cancel();
 		t.purge();
 		t = new Timer();
+	}
+
+	public void captureImage() {
+		try {
+			TimeUnit.SECONDS.sleep(5);
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
 }

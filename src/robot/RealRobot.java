@@ -67,103 +67,107 @@ public class RealRobot extends Robot{
 	@Override
 	public void forward(int step) {
 		connectionSocket.sendMessage("W" + Integer.toString(step)+ "|");
-		boolean completed = false;
-		ArrayList<String> buffer = ConnectionManager.getBuffer();
-		while (!completed) {
-			String s = connectionSocket.receiveMessage().trim();
-			completed = checkForwardAcknowledge(s);
-			
-			if (completed) {
-				break;
-			}
-			else {
-				if (s.equals(Constant.SEND_ARENA)) {
-					buffer.add(s);
-				}
-				for (int i = 0; i < buffer.size(); i++) {
-					completed = checkForwardAcknowledge(buffer.get(i));
-					if (completed) {
-						buffer.remove(i);
-						break;
-					}
-				}
-			}
-		}
+		this.x = checkValidX(this.x + Constant.SENSORDIRECTION[this.getDirection()][0]);
+		this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
+//		boolean completed = false;
+//		ArrayList<String> buffer = ConnectionManager.getBuffer();
+//		while (!completed) {
+//			String s = connectionSocket.receiveMessage().trim();
+//			completed = checkForwardAcknowledge(s);
+//			
+//			if (completed) {
+//				break;
+//			}
+//			else {
+//				if (s.equals(Constant.SEND_ARENA)) {
+//					buffer.add(s);
+//				}
+//				for (int i = 0; i < buffer.size(); i++) {
+//					completed = checkForwardAcknowledge(buffer.get(i));
+//					if (completed) {
+//						buffer.remove(i);
+//						break;
+//					}
+//				}
+//			}
+//		}
 		toggleValid();
 	}
 	
-	private boolean checkForwardAcknowledge(String s) {
-		if (s.equals(Constant.FORWARD_ACK)) {
-			this.x = checkValidX(this.x + Constant.SENSORDIRECTION[this.getDirection()][0]);
-			this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
-			return true;
-		}
-		return false;
-	}
+//	private boolean checkForwardAcknowledge(String s) {
+//		if (s.equals(Constant.FORWARD_ACK)) {
+//			this.x = checkValidX(this.x + Constant.SENSORDIRECTION[this.getDirection()][0]);
+//			this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public void rotateRight() {
 		connectionSocket.sendMessage(Constant.TURN_RIGHT);
-		boolean completed = false;
-		String s;
-		ArrayList <String> buffer = ConnectionManager.getBuffer();
-		while (!completed) {
-			s = connectionSocket.receiveMessage().trim();
-			completed = checkRightAcknowledge(s);
-			if (completed) {
-				break;
-			}
-			else {
-				for (int i = 0; i < buffer.size(); i++) {
-					completed = checkRightAcknowledge(buffer.get(i));
-					if (completed) {
-						buffer.remove(i);
-						break;
-					}
-				}
-			}
-		}
+		setDirection((this.getDirection() + 1) % 4);
+//		boolean completed = false;
+//		String s;
+//		ArrayList <String> buffer = ConnectionManager.getBuffer();
+//		while (!completed) {
+//			s = connectionSocket.receiveMessage().trim();
+//			completed = checkRightAcknowledge(s);
+//			if (completed) {
+//				break;
+//			}
+//			else {
+//				for (int i = 0; i < buffer.size(); i++) {
+//					completed = checkRightAcknowledge(buffer.get(i));
+//					if (completed) {
+//						buffer.remove(i);
+//						break;
+//					}
+//				}
+//			}
+//		}
 	}
 	
-	private boolean checkRightAcknowledge(String s) {
-		if (s.equals(Constant.RIGHT_ACK)) {
-			setDirection((this.getDirection() + 1) % 4);
-			return true;
-		}
-		return false;
-	}
+//	private boolean checkRightAcknowledge(String s) {
+//		if (s.equals(Constant.RIGHT_ACK)) {
+//			setDirection((this.getDirection() + 1) % 4);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public void rotateLeft() {
 		connectionSocket.sendMessage(Constant.TURN_LEFT);
-		boolean completed = false;
-		String s;
-		ArrayList <String> buffer = ConnectionManager.getBuffer();
-		while (!completed) {
-			s = connectionSocket.receiveMessage().trim();
-			completed = checkLeftAcknowledge(s);
-			if (completed) {
-				break;
-			}
-			else {
-				for (int i = 0; i < buffer.size(); i++) {
-					completed = checkLeftAcknowledge(buffer.get(i));
-					if (completed) {
-						buffer.remove(i);
-						break;
-					}
-				}
-			}
-		}
+		setDirection((this.getDirection() + 3) % 4);
+//		boolean completed = false;
+//		String s;
+//		ArrayList <String> buffer = ConnectionManager.getBuffer();
+//		while (!completed) {
+//			s = connectionSocket.receiveMessage().trim();
+//			completed = checkLeftAcknowledge(s);
+//			if (completed) {
+//				break;
+//			}
+//			else {
+//				for (int i = 0; i < buffer.size(); i++) {
+//					completed = checkLeftAcknowledge(buffer.get(i));
+//					if (completed) {
+//						buffer.remove(i);
+//						break;
+//					}
+//				}
+//			}
+//		}
 	}
 	
-	private boolean checkLeftAcknowledge(String s) {
-		if (s.equals(Constant.LEFT_ACK)) {
-			setDirection((this.getDirection() + 3) % 4);
-			return true;
-		}
-		return false;
-	}
+//	private boolean checkLeftAcknowledge(String s) {
+//		if (s.equals(Constant.LEFT_ACK)) {
+//			setDirection((this.getDirection() + 3) % 4);
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	public void captureImage() {
 		connectionSocket.sendMessage("C[" + y + "," + x + "," + ((this.getDirection()+3) % 4) + "]"); // This is to do converting for Real Run

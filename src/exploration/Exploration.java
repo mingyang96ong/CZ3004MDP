@@ -5,20 +5,31 @@ import java.util.Arrays;
 
 import robot.Robot;
 import map.Map;
-import astarpathfinder.AStarPathFinder;
 import config.Constant;
-import connection.ConnectionSocket;
+import astarpathfinder.AStarPathFinder;
 
 public class Exploration {
-	public static int step = 1;
-    public void Exploration(Robot robot, int time, int percentage){
+
+    public void Exploration(Robot robot, int time, int percentage, int speed, boolean image_recognition){
+        if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
+            if (image_recognition) {
+                ImageRecognition_Exploration(robot);
+            } else {
+                Normal_Exploration(robot);
+            }
+        } else {
+            Limited_Exploration(robot, time, percentage, speed);
+        }
+    };
+
+    private void Limited_Exploration(Robot robot, int time, int percentage, int speed) {
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.start();
         AStarPathFinder astar = new AStarPathFinder();
         robot.setDirection(2);
 
         do {
-        	if (time != -1) {
+            if (time != -1) {
                 // to account for the time-limited exploration
                 int time_taken = (int) stopwatch.getElapsedTime();
                 if (time_taken >= time) {
@@ -32,16 +43,13 @@ public class Exploration {
                 }
             }
             System.out.println("Phase 1");
-            move(robot);
-        } while (!at_start(robot) && ExplorationThread.getRunning());
+            move(robot, speed);
+        } while (!at_start(robot));
 
         int[] unexplored = unexplored(robot, Constant.START);
-//        System.out.println(Arrays.toString(unexplored));
-//        astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false);
-//        robot.updateMap();
 
-        while (unexplored != null && ExplorationThread.getRunning()) {
-        	if (time != -1) {
+        while (unexplored != null) {
+            if (time != -1) {
                 // to account for the time-limited exploration
                 int time_taken = (int) stopwatch.getElapsedTime();
                 if (time_taken >= time) {
@@ -57,66 +65,120 @@ public class Exploration {
 
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false);
+            astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false, speed);
             unexplored = unexplored(robot, unexplored);
             robot.updateMap();
         }
 
-        if (!at_start(robot) && ExplorationThread.getRunning()) {
-//            // fastest path to start point
+        if (!at_start(robot)) {
+            // fastest path to start point
             System.out.println("Phase 3");
             System.out.println(Arrays.toString(robot.getPosition()));
-            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true);
+            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true, speed);
         }
-        if (!ExplorationThread.getRunning()) {
-        	System.out.println("Exploration terminated");
-        }
-        else {
-        	System.out.println("Exploration Complete!");
-        }
-        stopwatch.stop();
-        // generate MDF String to confirm final map
-    };
 
-    private boolean move(Robot robot) {
-        System.out.println(Arrays.toString(robot.getPosition()));
-        if (!ConnectionSocket.checkConnection()) {
-	        try {
-	            TimeUnit.MILLISECONDS.sleep(500);
-	        }
-	        catch (Exception e){
-	            System.out.println(e.getMessage());
-	        }
+        stopwatch.stop();
+        System.out.println("Exploration Complete!");
+        // generate MDF String to confirm final map
+    }
+
+    private void Normal_Exploration(Robot robot) {
+        AStarPathFinder astar = new AStarPathFinder();
+        robot.setDirection(2);
+
+        do {
+            move(robot, 1);
+        } while (!at_start(robot));
+
+        int[] unexplored = unexplored(robot, Constant.START);
+
+        while (unexplored != null) {
+            // fastest path to nearest unexplored square
+            System.out.println("Phase 2");
+            astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false, 1);
+            unexplored = unexplored(robot, unexplored);
+            robot.updateMap();
         }
-        if (!ExplorationThread.getRunning()) {
-        	return false;
+
+        if (!at_start(robot)) {
+            // fastest path to start point
+            System.out.println("Phase 3");
+            System.out.println(Arrays.toString(robot.getPosition()));
+            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true, 1);
+        }
+
+        System.out.println("Exploration Complete!");
+        // generate MDF String to confirm final map
+    }
+
+    private void ImageRecognition_Exploration(Robot robot) {
+        AStarPathFinder astar = new AStarPathFinder();
+        robot.setDirection(2);
+
+        do {
+            move(robot, 1);
+            captureImage(robot);
+        } while (!at_start(robot));
+
+        int[] unexplored = unexplored(robot, Constant.START);
+
+        while (unexplored != null) {
+            // fastest path to nearest unexplored square
+            System.out.println("Phase 2");
+            astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false, 1);
+            unexplored = unexplored(robot, unexplored);
+            robot.updateMap();
+        }
+
+        if (!at_start(robot)) {
+            // fastest path to start point
+            System.out.println("Phase 3");
+            System.out.println(Arrays.toString(robot.getPosition()));
+            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true, 1);
+        }
+
+        System.out.println("Exploration Complete!");
+        // generate MDF String to confirm final map
+    }
+
+    private boolean move(Robot robot, int speed) {
+        System.out.println(Arrays.toString(robot.getPosition()));
+
+        try {
+            TimeUnit.SECONDS.sleep(speed);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
         }
 
         if (check_right_empty(robot)) {
             robot.rotateRight();
             if (check_front_empty(robot)) {
-                robot.forward(step);
+                robot.forward(1);
                 return true;
             } else {
                 robot.rotateLeft();
             }
         }
         if (check_front_empty(robot)) {
-            robot.forward(step);
+            robot.forward(1);
             return true;
         }
         robot.rotateLeft();
         if (check_front_empty(robot)) {
-            robot.forward(step);
+            robot.forward(1);
             return true;
         }
         robot.rotateLeft();
         if (check_front_empty(robot)) {
-            robot.forward(step);
+            robot.forward(1);
         } else {
             System.out.println("Error during exploration phase 1. All 4 sides blocked.");
         }
         return true;
+    }
+    private void captureImage(Robot robot) {
+
     }
 
     private boolean check_right_empty(Robot robot) {
@@ -145,6 +207,7 @@ public class Exploration {
         }
         return null;
     }
+
     private int percent_complete(Robot robot) {
         Map map = robot.getMap();
         int unexplored = 0;

@@ -45,8 +45,11 @@ public class AddJButtonActionListener implements ActionListener{
 	private int[] waypoint_chosen = {-1,-1};
 	private int time_chosen = -1;
 	private int percentage_chosen = 100;
+	private String[] MDFString = {null, null};
+	private int speed_chosen = 1;
+	private boolean image_recognition_chosen = false;
 
-	
+
 	public AddJButtonActionListener(JFrame frame, SimulatorRobot r) {
 		this.frame = frame;
 		this.r = r;
@@ -55,8 +58,9 @@ public class AddJButtonActionListener implements ActionListener{
 		String[] waypoint_y_pos = create_seq_array(1, 14);
 		String[] time_arr = create_seq_array(0, 121);
 		String[] percentage_arr = create_seq_array(0, 101);
-		
-		
+		String[] speed_arr = create_seq_array(1, 6);
+
+
 		// Create the UI Component
 		JLabel mcLabel = new JLabel("Manual Control:");
 		JLabel loadMapLabel = new JLabel("Select the map you wish to load:");
@@ -80,7 +84,12 @@ public class AddJButtonActionListener implements ActionListener{
 		JLabel time_label = new JLabel("Set exploration time limit (secs): ");
 		JComboBox <String> percentage = new JComboBox<>(percentage_arr);
 		JLabel percentage_label = new JLabel("Set exploration coverage limit (%): ");
-		
+		JButton returnToStart = new JButton();
+		JButton printMDF = new JButton();
+		JLabel MDF_label = new JLabel(MDFString[1]);
+		JLabel speed_label = new JLabel("Set speed (secs/step): ");
+		JComboBox <String> speed = new JComboBox<>(speed_arr);
+
 		// Set Icon or Image to the UI Component
 		right.setIcon(new ImageIcon(new ImageIcon(".\\images\\right.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
 		left.setIcon(new ImageIcon(new ImageIcon(".\\images\\left.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
@@ -91,7 +100,9 @@ public class AddJButtonActionListener implements ActionListener{
 		resetRobot.setText("Restart");
 		exploration.setText("Exploration");
 		fastestPath.setText("Fastest Path");
-		
+		printMDF.setText("MDF String");
+		returnToStart.setText("Return To Start");
+
 		// For the Button to do something, you need to add the button to this Action Listener and set the command for the ActionListener to receive
 		right.addActionListener(this);
 		right.setActionCommand("Right");
@@ -126,10 +137,17 @@ public class AddJButtonActionListener implements ActionListener{
 		percentage.addActionListener(this);
 		percentage.setActionCommand("Set % limit");
 		percentage.setSelectedIndex(-1); //  This line will print null in console
+		returnToStart.addActionListener(this);
+		returnToStart.setActionCommand("Return");
+		printMDF.addActionListener(this);
+		printMDF.setActionCommand("MDF String");
+		speed.addActionListener(this);
+		speed.setActionCommand("Set speed");
+		speed.setSelectedIndex(-1); //  This line will print null in console
 
-		
+
 		// Set the size (x, y, width, height) of the UI label
-		
+
 		mcLabel.setBounds(x, y - 100, 100, 50);
 		loadMapLabel.setBounds(x, y + 165, 300, 50);
 		left.setBounds(x + 100, y - 100, 50, 50);
@@ -148,17 +166,23 @@ public class AddJButtonActionListener implements ActionListener{
 		waypoint_y.setBounds(x + 175, y + 125, 50, 30);
 		set_waypoint_label.setBounds(x, y + 125, 300, 30);
 		invalid_waypoint.setBounds(x + 150, y + 125, 300, 30);
-		time.setBounds(x + 200 , y + 225, 50, 30);
+		time.setBounds(x + 200, y + 225, 50, 30);
 		time_label.setBounds(x, y + 225, 300, 30);
 		percentage.setBounds(x + 200 , y + 275, 50, 30);
 		percentage_label.setBounds(x, y + 275, 300, 30);
+		speed.setBounds(x + 150, y + 325, 50, 30);
+		speed_label.setBounds(x, y + 325, 200, 30);
+		returnToStart.setBounds(x + 300, y + 50, 140, 50);
+		printMDF.setBounds(x, y + 425, 100, 50);
+		MDF_label.setBounds(x, y + 475, 500, 30);
+
 
 
 		// Set fonts for the labels
 		mcLabel.setFont(new Font(mcLabel.getFont().getName(), Font.ITALIC, 13));
 		robotView.setFont(new Font(robotView.getFont().getName(), Font.BOLD, 30));
 		simulatedMap.setFont(new Font(simulatedMap.getFont().getName(), Font.BOLD, 30));
-		
+
 		// Set location of the UI component
 		mcLabel.setLocation(x, y - 100);
 		loadMapLabel.setLocation(x, y + 165);
@@ -182,7 +206,12 @@ public class AddJButtonActionListener implements ActionListener{
 		time_label.setLocation(x, y + 225);
 		percentage.setLocation(x + 200 , y + 275);
 		percentage_label.setLocation(x, y + 275);
-		
+		speed.setLocation(x + 150, y + 325);
+		speed_label.setLocation(x, y + 325);
+		returnToStart.setLocation(x + 300, y + 50);
+		printMDF.setLocation(x, y + 425);
+		MDF_label.setLocation(x, y + 475);
+
 		// Add the UI component to the frame
 		frame.add(mcLabel);
 		frame.add(loadMapLabel);
@@ -206,7 +235,12 @@ public class AddJButtonActionListener implements ActionListener{
 		frame.add(time_label);
 		frame.add(percentage);
 		frame.add(percentage_label);
-		
+		frame.add(returnToStart);
+		frame.add(printMDF);
+		frame.add(MDF_label);
+		frame.add(speed);
+		frame.add(speed_label);
+
 		// Set Visibility of UI Component
 		mcLabel.setVisible(true);
 		loadMapLabel.setVisible(true);
@@ -230,7 +264,12 @@ public class AddJButtonActionListener implements ActionListener{
 		time_label.setVisible(true);
 		percentage.setVisible(true);
 		percentage_label.setVisible(true);
-		
+		returnToStart.setVisible(true);
+		printMDF.setVisible(true);
+		MDF_label.setVisible(false);
+		speed.setVisible(true);
+		speed_label.setVisible(true);
+
 		// Add button to the list of buttons
 		Buttons.add(right);
 		Buttons.add(left);
@@ -246,7 +285,10 @@ public class AddJButtonActionListener implements ActionListener{
 		Buttons.add(waypoint_y);
 		Buttons.add(time);
 		Buttons.add(percentage);
-		
+		Buttons.add(returnToStart);
+		Buttons.add(printMDF);
+		Buttons.add(speed);
+
 		// Add label to the hashmap
 		Labels.put("mcLabel", mcLabel);
 		Labels.put("loadMapLabel", loadMapLabel);
@@ -256,6 +298,8 @@ public class AddJButtonActionListener implements ActionListener{
 		Labels.put("invalid_waypoint", invalid_waypoint);
 		Labels.put("time_label", time_label);
 		Labels.put("percentage_label", percentage_label);
+		Labels.put("MDF_label", MDF_label);
+		Labels.put("speed_label", speed_label);
 	}
 
 	private String[] create_seq_array(int min, int max){
@@ -380,6 +424,7 @@ public class AddJButtonActionListener implements ActionListener{
 			r.rotateRight();
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
+
 		if (action.equals("Left")) {
 			System.out.println("Left clicked");
 			disableButtons();
@@ -390,6 +435,7 @@ public class AddJButtonActionListener implements ActionListener{
 			r.rotateLeft();
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
+
 		if (action.equals("Up")) {
 			System.out.println("Up clicked");
 			disableButtons();
@@ -400,8 +446,8 @@ public class AddJButtonActionListener implements ActionListener{
 			}
 			r.forward(1);
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
-
 		}
+
 		if (action.contentEquals("Update")) {
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
@@ -415,12 +461,13 @@ public class AddJButtonActionListener implements ActionListener{
 			System.out.println();
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
+
 		if (action.contentEquals("Check Map")) {
 			disableButtons();
 			JOptionPane.showMessageDialog(null, r.checkMap(), "Result of checking map", JOptionPane.INFORMATION_MESSAGE);
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
-		
+
 		if (action.contentEquals("Toggle Map")) {
 			disableButtons();
 			if (r.toggleMap().compareTo("robot") == 0) {
@@ -450,11 +497,7 @@ public class AddJButtonActionListener implements ActionListener{
 			r.restartRobot();
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
-		
-		if (action.contentEquals("Exploration")) {
-			ExplorationThread.getInstance(r, time_chosen, percentage_chosen);
-		}
-		
+
 		if (action.contentEquals("Load Map")) {
 			JComboBox <String> arenaMap = (JComboBox <String>)e.getSource();
 			String selectedFile = (String) arenaMap.getSelectedItem();
@@ -482,13 +525,22 @@ public class AddJButtonActionListener implements ActionListener{
 			catch (Exception eX) {
 				System.out.println(eX.getMessage());
 			}
-			
+
+			Labels.get("MDF_label").setVisible(false);
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 		}
+
 		if (action.contentEquals("Fastest Path")) {
-			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
-			FastestPathThread.getInstance(r, waypoint_chosen);
+			if (Arrays.equals(waypoint_chosen, new int[] {-1, -1})) {
+				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+			}
+			FastestPathThread.getInstance(r, waypoint_chosen, speed_chosen);
 		}
+		
+		if (action.contentEquals("Exploration")) {
+			ExplorationThread.getInstance(r, time_chosen, percentage_chosen, speed_chosen, image_recognition_chosen);
+		}
+
 		if (action.contentEquals("Set x coordinate")) {
 			AStarPathFinder astar = new AStarPathFinder();
 			JComboBox <String> waypoint_x = (JComboBox <String>)e.getSource();
@@ -501,12 +553,12 @@ public class AddJButtonActionListener implements ActionListener{
 			}
 
 			if (!astar.is_valid(r, waypoint_chosen)) {
-				enableLabel("invalid_waypoint");
+				Labels.get("invalid_waypoint").setVisible(true);
 			} else {
-				disableLabel("invalid_waypoint");
-				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+				Labels.get("invalid_waypoint").setVisible(false);
 			}
 		}
+
 		if (action.contentEquals("Set y coordinate")) {
 			AStarPathFinder astar = new AStarPathFinder();
 			JComboBox <String> waypoint_y = (JComboBox <String>)e.getSource();
@@ -518,12 +570,13 @@ public class AddJButtonActionListener implements ActionListener{
 				waypoint_chosen[1] = Integer.parseInt(selected_waypoint_y);
 			}
 			if (!astar.is_valid(r, waypoint_chosen)) {
-				enableLabel("invalid_waypoint");
+				Labels.get("invalid_waypoint").setVisible(true);
 			} else {
-				disableLabel("invalid_waypoint");
-				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+				Labels.get("invalid_waypoint").setVisible(false);
 			}
-		}if (action.contentEquals("Set time limit")) {
+		}
+
+		if (action.contentEquals("Set time limit")) {
 			JComboBox <String> secs = (JComboBox <String>)e.getSource();
 			String secs_chosen = (String) secs.getSelectedItem();
 			if (secs_chosen == null) {
@@ -533,6 +586,7 @@ public class AddJButtonActionListener implements ActionListener{
 				time_chosen = Integer.parseInt(secs_chosen);
 			}
 		}
+
 		if (action.contentEquals("Set % limit")) {
 			JComboBox <String> percentage = (JComboBox <String>)e.getSource();
 			String perc_chosen = (String) percentage.getSelectedItem();
@@ -541,6 +595,27 @@ public class AddJButtonActionListener implements ActionListener{
 			}
 			else {
 				percentage_chosen = Integer.parseInt(perc_chosen);
+			}
+		}
+
+		if (action.contentEquals("Return")) {
+			r.resetRobotPositionOnUI();
+		}
+
+		if (action.contentEquals("MDF String")) {
+			r.setMap(loadedMap);
+			MDFString = r.getMDFString();
+			System.out.println(MDFString[0]);
+			System.out.println(MDFString[1]);
+			Labels.get("MDF_label").setText(MDFString[1]);
+			Labels.get("MDF_label").setVisible(true);
+		}
+
+		if (action.contentEquals("Set speed")) {
+			JComboBox<String> s = (JComboBox<String>) e.getSource();
+			String sp = (String) s.getSelectedItem();
+			if (sp != null) {
+				speed_chosen = Integer.parseInt(sp);
 			}
 		}
 	}

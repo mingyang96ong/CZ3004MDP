@@ -82,7 +82,7 @@ public class ConnectionManager extends Thread{
 			}
 			else if (!ExplorationThread.getRunning() && !FastestPathThread.getRunning() && s.equals(Constant.START_EXPLORATION) ) {
 				s = "Exploration Started";
-				thread = ExplorationThread.getInstance(robot, Constant.TIME, Constant.PERCENTAGE);
+				thread = ExplorationThread.getInstance(robot, Constant.TIME, Constant.PERCENTAGE, Constant.SPEED, Constant.IMAGE_REC);
 				thread.setPriority(Thread.MAX_PRIORITY);
 				
 				complete = true;
@@ -96,7 +96,7 @@ public class ConnectionManager extends Thread{
 //					connectionSocket.sendMessage(Constant.END_TOUR);
 			}
 			else if (!ExplorationThread.getRunning() && !FastestPathThread.getRunning() && s.equals(Constant.FASTEST_PATH) ){
-				thread = FastestPathThread.getInstance(robot, robot.getWaypoint());
+				thread = FastestPathThread.getInstance(robot, robot.getWaypoint(), 1);
 				thread.setPriority(Thread.MAX_PRIORITY);
 				
 				s = "Fastest Path started";
@@ -120,7 +120,7 @@ public class ConnectionManager extends Thread{
 					String tmp = s.replace(Constant.SETWAYPOINT + "(", "");
 					tmp = tmp.replace(")", "");
 					String[] arr = tmp.trim().split(",");
-					robot.setWaypoint(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]));
+					robot.setWaypoint(Integer.parseInt(arr[1]), Integer.parseInt(arr[0]));
 					s = "Successfully set the waypoint: " + Integer.parseInt(arr[0]) + 
 							"," + Integer.parseInt(arr[1]);
 					System.out.println(s);

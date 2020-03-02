@@ -34,9 +34,7 @@ public abstract class Robot {
 	public abstract void rotateRight();
 	public abstract void rotateLeft();
 	
-	public void captureImage() {
-		return;
-	}
+	public abstract void captureImage();
 	
 	public void setDirection(int direction) {
 		this.direction = direction;

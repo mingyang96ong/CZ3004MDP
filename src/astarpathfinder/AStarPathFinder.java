@@ -3,9 +3,7 @@ package astarpathfinder;
 import robot.Robot;
 import map.Map;
 import config.Constant;
-import connection.ConnectionSocket;
 import exploration.Exploration;
-import exploration.ExplorationThread;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -51,31 +49,21 @@ public class AStarPathFinder {
 
         int[] path = get_path(robot, cur);
         System.out.println(Arrays.toString(path));
-        if ((ExplorationThread.getRunning() || FastestPathThread.getRunning())) {
-	        move(robot, path, speed);
-	        System.out.println("Finished Fastest Path");
-	        return true;
-        }
-        else{
-        	System.out.println("Fastest Path terminated");
-        	return false;
-        }
+
+        move(robot, path, speed);
+        System.out.println("Finished Fastest Path");
+        return true;
     }
 
     private boolean move(Robot robot, int[] path, int speed) {
         Exploration ex = new Exploration();
 
         for (int direction : path) {
-        	if (!ConnectionSocket.checkConnection()) {
-	            try {
-	                TimeUnit.MILLISECONDS.sleep(speed);
-	            }
-	            catch (Exception e){
-	                System.out.println(e.getMessage());
-	            }
-        	}
-            if (!(ExplorationThread.getRunning() || FastestPathThread.getRunning())) {
-            	return false;
+            try {
+                TimeUnit.SECONDS.sleep(speed);
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
             }
 
             if (direction == Constant.FORWARD) {
