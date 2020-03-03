@@ -48,6 +48,12 @@ public class Constant {
 
 	// Used in Map and possibly used in real run and simulator
 	public static final String[] POSSIBLEGRIDLABELS = new String[]{"Unexplored", "Explored", "Obstacle", "Waypoint", "Startpoint", "Endpoint"};
+	public static final String UNEXPLORED = POSSIBLEGRIDLABELS[0];
+	public static final String EXPLORED = POSSIBLEGRIDLABELS[1];
+	public static final String OBSTACLE = POSSIBLEGRIDLABELS[2];
+	public static final String WAYPOINT = POSSIBLEGRIDLABELS[3];
+	public static final String STARTPOINT = POSSIBLEGRIDLABELS[4];
+	public static final String ENDPOINT = POSSIBLEGRIDLABELS[5];
 
 	// Map directions
 	public static final int NORTH = 0;
@@ -110,8 +116,8 @@ public class Constant {
 	public static final boolean IMAGE_REC = false;
 
 	// Connection Constants
-	public static final String IP_ADDRESS = "127.0.0.1";
-	//	public static final String IP_ADDRESS = "192.168.15.15";
+//	public static final String IP_ADDRESS = "127.0.0.1";
+	public static final String IP_ADDRESS = "192.168.15.15";
 	public static final int PORT = 8080;
 
 	public static final String START_EXPLORATION = "ES|";

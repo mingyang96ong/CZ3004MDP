@@ -10,6 +10,8 @@ public class Map{
 	// Note that grid is by x, y coordinate and this is opposite of the Array position in Java
 	
 	private String[][] grid = new String[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
+	private double[][] dist = new double[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
+	private int[][]    con  = new int[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
 	private int[] waypoint = new int[] {-1, -1};
 	
 	
@@ -41,21 +43,52 @@ public class Map{
 		return new Map(this.grid);
 	}
 	
-	public void print() {
+//	public void print() {
+//		System.out.println("The current map is: \n");
+//
+//		for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
+//			for (int i = 0; i < Constant.BOARDWIDTH; i++) {
+//				if (i != Constant.BOARDWIDTH - 1) {
+//					System.out.print(grid[i][j] + ", " );
+//				}
+//				else {
+//					System.out.print(grid[i][j]);
+//				}
+//			}
+//			System.out.println();
+//		}
+//		System.out.println("");
+//	}
+
+	public String print() {
+		String s = "";
+		s += "The current map is: \n\n";
 		System.out.println("The current map is: \n");
-		
+
 		for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
 			for (int i = 0; i < Constant.BOARDWIDTH; i++) {
 				if (i != Constant.BOARDWIDTH - 1) {
-					System.out.print(grid[i][j] + ", " );
+					if (grid[i][j] == Constant.POSSIBLEGRIDLABELS[1] || grid[i][j] == Constant.POSSIBLEGRIDLABELS[2] ||
+							grid[i][j] == Constant.POSSIBLEGRIDLABELS[3] || grid[i][j] == Constant.POSSIBLEGRIDLABELS[5]) {
+						s+=grid[i][j] + "  , ";
+						System.out.print(grid[i][j] + "  , " );
+					}
+					else {
+						s+=grid[i][j] + ", ";
+						System.out.print(grid[i][j] + ", " );
+					}
 				}
 				else {
+					s+=grid[i][j];
 					System.out.print(grid[i][j]);
 				}
 			}
+			s+="\n";
 			System.out.println();
 		}
+		s+="\n";
 		System.out.println("");
+		return s;
 	}
 	
 	public void initializeMap(String[][] grid) {
@@ -76,19 +109,29 @@ public class Map{
 		for (int i = 0; i< Constant.BOARDWIDTH; i++) {
 			for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
 				// Set the start point grids
+				// Set dist to 0 to ensure all values will NOT be overridden
 				if (i < Constant.STARTPOINTWIDTH && j < Constant.STARTPOINTHEIGHT) {
 					setGrid(i, j, Constant.POSSIBLEGRIDLABELS[4]);
+					setDist(i, j, 0);
 				}
 				// Set the end point grids
+				// Set dist to 0 to ensure all values will NOT be overridden
 				else if (i >= Constant.BOARDWIDTH - Constant.ENDPOINTWIDTH && j >= Constant.BOARDHEIGHT - Constant.ENDPOINTHEIGHT) {
 					setGrid(i, j, Constant.POSSIBLEGRIDLABELS[5]);
+					setDist(i, j, 0);
 				}
 				// Set the remaining grids unexplored
+				// Set dist to 999 to ensure all values will be overridden
 				else {
 					setGrid(i, j, Constant.POSSIBLEGRIDLABELS[0]);
+					setDist(i, j, 999);
 				}
 			}
 		}
+	}
+
+	public void setDist(int x, int y, double value) {
+		dist[x][y] = value;
 	}
 	
 	public void setGrid(int x, int y, String command) {
@@ -180,6 +223,14 @@ public class Map{
 	protected String[][] getGridMap() {
 		return grid;
 	}
+
+	public double getDist(int x, int y) {
+		// If the x, y is outside the board, it returns an obstacle.
+		if (x < 0 || x >= Constant.BOARDWIDTH || y < 0 || y >= Constant.BOARDHEIGHT) {
+			return 1;
+		}
+		return dist[x][y];
+	}
 	
 	public String getGrid(int x, int y) {
 		
@@ -253,7 +304,7 @@ public class Map{
 			MDFHexString[0] += Integer.toString(Integer.parseInt(MDFBitStringPart1.substring(i, i + 4), 2), 16);
 		}
 
-		MDFBitStringPart2 += "0".repeat(MDFBitStringPart2.length() % 8);
+		MDFBitStringPart2 += "0".repeat(8 - (MDFBitStringPart2.length() % 8));
 		
 		for (int i = 0; i < MDFBitStringPart2.length(); i += 4) {
 			MDFHexString[2] += Integer.toString(Integer.parseInt(MDFBitStringPart2.substring(i, i + 4), 2), 16);
