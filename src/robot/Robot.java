@@ -311,7 +311,7 @@ public abstract class Robot {
 //			if (value > e) {
 //				isObstacle[i] = false;
 //			}
-			int[] sensor_thres = Constant.SENSOR_RANGES[i];
+			double[] sensor_thres = Constant.SENSOR_RANGES[i];
 			for (int h = 0; h < sensor_thres.length; h++) {
 				int g = h+1;
 				int x = this.x + sensorLocation[i][0] + sensorDirectionValueX * g;
@@ -378,10 +378,10 @@ public abstract class Robot {
 	private void setGridDist(Map map) {
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
-				map.setDist(checkValidX(i+x), checkValidY(j+y), 0);
-				if (!(map.getGrid(checkValidX(i+x), checkValidY(j+y)).equals(Constant.STARTPOINT)) ||
-						(map.getGrid(checkValidX(i+x), checkValidY(j+y)).equals(Constant.ENDPOINT))){
-					map.setGrid(checkValidX(i+x), checkValidY(j+y), Constant.EXPLORED);
+				map.setDist(i+x, j+y, -1);
+				if (!((map.getGrid(i+x, j+y).equals(Constant.STARTPOINT)) ||
+						(map.getGrid(i+x, j+y).equals(Constant.ENDPOINT)))){
+					map.setGrid(i+x, j+y, Constant.EXPLORED);
 				}
 			}
 		}
