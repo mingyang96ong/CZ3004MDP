@@ -69,38 +69,31 @@ public class AStarPathFinder {
             if (direction == Constant.FORWARD) {
                 count++;
             } else if (direction == Constant.RIGHT) {
-            	sb.append("W"+count + "|" + Constant.TURN_RIGHT);
+            	if (count > 0) {
+	            	sb.append("W" + count + "|" + Constant.TURN_RIGHT);
+            	}
+            	else {
+            		sb.append(Constant.TURN_RIGHT);
+            	}
             	count = 1;
-            	
-//                robot.updateMap();
-//                robot.rotateRight();
-//                if (ex.check_front_empty(robot)) {
-//                    robot.forward(1);
-//                } else {
-//                    return false;
-//                }
+
             } else if (direction == Constant.LEFT) {
-            	sb.append("W"+count + "|" + Constant.TURN_LEFT);
+            	if (count > 0) {
+	            	sb.append("W" + count + "|" + Constant.TURN_LEFT);	
+            	}
+            	else {
+            		sb.append(Constant.TURN_LEFT);
+            	}
             	count = 1;
-//                robot.updateMap();
-//                robot.rotateLeft();
-//                if (ex.check_front_empty(robot)) {
-//                    robot.forward(1);
-//                } else {
-//                    return false;
-//                }
+
             } else {
-            	sb.append("W"+count + "|" + Constant.TURN_RIGHT + Constant.TURN_RIGHT);
+            	if (count > 0) {
+            		sb.append("W" + count + "|" + Constant.TURN_RIGHT + Constant.TURN_RIGHT);
+            	}
+            	else {
+            		sb.append(Constant.TURN_RIGHT + Constant.TURN_RIGHT);
+            	}
             	count = 1;
-//                robot.updateMap();
-//                robot.rotateRight();
-//                robot.updateMap();
-//                robot.rotateRight();
-//                if (ex.check_front_empty(robot)) {
-//                    robot.forward(1);
-//                } else {
-//                    return false;
-//                }
             }
         }
         if (count >= 1) {
