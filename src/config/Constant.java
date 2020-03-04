@@ -1,6 +1,12 @@
 package config;
 	
 public class Constant {
+	// Actual run constraints
+	public static final int TIME = -1;
+	public static final int PERCENTAGE = 100;
+	public static final int SPEED = 1;
+	public static final boolean IMAGE_REC = false;
+
 	// Used for all Real and Simulator Events
 	public static final int BOARDWIDTH = 20; // By default, this should be 20. This must be greater than 3 as the Robot assumes to take 3x3 grid.
 	public static final int BOARDHEIGHT = 15; // By default, this should be 15. This must be greater than 3 as the Robot assumes to take 3x3 grid.
@@ -8,6 +14,8 @@ public class Constant {
 	public static final int STARTPOINTWIDTH = 3;
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
+	public static final int[][] SENSOR_RANGES ={{13, 23, 30}, {11, 21, 30}, {13, 23, 30}, {12, 22, 30}, {12, 22, 30}, {23, 31, 43, 52, 63, 87}};
+
 	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.
 	public static final int SHORTSENSORMAXRANGE = 3; // This is in number of grid.
 	public static final int SHORTSENSOROFFSET = 3; // This is in cm.
@@ -99,21 +107,15 @@ public class Constant {
 	public static final int HEIGHT = BOARDHEIGHT * GRIDHEIGHT + MARGINTOP;
 	public static final int WIDTH = BOARDWIDTH * GRIDWIDTH + MARGINLEFT;
 
-	// Values in PolicyIteration
-	public static final double NORMALREWARD = -0.04;
-	public static final double ENDREWARD = 100;
-	public static final double WAYPOINTREWARD = ENDREWARD * 1.1; // 110
-	public static final double OBSTACLEREWARD = -100 * ENDREWARD; // - 10 000
-
-	public static final double TURNCOST_NW = NORMALREWARD * 0.1; // -0.08
-	//	public static final double TURNCOST_W = NORMALREWARD * 200; // -8
-	public static final double TURNCOST_W = NORMALREWARD * 0.1; // -8
-
-	// Non-limited Exploration Constants
-	public static final int TIME = -1;
-	public static final int PERCENTAGE = 100;
-	public static final int SPEED = 1;
-	public static final boolean IMAGE_REC = false;
+//	// Values in PolicyIteration
+//	public static final double NORMALREWARD = -0.04;
+//	public static final double ENDREWARD = 100;
+//	public static final double WAYPOINTREWARD = ENDREWARD * 1.1; // 110
+//	public static final double OBSTACLEREWARD = -100 * ENDREWARD; // - 10 000
+//
+//	public static final double TURNCOST_NW = NORMALREWARD * 0.1; // -0.08
+//	//	public static final double TURNCOST_W = NORMALREWARD * 200; // -8
+//	public static final double TURNCOST_W = NORMALREWARD * 0.1; // -8
 
 	// Connection Constants
 //	public static final String IP_ADDRESS = "127.0.0.1";
@@ -128,6 +130,7 @@ public class Constant {
 	public static final String SENSE_ALL = "Z|";
 	public static final String TURN_LEFT = "A|";
 	public static final String TURN_RIGHT = "D|";
+	public static final String CALIBRATE = "L|";
 	public static final String END_TOUR = "N";
 
 	// Connection Acknowledge

@@ -59,6 +59,7 @@ public class AddJButtonActionListener implements ActionListener{
 		String[] time_arr = create_seq_array(0, 121);
 		String[] percentage_arr = create_seq_array(0, 101);
 		String[] speed_arr = create_seq_array(1, 6);
+		String[] image_rec_arr = new String[] {"No Image Recognition", "With Image Recognition"};
 
 
 		// Create the UI Component
@@ -89,6 +90,7 @@ public class AddJButtonActionListener implements ActionListener{
 		JLabel MDF_label = new JLabel(MDFString[1]);
 		JLabel speed_label = new JLabel("Set speed (secs/step): ");
 		JComboBox <String> speed = new JComboBox<>(speed_arr);
+		JComboBox <String> image_rec = new JComboBox<>(image_rec_arr);
 
 		// Set Icon or Image to the UI Component
 		right.setIcon(new ImageIcon(new ImageIcon(".\\images\\right.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
@@ -136,14 +138,17 @@ public class AddJButtonActionListener implements ActionListener{
 		time.setSelectedIndex(-1); //  This line will print null in console
 		percentage.addActionListener(this);
 		percentage.setActionCommand("Set % limit");
-		percentage.setSelectedIndex(-1); //  This line will print null in console
+		percentage.setSelectedIndex(100);
 		returnToStart.addActionListener(this);
 		returnToStart.setActionCommand("Return");
 		printMDF.addActionListener(this);
 		printMDF.setActionCommand("MDF String");
 		speed.addActionListener(this);
 		speed.setActionCommand("Set speed");
-		speed.setSelectedIndex(-1); //  This line will print null in console
+		speed.setSelectedIndex(0);
+		image_rec.addActionListener(this);
+		image_rec.setActionCommand("Set image recognition");
+		image_rec.setSelectedIndex(0);
 
 
 		// Set the size (x, y, width, height) of the UI label
@@ -175,6 +180,7 @@ public class AddJButtonActionListener implements ActionListener{
 		returnToStart.setBounds(x + 300, y + 50, 140, 50);
 		printMDF.setBounds(x, y + 425, 100, 50);
 		MDF_label.setBounds(x, y + 475, 500, 30);
+		image_rec.setBounds(x, y + 375, 175, 30);
 
 
 
@@ -211,6 +217,7 @@ public class AddJButtonActionListener implements ActionListener{
 		returnToStart.setLocation(x + 300, y + 50);
 		printMDF.setLocation(x, y + 425);
 		MDF_label.setLocation(x, y + 475);
+		image_rec.setLocation(x, y + 375);
 
 		// Add the UI component to the frame
 		frame.add(mcLabel);
@@ -240,6 +247,7 @@ public class AddJButtonActionListener implements ActionListener{
 		frame.add(MDF_label);
 		frame.add(speed);
 		frame.add(speed_label);
+		frame.add(image_rec);
 
 		// Set Visibility of UI Component
 		mcLabel.setVisible(true);
@@ -269,6 +277,7 @@ public class AddJButtonActionListener implements ActionListener{
 		MDF_label.setVisible(false);
 		speed.setVisible(true);
 		speed_label.setVisible(true);
+		image_rec.setVisible(true);
 
 		// Add button to the list of buttons
 		Buttons.add(right);
@@ -288,6 +297,7 @@ public class AddJButtonActionListener implements ActionListener{
 		Buttons.add(returnToStart);
 		Buttons.add(printMDF);
 		Buttons.add(speed);
+		Buttons.add(image_rec);
 
 		// Add label to the hashmap
 		Labels.put("mcLabel", mcLabel);
@@ -606,8 +616,8 @@ public class AddJButtonActionListener implements ActionListener{
 			r.setMap(loadedMap);
 			MDFString = r.getMDFString();
 			System.out.println(MDFString[0]);
-			System.out.println(MDFString[1]);
-			Labels.get("MDF_label").setText(MDFString[1]);
+			System.out.println(MDFString[2]);
+			Labels.get("MDF_label").setText(MDFString[2]);
 			Labels.get("MDF_label").setVisible(true);
 		}
 
@@ -616,6 +626,14 @@ public class AddJButtonActionListener implements ActionListener{
 			String sp = (String) s.getSelectedItem();
 			if (sp != null) {
 				speed_chosen = Integer.parseInt(sp);
+			}
+		}
+
+		if (action.contentEquals("Set image recognition")) {
+			JComboBox<String> ir = (JComboBox<String>) e.getSource();
+			String irc = (String) ir.getSelectedItem();
+			if (irc != null) {
+				image_recognition_chosen = irc.equals("With Image Recognition");
 			}
 		}
 	}

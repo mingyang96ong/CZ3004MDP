@@ -59,11 +59,12 @@ public class AStarPathFinder {
         Exploration ex = new Exploration();
 
         for (int direction : path) {
-            try {
-                TimeUnit.SECONDS.sleep(speed);
-            }
-            catch (Exception e){
-                System.out.println(e.getMessage());
+            if (!connection.ConnectionSocket.checkConnection()) {
+                try {
+                    TimeUnit.SECONDS.sleep(speed);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
             if (direction == Constant.FORWARD) {

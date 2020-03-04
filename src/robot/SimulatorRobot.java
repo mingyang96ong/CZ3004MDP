@@ -177,7 +177,16 @@ public class SimulatorRobot extends Robot{
 
 	public void captureImage() {
 		try {
-			TimeUnit.SECONDS.sleep(5);
+			TimeUnit.SECONDS.sleep(2);
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void calibrate() {
+		try {
+			TimeUnit.SECONDS.sleep(2);
 		}
 		catch (Exception e){
 			System.out.println(e.getMessage());

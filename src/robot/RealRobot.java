@@ -103,9 +103,11 @@ public class RealRobot extends Robot{
 		this.sensePosition[0] = x;
 		this.sensePosition[1] = y;
 		this.sensePosition[2] = getDirection();
-//		String[] arr2 = this.getMDFString();
-//		connectionSocket.sendMessage("{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
-//				"\"}]}");
+		String[] arr2 = this.getMDFString();
+		connectionSocket.sendMessage("M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
+				"\"}]}");
+		System.out.println("{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
+				"\"}]}");
 	}
 
 	@Override
@@ -244,5 +246,10 @@ public class RealRobot extends Robot{
 			return true;
 		}
 		return false;
+	}
+
+	public void calibrate() {
+		connectionSocket.sendMessage(Constant.CALIBRATE);
+		acknowledge();
 	}
 }

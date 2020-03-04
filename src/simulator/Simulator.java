@@ -15,7 +15,6 @@ import javax.swing.WindowConstants;
 
 import config.Constant;
 import map.Map;
-import policyIteration.PolicyIteration;
 import robot.SimulatorRobot;
 
 public class Simulator {
