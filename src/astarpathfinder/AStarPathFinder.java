@@ -3,6 +3,7 @@ package astarpathfinder;
 import robot.Robot;
 import map.Map;
 import config.Constant;
+import connection.ConnectionSocket;
 import exploration.Exploration;
 
 import java.util.Arrays;
@@ -49,12 +50,69 @@ public class AStarPathFinder {
 
         int[] path = get_path(robot, cur);
         System.out.println(Arrays.toString(path));
-
-        move(robot, path, speed);
+        if (ConnectionSocket.checkConnection() && FastestPathThread.getRunning()) {
+        	realFPmove(robot, path);
+        }
+        else {
+        	move(robot, path, speed);
+        }
         System.out.println("Finished Fastest Path");
         return true;
     }
-
+    
+    private boolean realFPmove(Robot robot, int[] path) {
+    	
+    	StringBuilder sb = new StringBuilder();
+    	int count = 0;
+        for (int i = 0; i < path.length; i++) {
+        	int direction = path[i];
+            if (direction == Constant.FORWARD) {
+                count++;
+            } else if (direction == Constant.RIGHT) {
+            	sb.append("W"+count + "|" + Constant.TURN_RIGHT);
+            	count = 1;
+            	
+//                robot.updateMap();
+//                robot.rotateRight();
+//                if (ex.check_front_empty(robot)) {
+//                    robot.forward(1);
+//                } else {
+//                    return false;
+//                }
+            } else if (direction == Constant.LEFT) {
+            	sb.append("W"+count + "|" + Constant.TURN_LEFT);
+            	count = 1;
+//                robot.updateMap();
+//                robot.rotateLeft();
+//                if (ex.check_front_empty(robot)) {
+//                    robot.forward(1);
+//                } else {
+//                    return false;
+//                }
+            } else {
+            	sb.append("W"+count + "|" + Constant.TURN_RIGHT + Constant.TURN_RIGHT);
+            	count = 1;
+//                robot.updateMap();
+//                robot.rotateRight();
+//                robot.updateMap();
+//                robot.rotateRight();
+//                if (ex.check_front_empty(robot)) {
+//                    robot.forward(1);
+//                } else {
+//                    return false;
+//                }
+            }
+        }
+        if (count >= 1) {
+        	sb.append("W" + count + "|");
+        }
+        String msg = sb.toString();
+        System.out.println("Message sent for FastestPath real run: " + msg);
+        ConnectionSocket.getInstance().sendMessage(msg);
+        
+        return true;
+    }
+    
     private boolean move(Robot robot, int[] path, int speed) {
         Exploration ex = new Exploration();
 

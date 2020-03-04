@@ -14,8 +14,12 @@ public class Constant {
 	public static final int STARTPOINTWIDTH = 3;
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
-	public static final double[][] SENSOR_RANGES ={{15, 25.5, 32.9}, {10.5, 19, 34.5}, {15.5, 26, 38}, {12, 22, 30}, {12, 22, 30},
-			{20, 27, 37, 46.5, 58.5, 68.5, 78.5}}; // LAB
+	public static final double[][] SENSOR_RANGES ={	{15, 25.5, 32.9}, 
+													{10.5, 19, 34.5},
+													{15.5, 26, 38}, 
+													{12, 22, 30}, 
+													{12, 22, 30},
+													{20, 27, 37, 46.5, 58.5, 68.5, 78.5}}; // LAB
 	
 
 	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.
