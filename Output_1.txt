@@ -1,0 +1,720 @@
+
+
+Pos : [1, 1]
+The sensor values are: 29.50 25.18 26.67 8.16 8.18 60.20 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 2]
+The sensor values are: 18.92 16.62 19.94 8.01 8.18 129.84 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 3]
+The sensor values are: 9.12 6.66 9.52 7.45 7.86 480.96 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 3]
+The sensor values are: 40.12 3153.19 1932.90 7.01 7.07 31.50 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 3]
+The sensor values are: 4494.47 241.09 86.21 8.45 20.47 30.98 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [3, 3]
+The sensor values are: 342.71 1176.04 74.24 8.40 29.30 32.21 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 3]
+The sensor values are: 142.04 51.86 68.02 153.08 154.07 31.32 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 3]
+The sensor values are: 49.04 3153.19 204.52 38.30 40.30 95.45 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 4]
+The sensor values are: 49.35 627.36 179.22 36.57 6.46 63.11 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 5]
+The sensor values are: 42.57 299.93 108.51 34.16 19.59 63.79 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 5]
+The sensor values are: 40.31 6.66 32.67 66.99 47.69 75.14 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 5]
+The sensor values are: 40.70 66.65 79.87 35.46 17.92 67.44 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 6]
+The sensor values are: 45.67 94.42 121.94 6.69 34.01 65.57 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 7]
+The sensor values are: 41.93 65.41 95.33 31.30 30.79 69.02 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [4, 7]
+The sensor values are: 43.47 29.66 34.01 108.34 103.42 32.96 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [3, 7]
+The sensor values are: 29.18 23.59 22.47 79.02 6.62 31.41 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 7]
+The sensor values are: 17.07 13.32 15.59 11.59 6.61 34.99 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Obstacle, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 7]
+The sensor values are: 7.62 7.34 6.72 8.23 7.01 24.35 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Obstacle, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 7]
+The sensor values are: 10.56 26.38 29.10 6.68 7.13 91.14 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Unexplored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 7]
+The sensor values are: 49.04 299.93 103.81 27.50 25.87 19.14 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Explored, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 7]
+The sensor values are: 44.66 251.19 278.71 26.27 30.57 71.52 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 7]
+The sensor values are: 28.33 25.55 52.68 17.56 17.29 83.54 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Unexplored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 8]
+The sensor values are: 20.49 15.20 32.16 16.81 16.42 84.13 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 8]
+The sensor values are: 18.60 16.12 19.25 40.33 18.00 23.11 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 8]
+The sensor values are: 9.93 6.68 8.63 17.56 16.35 23.85 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Obstacle, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 8]
+The sensor values are: 18.68 16.62 19.85 108.34 66.57 18.21 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 7]
+The sensor values are: 10.82 7.05 9.45 106.33 91.92 18.89 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [1, 7]
+The sensor values are: 47.85 241.09 924.66 27.99 28.67 19.14 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 7]
+The sensor values are: 48.15 241.09 101.58 26.42 27.38 75.14 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
+
+
+Pos : [2, 7]
+The sensor values are: 29.83 25.99 52.68 17.56 16.99 83.54 
+The current map is: 
+
+Startpoint, Startpoint, Startpoint, Obstacle, Obstacle, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Startpoint, Startpoint, Startpoint, Explored, Explored, Explored, Explored, Obstacle, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Obstacle, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Obstacle, Explored, Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Explored, Explored, Explored, Explored, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Obstacle, Obstacle, Obstacle, Obstacle, Explored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored
+Unexplored, Explored, Unexplored, Explored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Unexplored, Endpoint, Endpoint, Endpoint
+
+
+
