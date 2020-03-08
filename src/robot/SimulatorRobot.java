@@ -196,4 +196,8 @@ public class SimulatorRobot extends Robot{
 		}
 		buttonListener.disableLabel("calibrating");
 	}
+
+	public Map getTrueMap(){
+		return sensor.getTrueMap();
+	}
 }

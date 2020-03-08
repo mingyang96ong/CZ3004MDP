@@ -4,12 +4,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.Arrays;
 
+import astarpathfinder.FastestPath;
+import astarpathfinder.FastestPathThread;
 import robot.Robot;
 import map.Map;
 import config.Constant;
 import astarpathfinder.AStarPathFinder;
 
 public class Exploration {
+    private FastestPath fp = new FastestPath();
 
     public void Exploration(Robot robot, int time, int percentage, int speed, boolean image_recognition){
         if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
@@ -21,13 +24,29 @@ public class Exploration {
         } else {
             Limited_Exploration(robot, time, percentage, speed);
         }
+
+        int[] path = fp.FastestPath(robot, robot.getWaypoint(), Constant.END, 1, false);
+
+        switch (path[0]) {
+            case Constant.LEFT:
+                robot.rotateLeft();
+                break;
+            case Constant.RIGHT:
+                robot.rotateRight();
+                break;
+            case Constant.BACKWARD:
+                robot.rotateRight();
+                robot.rotateRight();
+                break;
+            default:
+                break;
+        }
         robot.calibrate();
     };
 
     private void Limited_Exploration(Robot robot, int time, int percentage, int speed) {
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.start();
-        AStarPathFinder astar = new AStarPathFinder();
         robot.setDirection(2);
 
         do {
@@ -72,7 +91,7 @@ public class Exploration {
 
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false, speed);
+            fp.FastestPath(robot, null, unexplored, speed, true);
             unexplored = unexplored(robot, robot.getPosition());
             crash(robot.updateMap());
         }
@@ -81,7 +100,7 @@ public class Exploration {
             // fastest path to start point
             System.out.println("Phase 3");
             System.out.println(Arrays.toString(robot.getPosition()));
-            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true, speed);
+            fp.FastestPath(robot, null, Constant.START, speed, true);
         }
 
         stopwatch.stop();
@@ -106,7 +125,7 @@ public class Exploration {
         while (unexplored != null) {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            astar.AStarPathFinder(robot, robot.getPosition(), unexplored, false, 1);
+            fp.FastestPath(robot, null, unexplored, 1, true);
             unexplored = unexplored(robot, robot.getPosition());
             crash(robot.updateMap());
         }
@@ -115,7 +134,7 @@ public class Exploration {
             // fastest path to start point
             System.out.println("Phase 3");
             System.out.println(Arrays.toString(robot.getPosition()));
-            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true, 1);
+            fp.FastestPath(robot, null, Constant.START, 1, true);
         }
 
         System.out.println("Exploration Complete!");
@@ -147,7 +166,7 @@ public class Exploration {
         while (go_to != null) {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            astar.AStarPathFinder(robot, robot.getPosition(), go_to, true, 1);
+            fp.FastestPath(robot, null, go_to, 1, true);
             obstacle_on_right(robot, need_take);
 
             do {
@@ -169,7 +188,7 @@ public class Exploration {
             // fastest path to start point
             System.out.println("Phase 3");
             System.out.println(Arrays.toString(robot.getPosition()));
-            astar.AStarPathFinder(robot, robot.getPosition(), Constant.START, true, 1);
+            fp.FastestPath(robot, null, Constant.START, 1, true);
         }
 
         System.out.println("Exploration Complete!");

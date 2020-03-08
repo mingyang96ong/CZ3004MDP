@@ -10,8 +10,10 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class AStarPathFinder {
+    int direction = -1;
+    boolean first_penalty = true;
 
-    public boolean AStarPathFinder(Robot robot, int[] start_pos, int[] end_pos, boolean on_grid, int speed) {
+    public int[] AStarPathFinder(Robot robot, int[] start_pos, int[] end_pos, boolean on_grid) {
         Node start = new Node(start_pos);
         Node cur = start;
 
@@ -44,117 +46,35 @@ public class AStarPathFinder {
 
             if (Arrays.equals(open, new Node[] {})) {
                 System.out.println("Error: No possible path");
-                return false;
+                return null;
             }
         }
 
-        int[] path = get_path(robot, cur);
+        int[] path = get_path(cur);
         System.out.println(Arrays.toString(path));
-        if (ConnectionSocket.checkConnection() && FastestPathThread.getRunning()) {
-        	realFPmove(robot, path);
-        }
-        else {
-        	move(robot, path, speed);
-        }
-        System.out.println("Finished Fastest Path");
-        return true;
-    }
-    
-    private boolean realFPmove(Robot robot, int[] path) {
-    	
-    	StringBuilder sb = new StringBuilder();
-    	int count = 0;
-        for (int i = 0; i < path.length; i++) {
-        	int direction = path[i];
-            if (direction == Constant.FORWARD) {
-                count++;
-            } else if (direction == Constant.RIGHT) {
-            	if (count > 0) {
-	            	sb.append("W" + count + "|" + Constant.TURN_RIGHT);
-            	}
-            	else {
-            		sb.append(Constant.TURN_RIGHT);
-            	}
-            	count = 1;
-
-            } else if (direction == Constant.LEFT) {
-            	if (count > 0) {
-	            	sb.append("W" + count + "|" + Constant.TURN_LEFT);	
-            	}
-            	else {
-            		sb.append(Constant.TURN_LEFT);
-            	}
-            	count = 1;
-
-            } else {
-            	if (count > 0) {
-            		sb.append("W" + count + "|" + Constant.TURN_RIGHT + Constant.TURN_RIGHT);
-            	}
-            	else {
-            		sb.append(Constant.TURN_RIGHT + Constant.TURN_RIGHT);
-            	}
-            	count = 1;
-            }
-        }
-        if (count >= 1) {
-        	sb.append("W" + count + "|");
-        }
-        String msg = sb.toString();
-        System.out.println("Message sent for FastestPath real run: " + msg);
-        ConnectionSocket.getInstance().sendMessage(msg);
-        
-        return true;
+        update_direction(path);
+        System.out.println("Path Found");
+        return path;
     }
 
-    private boolean move(Robot robot, int[] path, int speed) {
-        Exploration ex = new Exploration();
-
-        for (int direction : path) {
-            if (!connection.ConnectionSocket.checkConnection()) {
-                try {
-                    TimeUnit.SECONDS.sleep(speed);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            }
-
-            if (direction == Constant.FORWARD) {
-                if (ex.check_front_empty(robot)) {
-                    robot.forward(1);
-                } else {
-                    return false;
-                }
-            } else if (direction == Constant.RIGHT) {
-                robot.updateMap();
-                robot.rotateRight();
-                if (ex.check_front_empty(robot)) {
-                    robot.forward(1);
-                } else {
-                    return false;
-                }
-            } else if (direction == Constant.LEFT) {
-                robot.updateMap();
-                robot.rotateLeft();
-                if (ex.check_front_empty(robot)) {
-                    robot.forward(1);
-                } else {
-                    return false;
-                }
-            } else {
-                robot.updateMap();
-                robot.rotateRight();
-                robot.updateMap();
-                robot.rotateRight();
-                if (ex.check_front_empty(robot)) {
-                    robot.forward(1);
-                } else {
-                    return false;
+    private void update_direction (int[] path) {
+        if (path != null) {
+            for (int i = 0; i < path.length; i++) {
+                switch (path[i]) {
+                    case Constant.LEFT:
+                        direction = (direction + 3) % 4;
+                        break;
+                    case Constant.RIGHT:
+                        direction = (direction + 1) % 4;
+                        break;
+                    case Constant.BACKWARD:
+                        direction = (direction + 2) % 4;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
-
-        robot.updateMap();
-        return true;
     }
 
     private boolean can_reach(int[] cur, int[] end) {
@@ -282,6 +202,10 @@ public class AStarPathFinder {
         int[][] robot_pos = {{x-1, y+1}, {x, y+1}, {x+1, y+1}, {x-1, y},
                 {x, y}, {x+1, y}, {x-1, y-1}, {x, y-1}, {x+1, y-1}};
 
+        if (pos == null) {
+            return false;
+        }
+
         if ((0<x)&&(x<19)&&(0<y)&&(y<14)) { // within boundaries
             for (int[] coordinates : robot_pos) {
                 if (map.getGrid(coordinates[0], coordinates[1]).equals("Obstacle")) {
@@ -297,7 +221,7 @@ public class AStarPathFinder {
 
     private int find_cost (Node node, int[] end_pos, Robot robot) {
         node.h_cost = find_h_cost(node, end_pos);
-        node.g_cost = find_g_cost(node, robot);
+        node.g_cost = find_g_cost(node);
         node.update_cost();
         return node.cost;
     }
@@ -317,15 +241,16 @@ public class AStarPathFinder {
         }
     }
 
-    private int find_g_cost(Node cur, Robot robot) {
+    private int find_g_cost(Node cur) {
         Node prev = cur.parent;
 
         if (prev == null) {
             // cur node is the start
             return 0;
-        }
-        else {
-            int direction = go_where(robot, cur);
+        } else if ((!first_penalty) && (prev.parent == null)) {
+            return 1;
+        } else {
+            int direction = go_where(cur);
 
             if (direction == Constant.FORWARD) {
                 return prev.g_cost + 1;
@@ -337,14 +262,14 @@ public class AStarPathFinder {
         }
     }
 
-    private int go_where(Robot robot, Node cur) {
+    private int go_where(Node cur) {
         Node second = cur.parent;
         if (second == null) {
             return -1;
         }
         Node first = second.parent;
         if (first == null) { // This is only 1 grid away from the start
-            int direction = robot.getDirection();
+//            int direction = robot.getDirection();
 
             if (second.pos[0] == cur.pos[0]) {
                 if (second.pos[1] > cur.pos[1]) {
@@ -469,18 +394,26 @@ public class AStarPathFinder {
         return -1;
     }
 
-    private int[] get_path(Robot robot, Node node) {
-        int[] path = {go_where(robot, node)};
+    private int[] get_path(Node node) {
+        int[] path = {go_where(node)};
         Node cur = node.parent;
 
         while (cur.parent != null) {
             int[] temp_path = new int[path.length+1];
             System.arraycopy(path, 0, temp_path, 1, path.length);
-            temp_path[0] = go_where(robot, cur);
+            temp_path[0] = go_where(cur);
             path = temp_path;
             cur = cur.parent;
         }
 
         return path;
+    }
+
+    public void set_direction(int direction) {
+        this.direction = direction;
+    }
+
+    public void set_first_turn_penalty(boolean first_penalty) {
+        this.first_penalty = first_penalty;
     }
 }

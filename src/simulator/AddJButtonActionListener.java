@@ -544,6 +544,7 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 
 		if (action.contentEquals("Fastest Path")) {
+			r.setMap(r.getTrueMap());
 			if (Arrays.equals(waypoint_chosen, new int[] {-1, -1})) {
 				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
 			}
@@ -586,8 +587,6 @@ public class AddJButtonActionListener implements ActionListener{
 				enableLabel("invalid_waypoint");
 			} else {
 				disableLabel("invalid_waypoint");
-				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
-				
 			}
 		}
 
