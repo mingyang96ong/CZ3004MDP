@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class AStarPathFinder {
+    boolean first = true;
     int direction = -1;
     boolean first_penalty = true;
 
@@ -59,8 +60,8 @@ public class AStarPathFinder {
 
     private void update_direction (int[] path) {
         if (path != null) {
-            for (int i = 0; i < path.length; i++) {
-                switch (path[i]) {
+            for (int value : path) {
+                switch (value) {
                     case Constant.LEFT:
                         direction = (direction + 3) % 4;
                         break;
@@ -196,15 +197,15 @@ public class AStarPathFinder {
     }
 
     public boolean is_valid(Robot robot, int[] pos){
+        if (pos == null) {
+            return false;
+        }
+
         Map map = robot.getMap();
         int x = pos[0];
         int y = pos[1];
         int[][] robot_pos = {{x-1, y+1}, {x, y+1}, {x+1, y+1}, {x-1, y},
                 {x, y}, {x+1, y}, {x-1, y-1}, {x, y-1}, {x+1, y-1}};
-
-        if (pos == null) {
-            return false;
-        }
 
         if ((0<x)&&(x<19)&&(0<y)&&(y<14)) { // within boundaries
             for (int[] coordinates : robot_pos) {

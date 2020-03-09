@@ -288,14 +288,8 @@ public abstract class Robot {
 					break;
 				default:
 					if (i < sensorValues.length-1) {
-						if (i < 3) {
-							sensorDirectionValueX = sensorDirection[0][0];
-							sensorDirectionValueY = sensorDirection[0][1];
-						}
-						else {
-							sensorDirectionValueX = sensorDirection[1][0];
-							sensorDirectionValueY = sensorDirection[1][1];
-						}
+						sensorDirectionValueX = sensorDirection[1][0];
+						sensorDirectionValueY = sensorDirection[1][1];
 						s = Constant.SHORTSENSOROFFSET;
 						e = Constant.SHORTSENSORMAXRANGE * 10;
 					}
@@ -321,7 +315,7 @@ public abstract class Robot {
 
 				if (value <= sensor_thres[h]) {
 //					updateMapGridObstacle(newMap, x, y, gridType);
-					if (more_accurate(value, old_dist)) {
+					if (more_accurate(g, old_dist)) {
 						newMap.setGrid(x, y, Constant.OBSTACLE);
 						newMap.setDist(x, y, g);
 					}
@@ -333,15 +327,15 @@ public abstract class Robot {
 				}
 				else {
 //					updateMapGridExplored(newMap, x, y, gridType);
-					if (more_accurate(value, old_dist)) {
+					if (more_accurate(g, old_dist)) {
 						newMap.setGrid(x, y, Constant.EXPLORED);
 						newMap.setDist(x, y, g);
 					}
 				}
 			}
 		}
-		for (int i = 0; i < isObstacle.length; i++) {
-			System.out.print(isObstacle[i]);
+		for (int value : isObstacle) {
+			System.out.print(value);
 			System.out.print(" ");
 		}
 		System.out.println();

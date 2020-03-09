@@ -5,6 +5,8 @@ import connection.ConnectionSocket;
 import exploration.Exploration;
 import robot.Robot;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class FastestPath {
@@ -43,58 +45,53 @@ public class FastestPath {
                 move(robot, path, speed);
             }
         }
-
+        System.out.println(Arrays.toString(path));
+        System.out.println(Arrays.toString(robot.getWaypoint()));
         System.out.println("Finished Fastest Path");
         return path;
     }
 
-    private boolean realFPmove(int[] path) {
+    private void realFPmove(int[] path) {
 
         StringBuilder sb = new StringBuilder();
         int count = 0;
-        for (int i = 0; i < path.length; i++) {
-            int direction = path[i];
+        for (int direction : path) {
             if (direction == Constant.FORWARD) {
                 count++;
             } else if (direction == Constant.RIGHT) {
                 if (count > 0) {
-                    sb.append("W" + count + "|" + Constant.TURN_RIGHT);
-                }
-                else {
+                    sb.append("W").append(count).append("|").append(Constant.TURN_RIGHT);
+                } else {
                     sb.append(Constant.TURN_RIGHT);
                 }
                 count = 1;
 
             } else if (direction == Constant.LEFT) {
                 if (count > 0) {
-                    sb.append("W" + count + "|" + Constant.TURN_LEFT);
-                }
-                else {
+                    sb.append("W").append(count).append("|").append(Constant.TURN_LEFT);
+                } else {
                     sb.append(Constant.TURN_LEFT);
                 }
                 count = 1;
 
             } else {
                 if (count > 0) {
-                    sb.append("W" + count + "|" + Constant.TURN_RIGHT + Constant.TURN_RIGHT);
-                }
-                else {
-                    sb.append(Constant.TURN_RIGHT + Constant.TURN_RIGHT);
+                    sb.append("W").append(count).append("|").append(Constant.TURN_RIGHT).append(Constant.TURN_RIGHT);
+                } else {
+                    sb.append(Constant.TURN_RIGHT).append(Constant.TURN_RIGHT);
                 }
                 count = 1;
             }
         }
         if (count >= 1) {
-            sb.append("W" + count + "|");
+            sb.append("W").append(count).append("|");
         }
         String msg = sb.toString();
         System.out.println("Message sent for FastestPath real run: " + msg);
         ConnectionSocket.getInstance().sendMessage(msg);
-
-        return true;
     }
 
-    private boolean move(Robot robot, int[] path, int speed) {
+    private void move(Robot robot, int[] path, int speed) {
         Exploration ex = new Exploration();
 
         for (int direction : path) {
@@ -110,7 +107,7 @@ public class FastestPath {
                 if (ex.check_front_empty(robot)) {
                     robot.forward(1);
                 } else {
-                    return false;
+                    return;
                 }
             } else if (direction == Constant.RIGHT) {
                 robot.updateMap();
@@ -118,7 +115,7 @@ public class FastestPath {
                 if (ex.check_front_empty(robot)) {
                     robot.forward(1);
                 } else {
-                    return false;
+                    return;
                 }
             } else if (direction == Constant.LEFT) {
                 robot.updateMap();
@@ -126,7 +123,7 @@ public class FastestPath {
                 if (ex.check_front_empty(robot)) {
                     robot.forward(1);
                 } else {
-                    return false;
+                    return;
                 }
             } else {
                 robot.updateMap();
@@ -136,12 +133,11 @@ public class FastestPath {
                 if (ex.check_front_empty(robot)) {
                     robot.forward(1);
                 } else {
-                    return false;
+                    return;
                 }
             }
         }
 
         robot.updateMap();
-        return true;
     }
 }

@@ -1,11 +1,9 @@
 package exploration;
 
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.Arrays;
 
 import astarpathfinder.FastestPath;
-import astarpathfinder.FastestPathThread;
 import robot.Robot;
 import map.Map;
 import config.Constant;
@@ -24,6 +22,23 @@ public class Exploration {
         } else {
             Limited_Exploration(robot, time, percentage, speed);
         }
+        corner_calibration(robot);
+
+//        switch (robot.getDirection()) {
+//            case Constant.NORTH:
+//                robot.rotateLeft();
+//                break;
+//            case Constant.EAST:
+//                robot.rotateRight();
+//                robot.rotateRight();
+//                break;
+//            case Constant.SOUTH:
+//                robot.rotateRight();
+//                break;
+//            default:
+//                break;
+//        }
+//        robot.calibrate();
 
         int[] path = fp.FastestPath(robot, robot.getWaypoint(), Constant.END, 1, false);
 
@@ -41,7 +56,6 @@ public class Exploration {
             default:
                 break;
         }
-        robot.calibrate();
     };
 
     private void Limited_Exploration(Robot robot, int time, int percentage, int speed) {
@@ -66,10 +80,7 @@ public class Exploration {
 
             System.out.println("Phase 1");
             move(robot, speed, null);
-
-            if (at_corner(robot)) {
-                robot.calibrate();
-            }
+            corner_calibration(robot);
         } while (!at_pos(robot, Constant.START));
 
         int[] unexplored = unexplored(robot, robot.getPosition());
@@ -114,10 +125,7 @@ public class Exploration {
 
         do {
             move(robot, 1, null);
-
-            if (at_corner(robot)) {
-                robot.calibrate();
-            }
+            corner_calibration(robot);
         } while (!at_pos(robot, Constant.START));
 
         int[] unexplored = unexplored(robot, robot.getPosition());
@@ -150,10 +158,7 @@ public class Exploration {
         do {
             checked_obstacles = move(robot, 1, checked_obstacles);
             System.out.println(Arrays.deepToString(checked_obstacles));
-
-            if (at_corner(robot)) {
-                robot.calibrate();
-            }
+            corner_calibration(robot);
         } while (!at_pos(robot, Constant.START));
 
         int[] need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
@@ -389,9 +394,74 @@ public class Exploration {
         return (!obstacles[0]) && (!obstacles[1]) && (!obstacles[2]);
     };
 
-    private boolean at_corner(Robot robot) {
+    private void corner_calibration(Robot robot) {
         int[] pos = robot.getPosition();
-        return (((pos[0] == 1) || (pos[0] == 18)) && ((pos[1] == 1) || (pos[1] == 13)));
+        if (!(((pos[0] == 1) || (pos[0] == 18)) && ((pos[1] == 1) || (pos[1] == 13)))) {
+            return;
+        }
+        robot.updateMap();
+        int direction = robot.getDirection();
+        if ((pos[0] == 1) && (pos[1] == 13)) {
+            switch (direction) {
+                case Constant.NORTH:
+                    robot.rotateRight();
+                    robot.rotateRight();
+                    break;
+                case Constant.EAST:
+                    robot.rotateRight();
+                    break;
+                case Constant.WEST:
+                    robot.rotateLeft();
+                    break;
+                default:
+                    break;
+            }
+        } else if ((pos[0] == 18) && (pos[1] == 13)) {
+            switch (direction) {
+                case Constant.WEST:
+                    robot.rotateRight();
+                    robot.rotateRight();
+                    break;
+                case Constant.NORTH:
+                    robot.rotateRight();
+                    break;
+                case Constant.SOUTH:
+                    robot.rotateLeft();
+                    break;
+                default:
+                    break;
+            }
+        } else if ((pos[0] == 18) && (pos[1] == 1)) {
+            switch (direction) {
+                case Constant.SOUTH:
+                    robot.rotateRight();
+                    robot.rotateRight();
+                    break;
+                case Constant.WEST:
+                    robot.rotateRight();
+                    break;
+                case Constant.EAST:
+                    robot.rotateLeft();
+                    break;
+                default:
+                    break;
+            }
+        } else if ((pos[0] == 1) && (pos[1] == 1)) {
+            switch (direction) {
+                case Constant.EAST:
+                    robot.rotateRight();
+                    robot.rotateRight();
+                    break;
+                case Constant.SOUTH:
+                    robot.rotateRight();
+                    break;
+                case Constant.NORTH:
+                    robot.rotateLeft();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private boolean at_pos(Robot robot, int[] goal){
