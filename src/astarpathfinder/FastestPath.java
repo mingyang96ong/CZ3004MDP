@@ -58,32 +58,24 @@ public class FastestPath {
         for (int direction : path) {
             if (direction == Constant.FORWARD) {
                 count++;
-            } else if (direction == Constant.RIGHT) {
-                if (count > 0) {
-                    sb.append("W").append(count).append("|").append(Constant.TURN_RIGHT);
-                } else {
+            } else if (count > 0) {
+                sb.append("W").append(count).append("|");
+                if (direction == Constant.RIGHT) {
                     sb.append(Constant.TURN_RIGHT);
-                }
-                count = 1;
-
-            } else if (direction == Constant.LEFT) {
-                if (count > 0) {
-                    sb.append("W").append(count).append("|").append(Constant.TURN_LEFT);
-                } else {
+                    count = 1;
+                } else if (direction == Constant.LEFT) {
                     sb.append(Constant.TURN_LEFT);
-                }
-                count = 1;
-
-            } else {
-                if (count > 0) {
-                    sb.append("W").append(count).append("|").append(Constant.TURN_RIGHT).append(Constant.TURN_RIGHT);
-                } else {
+                    count = 1;
+                } else if (direction == Constant.BACKWARD) {
                     sb.append(Constant.TURN_RIGHT).append(Constant.TURN_RIGHT);
+                    count = 1;
+                } else {
+                    System.out.println("Error!");
+                    return;
                 }
-                count = 1;
             }
         }
-        if (count >= 1) {
+        if (count > 0) {
             sb.append("W").append(count).append("|");
         }
         String msg = sb.toString();
@@ -125,7 +117,7 @@ public class FastestPath {
                 } else {
                     return;
                 }
-            } else {
+            } else if (direction == Constant.BACKWARD){
                 robot.updateMap();
                 robot.rotateRight();
                 robot.updateMap();
@@ -135,6 +127,8 @@ public class FastestPath {
                 } else {
                     return;
                 }
+            } else {
+                return;
             }
         }
 

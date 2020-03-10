@@ -273,6 +273,7 @@ public class AStarPathFinder {
     private int go_where(Node cur) {
         Node second = cur.parent;
         if (second == null) {
+            // start
             return -1;
         }
         Node first = second.parent;
@@ -406,12 +407,14 @@ public class AStarPathFinder {
         int[] path = {go_where(node)};
         Node cur = node.parent;
 
-        while (cur != null) {
-            int[] temp_path = new int[path.length+1];
-            System.arraycopy(path, 0, temp_path, 1, path.length);
-            temp_path[0] = go_where(cur);
-            path = temp_path;
-            cur = cur.parent;
+        while (cur.parent != null) {
+            if (go_where(cur) >= 0) {
+                int[] temp_path = new int[path.length + 1];
+                System.arraycopy(path, 0, temp_path, 1, path.length);
+                temp_path[0] = go_where(cur);
+                path = temp_path;
+                cur = cur.parent;
+            }
         }
 
         return path;

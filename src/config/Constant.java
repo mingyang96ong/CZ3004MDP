@@ -15,7 +15,7 @@ public class Constant {
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
 	public static final double[][] SENSOR_RANGES ={	{15.065, 24, 33.9}, 
-													{10.5, 19, 34.5},
+													{10.5, 20, 34.5},
 													{15, 25.5, 32.9}, 
 													{12, 22, 30}, 
 													{12, 22, 30},
