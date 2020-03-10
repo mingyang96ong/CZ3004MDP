@@ -24,22 +24,6 @@ public class Exploration {
         }
         corner_calibration(robot);
 
-//        switch (robot.getDirection()) {
-//            case Constant.NORTH:
-//                robot.rotateLeft();
-//                break;
-//            case Constant.EAST:
-//                robot.rotateRight();
-//                robot.rotateRight();
-//                break;
-//            case Constant.SOUTH:
-//                robot.rotateRight();
-//                break;
-//            default:
-//                break;
-//        }
-//        robot.calibrate();
-
         int[] path = fp.FastestPath(robot, robot.getWaypoint(), Constant.END, 1, false);
 
         switch (path[0]) {
@@ -104,7 +88,7 @@ public class Exploration {
             System.out.println("Phase 2");
             fp.FastestPath(robot, null, unexplored, speed, true);
             unexplored = unexplored(robot, robot.getPosition());
-            crash(robot.updateMap());
+            robot.updateMap();
         }
 
         if (!at_pos(robot, Constant.START)) {
@@ -120,7 +104,6 @@ public class Exploration {
     }
 
     private void Normal_Exploration(Robot robot) {
-        AStarPathFinder astar = new AStarPathFinder();
         robot.setDirection(2);
 
         do {
@@ -135,7 +118,7 @@ public class Exploration {
             System.out.println("Phase 2");
             fp.FastestPath(robot, null, unexplored, 1, true);
             unexplored = unexplored(robot, robot.getPosition());
-            crash(robot.updateMap());
+            robot.updateMap();
         }
 
         if (!at_pos(robot, Constant.START)) {
@@ -462,6 +445,7 @@ public class Exploration {
                     break;
             }
         }
+        robot.calibrate();
     }
 
     private boolean at_pos(Robot robot, int[] goal){
