@@ -13,7 +13,7 @@ public class AStarPathFinder {
 
     public int[] AStarPathFinder(Robot robot, int[] start_pos, int[] end_pos, boolean on_grid) {
         Node start = new Node(start_pos);
-        Node cur = start;
+        Node cur;
 
         Node[] open = {start};
         Node[] closed = {};
@@ -406,7 +406,7 @@ public class AStarPathFinder {
         int[] path = {go_where(node)};
         Node cur = node.parent;
 
-        while (cur.parent != null) {
+        while (cur != null) {
             int[] temp_path = new int[path.length+1];
             System.arraycopy(path, 0, temp_path, 1, path.length);
             temp_path[0] = go_where(cur);

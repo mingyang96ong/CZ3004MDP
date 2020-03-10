@@ -11,8 +11,10 @@ import astarpathfinder.AStarPathFinder;
 
 public class Exploration {
     private FastestPath fp = new FastestPath();
+    private Map map;
 
     public void Exploration(Robot robot, int time, int percentage, int speed, boolean image_recognition){
+        map = robot.getMap();
         if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
             if (image_recognition) {
                 ImageRecognition_Exploration(robot);
@@ -89,8 +91,8 @@ public class Exploration {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
             int[] path = fp.FastestPath(robot, null, unexplored, speed, false, true);
-            if (path == null) {
-                robot.getMap().setGrid(unexplored[0], unexplored[1], Constant.OBSTACLE);
+            if ((path == null) || (map.getGrid(unexplored[0], unexplored[1]).equals(Constant.UNEXPLORED))) {
+                map.setGrid(unexplored[0], unexplored[1], Constant.OBSTACLE);
             }
             unexplored = unexplored(robot, robot.getPosition());
             robot.updateMap();
@@ -122,9 +124,10 @@ public class Exploration {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
             int[] path = fp.FastestPath(robot, null, unexplored, 1, false, true);
-            if (path == null) {
-                robot.getMap().setGrid(unexplored[0], unexplored[1], Constant.OBSTACLE);
+            if ((path == null) || (map.getGrid(unexplored[0], unexplored[1]).equals(Constant.UNEXPLORED))) {
+                map.setGrid(unexplored[0], unexplored[1], Constant.OBSTACLE);
             }
+
             unexplored = unexplored(robot, robot.getPosition());
             robot.updateMap();
         }
@@ -141,7 +144,7 @@ public class Exploration {
     }
 
     private void ImageRecognition_Exploration(Robot robot) {
-        AStarPathFinder astar = new AStarPathFinder();
+        boolean unexplored = false;
         robot.setDirection(2);
 
         int[][] checked_obstacles = {{0}};
@@ -156,14 +159,23 @@ public class Exploration {
         int[] go_to = next_to_obstacle(robot, need_take);
 
         if (go_to == null) {
+            unexplored = true;
             go_to = unexplored(robot, robot.getPosition());
         }
 
         while (go_to != null) {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            fp.FastestPath(robot, null, go_to, 1, false, true);
-            obstacle_on_right(robot, need_take);
+            int[] path = fp.FastestPath(robot, null, go_to, 1, false, true);
+            if ((unexplored) && ((path == null) || (map.getGrid(go_to[0], go_to[1]).equals(Constant.UNEXPLORED)))) {
+                map.setGrid(go_to[0], go_to[1], Constant.OBSTACLE);
+                int[][] temp = new int[checked_obstacles.length + 1][3];
+                System.arraycopy(checked_obstacles, 0, temp, 0, checked_obstacles.length);
+                temp[checked_obstacles.length] = go_to;
+                checked_obstacles = temp;
+            } else {
+                obstacle_on_right(robot, need_take);
+            }
 
             do {
                 checked_obstacles = move(robot, 1, checked_obstacles);
@@ -174,6 +186,7 @@ public class Exploration {
             go_to = next_to_obstacle(robot, need_take);
 
             if (go_to == null) {
+                unexplored = true;
                 go_to = unexplored(robot, robot.getPosition());
             }
 
