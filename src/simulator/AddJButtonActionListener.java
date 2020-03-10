@@ -544,11 +544,13 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 
 		if (action.contentEquals("Fastest Path")) {
-			r.setMap(r.getTrueMap());
+//			r.setMap(r.getTrueMap());
+			
 			if (Arrays.equals(waypoint_chosen, new int[] {-1, -1})) {
 				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
 			}
-			FastestPathThread.getInstance(r, waypoint_chosen, speed_chosen);
+			int [] waypoint = r.getWaypoint();
+			FastestPathThread.getInstance(r, waypoint, speed_chosen);
 		}
 
 		if (action.contentEquals("Exploration")) {
@@ -565,12 +567,13 @@ public class AddJButtonActionListener implements ActionListener{
 			else {
 				waypoint_chosen[0] = Integer.parseInt(selected_waypoint_x);
 			}
-
-			if (!astar.is_valid(r, waypoint_chosen)) {
-				enableLabel("invalid_waypoint");
-			} else {
-				disableLabel("invalid_waypoint");
-			}
+			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+//			if (!astar.is_valid(r, waypoint_chosen)) {
+//				enableLabel("invalid_waypoint");
+//				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+//			} else {
+//				disableLabel("invalid_waypoint");
+//			}
 		}
 
 		if (action.contentEquals("Set y coordinate")) {
@@ -583,11 +586,13 @@ public class AddJButtonActionListener implements ActionListener{
 			else {
 				waypoint_chosen[1] = Integer.parseInt(selected_waypoint_y);
 			}
-			if (!astar.is_valid(r, waypoint_chosen)) {
-				enableLabel("invalid_waypoint");
-			} else {
-				disableLabel("invalid_waypoint");
-			}
+			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+//			if (!astar.is_valid(r, waypoint_chosen)) {
+//				enableLabel("invalid_waypoint");
+//				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+//			} else {
+//				disableLabel("invalid_waypoint");
+//			}
 		}
 
 		if (action.contentEquals("Set time limit")) {
