@@ -3,11 +3,8 @@ package astarpathfinder;
 import robot.Robot;
 import map.Map;
 import config.Constant;
-import connection.ConnectionSocket;
-import exploration.Exploration;
 
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 public class AStarPathFinder {
     boolean first = true;
@@ -16,38 +13,40 @@ public class AStarPathFinder {
 
     public int[] AStarPathFinder(Robot robot, int[] start_pos, int[] end_pos, boolean on_grid) {
         Node start = new Node(start_pos);
-        Node cur = start;
+        Node cur;
 
         Node[] open = {start};
         Node[] closed = {};
 
         while (true) {
-            if (lowest_cost(open) == null) {
-                System.out.println("Error: lowest cost = null");
-                break;
-            }
-
             cur = lowest_cost(open);
-            open = remove_node(open, cur);
-            closed = add_node(closed, cur);
 
-            // For troubleshooting
-            System.out.println(Arrays.toString(cur.pos));
-            System.out.println(cur.cost);
-//            System.out.println(Arrays.toString(print(open)));
-//            System.out.println(Arrays.toString(print(closed)));
-
-            if (((!on_grid)&&(can_reach(cur.pos, end_pos))) ||
-                    ((on_grid)&&(Arrays.equals(cur.pos, end_pos)))) {
-                System.out.println("Path found!");
+            if (cur == null) {
+                System.out.println("Error: open is empty");
                 break;
-            }
+            } else {
+                open = remove_node(open, cur);
+                closed = add_node(closed, cur);
 
-            open = add_neighbours(robot, open, closed, cur, end_pos);
+//                For troubleshooting
+//                System.out.println(Arrays.toString(cur.pos));
+//                System.out.println(cur.cost);
+//                System.out.println(Arrays.toString(print(open)));
+//                System.out.println(Arrays.toString(print(closed)));
 
-            if (Arrays.equals(open, new Node[] {})) {
-                System.out.println("Error: No possible path");
-                return null;
+                if (((!on_grid) && (can_reach(cur.pos, end_pos, first))) ||
+                        ((on_grid) && (Arrays.equals(cur.pos, end_pos)))) {
+                    System.out.println("Path found!");
+                    break;
+                }
+
+                open = add_neighbours(robot, open, closed, cur, end_pos);
+
+                if (Arrays.equals(open, new Node[]{})) {
+                    set_first(false);
+                    System.out.println("Error: No possible path");
+                    return null;
+                }
             }
         }
 
@@ -78,13 +77,21 @@ public class AStarPathFinder {
         }
     }
 
-    private boolean can_reach(int[] cur, int[] end) {
-        int x = cur[0];
-        int y = cur[1];
-        int[][] robot_pos = {{x-1, y+1}, {x, y+1}, {x+1, y+1}, {x-1, y},
-                {x, y}, {x+1, y}, {x-1, y-1}, {x, y-1}, {x+1, y-1}};
-        for (int[] coordinates : robot_pos) {
-            if (Arrays.equals(coordinates, end)) {
+    private boolean can_reach(int[] cur, int[] end, boolean first) {
+        int x = end[0];
+        int y = end[1];
+        int[][] pos;
+
+        if (first) {
+            pos = new int[][] {{x-1, y-2}, {x, y-2}, {x+1, y-2}, {x+2, y-1}, {x+2, y}, {x+2, y+1},
+                                 {x+1, y+2}, {x, y+2}, {x-1, y+2}, {x-2, y+1}, {x-2, y}, {x-2, y-1}};
+        } else {
+            pos = new int[][] {{x-1, y-3}, {x, y-3}, {x+1, y-3}, {x+3, y-1}, {x+3, y}, {x+3, y+1},
+                               {x+1, y+3}, {x, y+3}, {x-1, y+3}, {x-3, y+1}, {x-3, y}, {x-3, y-1}};
+        }
+
+        for (int[] coordinates : pos) {
+            if (Arrays.equals(cur, coordinates)) {
                 return true;
             }
         }
@@ -266,6 +273,7 @@ public class AStarPathFinder {
     private int go_where(Node cur) {
         Node second = cur.parent;
         if (second == null) {
+            // start
             return -1;
         }
         Node first = second.parent;
@@ -400,11 +408,13 @@ public class AStarPathFinder {
         Node cur = node.parent;
 
         while (cur.parent != null) {
-            int[] temp_path = new int[path.length+1];
-            System.arraycopy(path, 0, temp_path, 1, path.length);
-            temp_path[0] = go_where(cur);
-            path = temp_path;
-            cur = cur.parent;
+            if (go_where(cur) >= 0) {
+                int[] temp_path = new int[path.length + 1];
+                System.arraycopy(path, 0, temp_path, 1, path.length);
+                temp_path[0] = go_where(cur);
+                path = temp_path;
+                cur = cur.parent;
+            }
         }
 
         return path;
@@ -412,6 +422,10 @@ public class AStarPathFinder {
 
     public void set_direction(int direction) {
         this.direction = direction;
+    }
+
+    public void set_first(boolean first) {
+        this.first = first;
     }
 
     public void set_first_turn_penalty(boolean first_penalty) {

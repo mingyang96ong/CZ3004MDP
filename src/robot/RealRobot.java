@@ -106,8 +106,8 @@ public class RealRobot extends Robot{
 		String[] arr2 = this.getMDFString();
 		connectionSocket.sendMessage("M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
 				"\"}]}");
-		System.out.println("{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
-				"\"}]}");
+//		System.out.println("{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
+//				"\"}]}");
 	}
 
 	@Override
@@ -253,6 +253,11 @@ public class RealRobot extends Robot{
 
 	public void calibrate() {
 		connectionSocket.sendMessage(Constant.CALIBRATE);
+		acknowledge();
+	}
+
+	public void right_align() {
+		connectionSocket.sendMessage(Constant.RIGHTALIGN);
 		acknowledge();
 	}
 }

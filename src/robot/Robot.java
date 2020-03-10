@@ -53,6 +53,7 @@ public abstract class Robot {
 
 	public abstract void captureImage(int[][] image_pos);
 	public abstract void calibrate();
+	public abstract void right_align();
 	
 	public void setDirection(int direction) {
 		this.direction = direction;
@@ -317,7 +318,11 @@ public abstract class Robot {
 //					updateMapGridObstacle(newMap, x, y, gridType);
 					if (more_accurate(g, old_dist)) {
 						newMap.setGrid(x, y, Constant.OBSTACLE);
-						newMap.setDist(x, y, g);
+						if (i == 5) {
+							newMap.setDist(x, y, g*2);
+						} else {
+							newMap.setDist(x, y, g);
+						}
 					}
 //					if (g == 1) {
 //						isObstacle[i] = true;
@@ -329,7 +334,11 @@ public abstract class Robot {
 //					updateMapGridExplored(newMap, x, y, gridType);
 					if (more_accurate(g, old_dist)) {
 						newMap.setGrid(x, y, Constant.EXPLORED);
-						newMap.setDist(x, y, g);
+						if (i == 5) {
+							newMap.setDist(x, y, g*2);
+						} else {
+							newMap.setDist(x, y, g);
+						}
 					}
 				}
 			}
