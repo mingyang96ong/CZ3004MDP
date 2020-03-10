@@ -24,17 +24,19 @@ public class Exploration {
         }
         corner_calibration(robot);
 
-        int[] path = fp.FastestPath(robot, robot.getWaypoint(), Constant.END, 1, false);
+        int[] path = fp.FastestPath(robot, robot.getWaypoint(), Constant.END, 1,  true,false);
 
         switch (path[0]) {
             case Constant.LEFT:
                 robot.rotateLeft();
-                break;
-            case Constant.RIGHT:
-                robot.rotateRight();
+                robot.right_align();
                 break;
             case Constant.BACKWARD:
-                robot.rotateRight();
+                robot.rotateLeft();
+                robot.right_align();
+                robot.rotateLeft();
+                break;
+            case Constant.RIGHT:
                 robot.rotateRight();
                 break;
             default:
@@ -86,7 +88,10 @@ public class Exploration {
 
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            fp.FastestPath(robot, null, unexplored, speed, true);
+            int[] path = fp.FastestPath(robot, null, unexplored, speed, false, true);
+            if (path == null) {
+                robot.getMap().setGrid(unexplored[0], unexplored[1], Constant.OBSTACLE);
+            }
             unexplored = unexplored(robot, robot.getPosition());
             robot.updateMap();
         }
@@ -95,7 +100,7 @@ public class Exploration {
             // fastest path to start point
             System.out.println("Phase 3");
             System.out.println(Arrays.toString(robot.getPosition()));
-            fp.FastestPath(robot, null, Constant.START, speed, true);
+            fp.FastestPath(robot, null, Constant.START, speed, true, true);
         }
 
         stopwatch.stop();
@@ -116,7 +121,10 @@ public class Exploration {
         while (unexplored != null) {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            fp.FastestPath(robot, null, unexplored, 1, true);
+            int[] path = fp.FastestPath(robot, null, unexplored, 1, false, true);
+            if (path == null) {
+                robot.getMap().setGrid(unexplored[0], unexplored[1], Constant.OBSTACLE);
+            }
             unexplored = unexplored(robot, robot.getPosition());
             robot.updateMap();
         }
@@ -125,7 +133,7 @@ public class Exploration {
             // fastest path to start point
             System.out.println("Phase 3");
             System.out.println(Arrays.toString(robot.getPosition()));
-            fp.FastestPath(robot, null, Constant.START, 1, true);
+            fp.FastestPath(robot, null, Constant.START, 1, true, true);
         }
 
         System.out.println("Exploration Complete!");
@@ -154,7 +162,7 @@ public class Exploration {
         while (go_to != null) {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            fp.FastestPath(robot, null, go_to, 1, true);
+            fp.FastestPath(robot, null, go_to, 1, false, true);
             obstacle_on_right(robot, need_take);
 
             do {
@@ -176,7 +184,7 @@ public class Exploration {
             // fastest path to start point
             System.out.println("Phase 3");
             System.out.println(Arrays.toString(robot.getPosition()));
-            fp.FastestPath(robot, null, Constant.START, 1, true);
+            fp.FastestPath(robot, null, Constant.START, 1, true, true);
         }
 
         System.out.println("Exploration Complete!");
@@ -369,7 +377,26 @@ public class Exploration {
 
     private boolean check_right_empty(Robot robot) {
         boolean[] obstacles = crash(robot.updateMap());
-        return (!obstacles[3]) && (!obstacles[4]);
+        int[] pos = robot.getPosition();
+        int direction = robot.getDirection();
+        Map map = robot.getMap();
+
+        switch (direction) {
+            case Constant.EAST:
+                pos[1] += 2;
+                break;
+            case Constant.WEST:
+                pos[1] -= 2;
+                break;
+            case Constant.SOUTH:
+                pos[0] -= 2;
+                break;
+            case Constant.NORTH:
+                pos[0] += 2;
+                break;
+        }
+
+        return (!obstacles[3]) && (!obstacles[4]) && (map.getGrid(pos[0], pos[1]).equals(Constant.EXPLORED));
     }
 
     public boolean check_front_empty(Robot robot){

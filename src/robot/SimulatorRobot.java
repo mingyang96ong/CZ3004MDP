@@ -197,6 +197,17 @@ public class SimulatorRobot extends Robot{
 		buttonListener.disableLabel("calibrating");
 	}
 
+	public void right_align() {
+		buttonListener.enableLabel("calibrating");
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		buttonListener.disableLabel("calibrating");
+	}
+
 	public Map getTrueMap(){
 		return sensor.getTrueMap();
 	}

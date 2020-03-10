@@ -5,14 +5,14 @@ import connection.ConnectionSocket;
 import exploration.Exploration;
 import robot.Robot;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class FastestPath {
-    public int[] FastestPath(Robot robot, int[] waypoint, int[] goal, int speed, boolean move) {
+    public int[] FastestPath(Robot robot, int[] waypoint, int[] goal, int speed, boolean on_grid, boolean move) {
         AStarPathFinder astar = new AStarPathFinder();
         astar.set_direction(robot.getDirection());
+        astar.set_first(true);
         int[] path, path1, path2;
 
         if (astar.is_valid(robot, waypoint)) {
@@ -23,19 +23,19 @@ public class FastestPath {
             }
 
             // if way point was set: go to way point first
-            path = astar.AStarPathFinder(robot, robot.getPosition(), waypoint, true);
+            path = astar.AStarPathFinder(robot, robot.getPosition(), waypoint, on_grid);
 
             if (path != null) {
                 astar.set_first_turn_penalty(true);
                 path1 = path;
-                path2 = astar.AStarPathFinder(robot, waypoint, goal, true);
+                path2 = astar.AStarPathFinder(robot, waypoint, goal, on_grid);
                 path = new int[path1.length + path2.length];
                 System.arraycopy(path1, 0, path, 0, path1.length);
                 System.arraycopy(path2, 0, path, path1.length, path2.length);
             }
         } else {
             astar.set_first_turn_penalty(true);
-            path = astar.AStarPathFinder(robot, robot.getPosition(), goal, true);
+            path = astar.AStarPathFinder(robot, robot.getPosition(), goal, on_grid);
         }
 
         if ((path != null) && move) {

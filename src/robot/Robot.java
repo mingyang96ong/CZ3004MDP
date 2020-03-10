@@ -53,6 +53,7 @@ public abstract class Robot {
 
 	public abstract void captureImage(int[][] image_pos);
 	public abstract void calibrate();
+	public abstract void right_align();
 	
 	public void setDirection(int direction) {
 		this.direction = direction;

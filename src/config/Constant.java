@@ -137,6 +137,7 @@ public class Constant {
 	public static final String TURN_LEFT = "A|";
 	public static final String TURN_RIGHT = "D|";
 	public static final String CALIBRATE = "L|";
+	public static final String RIGHTALIGN = "B|";
 	public static final String END_TOUR = "N";
 
 	// Connection Acknowledge

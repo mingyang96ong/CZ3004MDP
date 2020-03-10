@@ -255,4 +255,9 @@ public class RealRobot extends Robot{
 		connectionSocket.sendMessage(Constant.CALIBRATE);
 		acknowledge();
 	}
+
+	public void right_align() {
+		connectionSocket.sendMessage(Constant.RIGHTALIGN);
+		acknowledge();
+	}
 }
