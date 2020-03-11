@@ -7,8 +7,6 @@ import javax.swing.JOptionPane;
 
 import config.Constant;
 import connection.ConnectionManager;
-import connection.ConnectionSocket;
-import robot.RealRobot;
 import simulator.Simulator;
 
 public class MainSystem {

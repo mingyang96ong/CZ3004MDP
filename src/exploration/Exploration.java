@@ -15,6 +15,11 @@ public class Exploration {
 
     public void Exploration(Robot robot, int time, int percentage, int speed, boolean image_recognition){
         map = robot.getMap();
+
+        // Should be removed for actual run
+        robot.calibrate();
+        robot.rotateLeft();
+
         if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
             if (image_recognition) {
                 ImageRecognition_Exploration(robot);
