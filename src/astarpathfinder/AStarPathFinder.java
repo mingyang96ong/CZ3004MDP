@@ -408,6 +408,9 @@ public class AStarPathFinder {
         int[] path = {go_where(node)};
         Node cur = node.parent;
 
+        if (cur == null) {
+            return null;
+        }
 
         while (cur.parent != null) {
             if (go_where(cur) >= 0) {

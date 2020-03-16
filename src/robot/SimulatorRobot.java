@@ -157,12 +157,24 @@ public class SimulatorRobot extends Robot{
 	public void rotateRight() {
 		// In the actual robot, this will also send the command to rotate right
 		setDirection((this.getDirection() + 1) % 4);
+//		try {
+//			TimeUnit.SECONDS.sleep(1);
+//		}
+//		catch (Exception e){
+//			System.out.println(e.getMessage());
+//		}
 	}
 
 	@Override
 	public void rotateLeft() {
 		// In the actual robot, this will also send the command to rotate left
 		setDirection((this.getDirection() + 3) % 4);
+//		try {
+//			TimeUnit.SECONDS.sleep(1);
+//		}
+//		catch (Exception e){
+//			System.out.println(e.getMessage());
+//		}
 	}
 	
 	public void setMap(Map map) {
