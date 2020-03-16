@@ -17,8 +17,8 @@ public class Exploration {
         map = robot.getMap();
 
         // Should be removed for actual run
-        robot.calibrate();
-        robot.rotateLeft();
+//        robot.calibrate();
+//        robot.rotateLeft();
 
         if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
             if (image_recognition) {
@@ -31,7 +31,7 @@ public class Exploration {
         }
         corner_calibration(robot);
 
-        int[] path = fp.FastestPath(robot, robot.getWaypoint(), Constant.END, 1,  true,false);
+        int[] path = fp.FastestPath(robot, robot.getWaypoint(), Constant.END, 1, true, false);
 
         switch (path[0]) {
             case Constant.LEFT:
@@ -414,7 +414,9 @@ public class Exploration {
                 break;
         }
 
-        return (!obstacles[3]) && (!obstacles[4]) && (map.getGrid(pos[0], pos[1]).equals(Constant.EXPLORED));
+        return (!obstacles[3]) && (!obstacles[4]) && 
+        	(map.getGrid(pos[0], pos[1]).equals(Constant.EXPLORED) || map.getGrid(pos[0], pos[1]).equals(Constant.STARTPOINT)
+        			|| map.getGrid(pos[0], pos[1]).equals(Constant.ENDPOINT));
     }
 
     public boolean check_front_empty(Robot robot){

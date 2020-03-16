@@ -19,7 +19,7 @@ public class Constant {
 													{15, 25.5, 32.9}, 
 													{12.85, 22.7, 34.5}, 
 													{13.65, 25.25, 38.5},
-													{20, 27, 37, 46.5, 58.5, 70.5, 81}}; // LAB
+													{20, 26, 37, 46.5, 58.5, 70.5, 81}}; // LAB
 	
 
 	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.

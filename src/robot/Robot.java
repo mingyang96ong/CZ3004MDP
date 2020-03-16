@@ -316,11 +316,14 @@ public abstract class Robot {
 
 				if (value <= sensor_thres[h]) {
 //					updateMapGridObstacle(newMap, x, y, gridType);
-					if (more_accurate(g, old_dist)) {
-						newMap.setGrid(x, y, Constant.OBSTACLE);
-						if (i == 5) {
-							newMap.setDist(x, y, g*2);
-						} else {
+					if (i == 5) {
+						if (more_accurate(g+2, old_dist)) {
+							newMap.setGrid(x, y, Constant.OBSTACLE);
+							newMap.setDist(x, y, g+2);
+						}
+					} else {
+						if (more_accurate(g, old_dist)) {
+							newMap.setGrid(x, y, Constant.OBSTACLE);
 							newMap.setDist(x, y, g);
 						}
 					}
@@ -332,11 +335,14 @@ public abstract class Robot {
 				}
 				else {
 //					updateMapGridExplored(newMap, x, y, gridType);
-					if (more_accurate(g, old_dist)) {
-						newMap.setGrid(x, y, Constant.EXPLORED);
-						if (i == 5) {
-							newMap.setDist(x, y, g*2);
-						} else {
+					if (i == 5) {
+						if (more_accurate(g+1, old_dist)) {
+							newMap.setGrid(x, y, Constant.EXPLORED);
+							newMap.setDist(x, y, g+1);
+						}
+					} else {
+						if (more_accurate(g, old_dist)) {
+							newMap.setGrid(x, y, Constant.EXPLORED);
 							newMap.setDist(x, y, g);
 						}
 					}
