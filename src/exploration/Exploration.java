@@ -171,7 +171,7 @@ public class Exploration {
         while (go_to != null) {
             // fastest path to nearest unexplored square
             System.out.println("Phase 2");
-            int[] path = fp.FastestPath(robot, null, go_to, 1, false, true);
+            int[] path = fp.FastestPath(robot, null, go_to, 1, true, true);
             if ((unexplored) && ((path == null) || (map.getGrid(go_to[0], go_to[1]).equals(Constant.UNEXPLORED)))) {
                 map.setGrid(go_to[0], go_to[1], Constant.OBSTACLE);
                 int[][] temp = new int[checked_obstacles.length + 1][3];
@@ -182,10 +182,13 @@ public class Exploration {
                 obstacle_on_right(robot, need_take);
             }
 
-            do {
-                checked_obstacles = move(robot, 1, checked_obstacles);
-                System.out.println(Arrays.deepToString(checked_obstacles));
-            } while (!at_pos(robot, go_to));
+            int facing = robot.getDirection();
+            if (path != null) {
+                do {
+                    checked_obstacles = move(robot, 1, checked_obstacles);
+                    System.out.println(Arrays.deepToString(checked_obstacles));
+                } while (!done(robot, go_to[0], go_to[1], facing));
+            }
 
             need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
             go_to = next_to_obstacle(robot, need_take);
@@ -240,31 +243,31 @@ public class Exploration {
                 robot.forward(1);
                 return checked;
             } else {
-                if ((checked != null)&&(!front_wall(robot))) {
+                robot.rotateLeft();
+                if ((checked != null)&&(!right_wall(robot))) {
                     checked = image_recognition(robot, checked);
-                } else {
-                    robot.rotateLeft();
                 }
             }
         } else if ((checked != null)&&(!right_wall(robot))&&(!((sensors[3] == -1)&&(check_front_empty(robot))))) {
-            robot.rotateRight();
             checked = image_recognition(robot, checked);
         }
         if (check_front_empty(robot)) {
             robot.forward(1);
             return checked;
-        } else if ((checked != null)&&(!front_wall(robot))) {
-            checked = image_recognition(robot, checked);
         } else {
             robot.rotateLeft();
+            if ((checked != null)&&(!right_wall(robot))) {
+                checked = image_recognition(robot, checked);
+            }
         }
         if (check_front_empty(robot)) {
             robot.forward(1);
             return checked;
-        } else if ((checked != null)&&(!front_wall(robot))) {
-            checked = image_recognition(robot, checked);
         } else {
             robot.rotateLeft();
+            if ((checked != null)&&(!right_wall(robot))) {
+                checked = image_recognition(robot, checked);
+            }
         }
         if (check_front_empty(robot)) {
             robot.forward(1);
@@ -275,56 +278,82 @@ public class Exploration {
     }
 
     private int[][] image_recognition(Robot robot, int[][] checked_obstacles) {
-        int[] sensors = robot.updateMap();
+//        int[] sensors = robot.updateMap();
         int x = robot.getPosition()[0];
         int y = robot.getPosition()[1];
-        int[][] obs_pos = new int[3][3];
         int[] default_pos = new int[] {-1, -1, -1};
+        int[][] obs_pos = new int[][] {default_pos, default_pos, default_pos};
         boolean take_pic = false;
-        robot.rotateLeft();
         int direction = robot.getDirection();
 
         switch (direction) {
             case Constant.NORTH:
-                obs_pos = new int[][] {{x+1+sensors[0], y+1, Constant.NORTH},
-                        {x+1+sensors[1], y, Constant.NORTH}, {x+1+sensors[2], y-1, Constant.NORTH}};
+//                obs_pos = new int[][] {{x+1+sensors[0], y+1, Constant.NORTH},
+//                        {x+1+sensors[1], y, Constant.NORTH}, {x+1+sensors[2], y-1, Constant.NORTH}};
+                for (int i=0; i<3; i++) {
+                    for (int j=0; j<3; j++) {
+                        if (Arrays.equals(obs_pos[i], default_pos) &&
+                                map.getGrid(x+2+j, y-1+i).equals(Constant.OBSTACLE)) {
+                            obs_pos[i] = new int[] {x+2+j, y-1+i, Constant.NORTH};
+                        }
+                    }
+                }
                 break;
             case Constant.SOUTH:
-                obs_pos = new int[][] {{x-1-sensors[0], y-1, Constant.SOUTH} ,
-                        {x-1-sensors[1], y, Constant.SOUTH}, {x-1-sensors[2], y+1, Constant.SOUTH}};
+//                obs_pos = new int[][] {{x-1-sensors[0], y-1, Constant.SOUTH} ,
+//                        {x-1-sensors[1], y, Constant.SOUTH}, {x-1-sensors[2], y+1, Constant.SOUTH}};
+                for (int i=0; i<3; i++) {
+                    for (int j=0; j<3; j++) {
+                        if (Arrays.equals(obs_pos[i], default_pos) &&
+                                map.getGrid(x-2-j, y+1-i).equals(Constant.OBSTACLE)) {
+                            obs_pos[i] = new int[] {x-2-j, y+1-i, Constant.SOUTH};
+                        }
+                    }
+                }
                 break;
             case Constant.EAST:
-                obs_pos = new int[][] {{x-1, y+1+sensors[0], Constant.EAST},
-                        {x, y+1+sensors[1], Constant.EAST}, {x+1, y+1+sensors[2], Constant.EAST}};
+//                obs_pos = new int[][] {{x-1, y+1+sensors[0], Constant.EAST},
+//                        {x, y+1+sensors[1], Constant.EAST}, {x+1, y+1+sensors[2], Constant.EAST}};
+                for (int i=0; i<3; i++) {
+                    for (int j=0; j<3; j++) {
+                        if (Arrays.equals(obs_pos[i], default_pos) &&
+                                map.getGrid(x+1-i, y+2+j).equals(Constant.OBSTACLE)) {
+                            obs_pos[i] = new int[] {x+1-i, y+2+j, Constant.EAST};
+                        }
+                    }
+                }
                 break;
             case Constant.WEST:
-                obs_pos = new int[][] {{x+1, y-1-sensors[0], Constant.WEST},
-                        {x, y-1-sensors[1], Constant.WEST}, {x-1, y-1-sensors[2], Constant.WEST}};
+//                obs_pos = new int[][] {{x+1, y-1-sensors[0], Constant.WEST},
+//                        {x, y-1-sensors[1], Constant.WEST}, {x-1, y-1-sensors[2], Constant.WEST}};
+                for (int i=0; i<3; i++) {
+                    for (int j=0; j<3; j++) {
+                        if (Arrays.equals(obs_pos[i], default_pos) &&
+                                map.getGrid(x-1+i, y-2-j).equals(Constant.OBSTACLE)) {
+                            obs_pos[i] = new int[] {x-1+i, y-2-j, Constant.WEST};
+                        }
+                    }
+                }
                 break;
         }
 
-        for (int i=0; i<3; i++) {
-            if ((sensors[i] == -1) || (!within_map(obs_pos[i][0], obs_pos[i][1]))) {
-                obs_pos[i] = default_pos;
+        for (int k=0; k<3; k++) {
+            if (!within_map(obs_pos[k][0], obs_pos[k][1])) {
+                obs_pos[k] = default_pos;
             } else {
                 for (int[] obstacles : checked_obstacles) {
-                    if (Arrays.equals(obstacles, obs_pos[i])) {
-                        obs_pos[i] = default_pos;
+                    if (Arrays.equals(obstacles, obs_pos[k])) {
+                        obs_pos[k] = default_pos;
                         break;
                     }
                 }
             }
         }
 
-        // obs_pos: L, M, R
-        int[] copy = obs_pos[2];
-        obs_pos[2] = obs_pos[0];
-        obs_pos[0] = copy;
-
-        for (int j=0; j<3; j++) {
-            if (!(Arrays.equals(obs_pos[j], default_pos))) {
+        for (int m=0; m<3; m++) {
+            if (!(Arrays.equals(obs_pos[m], default_pos))) {
                 if (check_front_empty(robot)) {
-                    checked_obstacles[0][0] = j + 1;
+                    checked_obstacles[0][0] = m + 1;
                 }
                 if ((checked_obstacles[0][0] > 2) || (!check_front_empty(robot))) {
                     take_pic = true;
@@ -376,22 +405,22 @@ public class Exploration {
         }
     }
 
-    private boolean front_wall(Robot robot) {
-        int direction = robot.getDirection();
-        int[] pos = robot.getPosition();
-        switch (direction) {
-            case Constant.EAST:
-                return pos[0] == 18;
-            case Constant.WEST:
-                return pos[0] == 1;
-            case Constant.SOUTH:
-                return pos[1] == 13;
-            case Constant.NORTH:
-                return pos[1] == 1;
-            default:
-                return true;
-        }
-    }
+//    private boolean front_wall(Robot robot) {
+//        int direction = robot.getDirection();
+//        int[] pos = robot.getPosition();
+//        switch (direction) {
+//            case Constant.EAST:
+//                return pos[0] == 18;
+//            case Constant.WEST:
+//                return pos[0] == 1;
+//            case Constant.SOUTH:
+//                return pos[1] == 13;
+//            case Constant.NORTH:
+//                return pos[1] == 1;
+//            default:
+//                return true;
+//        }
+//    }
 
     private boolean check_right_empty(Robot robot) {
         boolean[] obstacles = crash(robot.updateMap());
@@ -630,6 +659,27 @@ public class Exploration {
                 }
         }
 
+    }
+
+    private boolean done(Robot robot, int x, int y, int facing) {
+        int[] stop;
+        switch (facing) {
+            case Constant.NORTH:
+                stop = new int[] {x+1, y+1};
+                break;
+            case Constant.SOUTH:
+                stop = new int[] {x-1, y-1};
+                break;
+            case Constant.EAST:
+                stop = new int[] {x-1, y+1};
+                break;
+            case Constant.WEST:
+                stop = new int[] {x+1, y-1};
+                break;
+            default:
+                stop = new int[] {x, y};
+        }
+        return at_pos(robot, stop);
     }
 
     private int percent_complete(Robot robot) {

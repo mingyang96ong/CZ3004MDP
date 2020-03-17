@@ -66,9 +66,9 @@ public class ConnectionManager extends Thread{
 			System.out.println(s);
 			if (!ExplorationThread.getRunning() && !FastestPathThread.getRunning() && s.contains(Constant.INITIALISING)) {
 				Pattern p_s_s = Pattern.compile(Constant.INITIALISING + "[\\s]\\([1-9],[1-9],[0-3]{1}\\)");
-				Pattern p_d_s = Pattern.compile(Constant.INITIALISING + "[\\s]\\([1][0-9],[1-9],[0-3]{1}\\)");
+				Pattern p_d_s = Pattern.compile(Constant.INITIALISING + "[\\s]\\([1][0-8],[1-9],[0-3]{1}\\)");
 				Pattern p_s_d = Pattern.compile(Constant.INITIALISING + "[\\s]\\([1-9],[1][0-4],[0-3]{1}\\)");
-				Pattern p_d_d = Pattern.compile(Constant.INITIALISING + "[\\s]\\([1][1-9],[1][0-4],[0-3]{1}\\)");
+				Pattern p_d_d = Pattern.compile(Constant.INITIALISING + "[\\s]\\([1][0-8],[1][0-4],[0-3]{1}\\)");
 				if ((p_s_s.matcher(s).matches() || p_d_s.matcher(s).matches() || p_s_d.matcher(s).matches() || p_d_d.matcher(s).matches())){
 					complete = true;
 					String tmp = s.replace(Constant.INITIALISING + " (", "");
@@ -112,16 +112,16 @@ public class ConnectionManager extends Thread{
 			else if (!ExplorationThread.getRunning() && !FastestPathThread.getRunning() && 
 					s.contains(Constant.SETWAYPOINT)) {
 				Pattern wp_s_s = Pattern.compile(Constant.SETWAYPOINT + " \\([1-9],[1-9]\\)");
-				Pattern wp_d_s = Pattern.compile(Constant.SETWAYPOINT + " \\([1-9],[1][0-9]\\)");
+				Pattern wp_d_s = Pattern.compile(Constant.SETWAYPOINT + " \\([1-9],[1][0-8]\\)");
 				Pattern wp_s_d = Pattern.compile(Constant.SETWAYPOINT + " \\([1][0-4],[1-9]\\)");
-				Pattern wp_d_d = Pattern.compile(Constant.SETWAYPOINT + " \\([1][0-4],[1][1-9]\\)");
+				Pattern wp_d_d = Pattern.compile(Constant.SETWAYPOINT + " \\([1][0-4],[1][0-8]\\)");
 				if ((wp_s_s.matcher(s).matches() || wp_d_s.matcher(s).matches() || wp_s_d.matcher(s).matches() || wp_d_d.matcher(s).matches())){
 					complete = true;
 					String tmp = s.replace(Constant.SETWAYPOINT + " (", "");
 					tmp = tmp.replace(")", "");
 					String[] arr = tmp.trim().split(",");
 					robot.setWaypoint(Integer.parseInt(arr[1]), Integer.parseInt(arr[0]));
-					s = "Successfully set the waypoint: " + Integer.parseInt(arr[0]) + 
+					s = "Successfully received the waypoint: " + Integer.parseInt(arr[0]) + 
 							"," + Integer.parseInt(arr[1]);
 					System.out.println(s);
 				}

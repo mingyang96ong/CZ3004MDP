@@ -542,7 +542,7 @@ public class AddJButtonActionListener implements ActionListener{
 			disableLabel("MDF_label");
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 			
-			r.setMap(r.getTrueMap());
+//			r.setMap(r.getTrueMap());
 		}
 
 		if (action.contentEquals("Fastest Path")) {

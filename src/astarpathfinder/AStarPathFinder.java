@@ -189,15 +189,16 @@ public class AStarPathFinder {
 
         for (int j=0; j<count; j++) {
             Node node = neighbours[j];
-            if (find_index(node, closed) == -1) { // if not in closed
-                int index = find_index(node, open);
-                if ((index > -1) && (node.cost < open[index].cost)) {
-                    open[index] = node;
-                }
-                if (index == -1) { // if not in open
-                    open = add_node(open, node);
-                }
-            }
+//            if (find_index(node, closed) == -1) { // if not in closed
+//                int index = find_index(node, open);
+//                if ((index > -1) && (node.cost < open[index].cost)) {
+//                    open[index] = node;
+//                }
+//                if (index == -1) { // if not in open
+//                    open = add_node(open, node);
+//                }
+//            }
+            open = add_node(open, node);
         }
 
         return open;
@@ -245,7 +246,7 @@ public class AStarPathFinder {
             return x;
         }
         else {
-            return (x + y + 2);
+            return (x + y );
         }
     }
 
@@ -407,6 +408,9 @@ public class AStarPathFinder {
         int[] path = {go_where(node)};
         Node cur = node.parent;
 
+        if (cur == null) {
+            return null;
+        }
 
         while (cur.parent != null) {
             if (go_where(cur) >= 0) {
