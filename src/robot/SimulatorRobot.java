@@ -187,7 +187,7 @@ public class SimulatorRobot extends Robot{
 		t = new Timer();
 	}
 
-	public void captureImage(int[][] image_pos) {
+	public boolean captureImage(int[][] image_pos) {
 		buttonListener.enableLabel("image_cap");
 		try {
 			TimeUnit.SECONDS.sleep(2);
@@ -196,6 +196,7 @@ public class SimulatorRobot extends Robot{
 			System.out.println(e.getMessage());
 		}
 		buttonListener.disableLabel("image_cap");
+		return false;
 	}
 
 	public void calibrate() {

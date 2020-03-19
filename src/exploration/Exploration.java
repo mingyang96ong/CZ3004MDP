@@ -12,6 +12,7 @@ import astarpathfinder.AStarPathFinder;
 public class Exploration {
     private FastestPath fp = new FastestPath();
     private Map map;
+    private boolean image_stop;
 
     public void Exploration(Robot robot, int time, int percentage, int speed, boolean image_recognition){
         map = robot.getMap();
@@ -22,6 +23,7 @@ public class Exploration {
 
         if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
             if (image_recognition) {
+                image_stop = false;
                 ImageRecognition_Exploration(robot);
             } else {
                 Normal_Exploration(robot);
@@ -120,7 +122,7 @@ public class Exploration {
 
         do {
             move(robot, 1, null);
-            corner_calibration(robot);
+//            corner_calibration(robot);
         } while (!at_pos(robot, Constant.START));
 
         int[] unexplored = unexplored(robot, robot.getPosition());
@@ -149,27 +151,30 @@ public class Exploration {
     }
 
     private void ImageRecognition_Exploration(Robot robot) {
-        boolean unexplored = false;
         robot.setDirection(2);
-
         int[][] checked_obstacles = {{0}};
 
         do {
             checked_obstacles = move(robot, 1, checked_obstacles);
             System.out.println(Arrays.deepToString(checked_obstacles));
-            corner_calibration(robot);
+//            corner_calibration(robot);
         } while (!at_pos(robot, Constant.START));
+        
+        corner_calibration(robot);
 
+        boolean unexplored = false;
         int[] need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
         int[] go_to = next_to_obstacle(robot, need_take);
+        boolean move = false;
 
         if (go_to == null) {
             unexplored = true;
+            need_take = null;
             go_to = unexplored(robot, robot.getPosition());
         }
 
-        while (go_to != null) {
-            // fastest path to nearest unexplored square
+        while ((go_to != null) && !(this.image_stop)) {
+            // fastest path to nearest obstacle that photos have not been taken photo of
             System.out.println("Phase 2");
             int[] path = fp.FastestPath(robot, null, go_to, 1, true, true);
             if ((unexplored) && ((path == null) || (map.getGrid(go_to[0], go_to[1]).equals(Constant.UNEXPLORED)))) {
@@ -179,31 +184,48 @@ public class Exploration {
                 temp[checked_obstacles.length] = go_to;
                 checked_obstacles = temp;
             } else {
-                obstacle_on_right(robot, need_take);
+                move = obstacle_on_right(robot, need_take);
             }
 
             int facing = robot.getDirection();
-            if (path != null) {
+            if ((path != null) && move) {
                 do {
                     checked_obstacles = move(robot, 1, checked_obstacles);
                     System.out.println(Arrays.deepToString(checked_obstacles));
                 } while (!done(robot, go_to[0], go_to[1], facing));
             }
 
+            unexplored = false;
             need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
             go_to = next_to_obstacle(robot, need_take);
 
             if (go_to == null) {
                 unexplored = true;
+                need_take = null;
                 go_to = unexplored(robot, robot.getPosition());
             }
 
             robot.updateMap();
         }
 
+        go_to = unexplored(robot, robot.getPosition());
+        while ((go_to != null) && this.image_stop) {
+            // fastest path to nearest unexplored square
+            System.out.println("Phase 3");
+            System.out.println(Arrays.toString(robot.getPosition()));
+
+            int[] path = fp.FastestPath(robot, null, go_to, 1, false, true);
+            if ((path == null) || (map.getGrid(go_to[0], go_to[1]).equals(Constant.UNEXPLORED))) {
+                map.setGrid(go_to[0], go_to[1], Constant.OBSTACLE);
+            }
+
+            go_to = unexplored(robot, robot.getPosition());
+            robot.updateMap();
+        }
+
         if (!at_pos(robot, Constant.START)) {
             // fastest path to start point
-            System.out.println("Phase 3");
+            System.out.println("Phase 4");
             System.out.println(Arrays.toString(robot.getPosition()));
             fp.FastestPath(robot, null, Constant.START, 1, true, true);
         }
@@ -278,6 +300,10 @@ public class Exploration {
     }
 
     private int[][] image_recognition(Robot robot, int[][] checked_obstacles) {
+        if (this.image_stop) {
+            return checked_obstacles;
+        }
+
 //        int[] sensors = robot.updateMap();
         int x = robot.getPosition()[0];
         int y = robot.getPosition()[1];
@@ -372,7 +398,9 @@ public class Exploration {
                 }
             }
             checked_obstacles[0][0] = 0;
-            robot.captureImage(obs_pos);
+            if (robot.captureImage(obs_pos)) {
+                this.image_stop = true;
+            }
         }
 
         return checked_obstacles;
@@ -522,6 +550,20 @@ public class Exploration {
             }
         }
         robot.calibrate();
+        int newdirection = robot.getDirection();
+        
+        switch(Math.abs(direction - newdirection + 4) % 4) {
+        case 1:
+        	robot.rotateRight();
+        	break;
+        case 2:
+        	robot.rotateRight();
+        	robot.rotateRight();
+        	break;
+        case 3:
+        	robot.rotateLeft();
+        	break;
+        }
     }
 
     private boolean at_pos(Robot robot, int[] goal){
@@ -596,7 +638,10 @@ public class Exploration {
         return cheapest_pos;
     }
 
-    private void obstacle_on_right(Robot robot, int[] obstacle) {
+    private boolean obstacle_on_right(Robot robot, int[] obstacle) {
+        if (obstacle == null) {
+            return false;
+        }
         int direction = robot.getDirection();
         int[] pos = robot.getPosition();
 
@@ -658,7 +703,7 @@ public class Exploration {
                     break;
                 }
         }
-
+        return true;
     }
 
     private boolean done(Robot robot, int x, int y, int facing) {

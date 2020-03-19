@@ -5,7 +5,7 @@ public class Constant {
 	public static final int TIME = -1;
 	public static final int PERCENTAGE = 100;
 	public static final int SPEED = 1;
-	public static final boolean IMAGE_REC = false;
+	public static final boolean IMAGE_REC = true;
 
 	// Used for all Real and Simulator Events
 	public static final int BOARDWIDTH = 20; // By default, this should be 20. This must be greater than 3 as the Robot assumes to take 3x3 grid.
@@ -14,12 +14,12 @@ public class Constant {
 	public static final int STARTPOINTWIDTH = 3;
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
-	public static final double[][] SENSOR_RANGES ={	{15.065, 24, 33.9}, 
-													{10.5, 19, 34.5},
-													{15, 25.5, 32.9}, 
+	public static final double[][] SENSOR_RANGES ={	{14.5, 24}, // 32 previously 
+													{10.5, 19}, // 34 previously
+													{15, 25.5}, // 36 previously 
 													{12.85, 22.7, 34.5}, 
 													{13.65, 25.25, 38.5},
-													{20, 26, 37, 46.5, 58.5, 70.5, 81}}; // LAB
+													{20.5, 26, 37, 46.5, 58.5, 70.5}}; // LAB
 	
 
 	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.
@@ -130,6 +130,7 @@ public class Constant {
 
 	public static final String START_EXPLORATION = "ES|";
 	public static final String FASTEST_PATH = "FS|";
+	public static final String IMAGE_STOP = "I";
 	public static final String SEND_ARENA = "SendArena";
 	public static final String INITIALISING = "starting";
 	public static final String SETWAYPOINT = "waypoint";

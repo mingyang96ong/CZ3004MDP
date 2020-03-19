@@ -51,7 +51,7 @@ public abstract class Robot {
 	public abstract void rotateRight();
 	public abstract void rotateLeft();
 
-	public abstract void captureImage(int[][] image_pos);
+	public abstract boolean captureImage(int[][] image_pos);
 	public abstract void calibrate();
 	public abstract void right_align();
 	
