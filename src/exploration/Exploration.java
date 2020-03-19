@@ -17,10 +17,6 @@ public class Exploration {
     public void Exploration(Robot robot, int time, int percentage, int speed, boolean image_recognition){
         map = robot.getMap();
 
-        // Should be removed for actual run
-//        robot.calibrate();
-//        robot.rotateLeft();
-
         if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
             if (image_recognition) {
                 image_stop = false;
@@ -170,7 +166,8 @@ public class Exploration {
         }
 
         if (!this.image_stop) {
-            need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
+//            need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
+            need_take = furthest(robot, checked_obstacles);
             go_to = next_to_obstacle(robot, need_take);
         }
 
@@ -662,6 +659,36 @@ public class Exploration {
             }
         }
         return cheapest_pos;
+    }
+
+    private int[] furthest(Robot robot, int[][] checked_obstacles) {
+        Map map = robot.getMap();
+        int highest_cost = -1;
+        int[] ex_pos = null;
+
+        for (int i=0; i<Constant.BOARDWIDTH; i++) {
+            for (int j=0; j<Constant.BOARDHEIGHT; j++) {
+                if (map.getGrid(i,j).equals(Constant.OBSTACLE)) {
+                    boolean not_inside = true;
+                    for (int k=1; k<checked_obstacles.length; k++) {
+                        int[] o_pos = {checked_obstacles[k][0], checked_obstacles[k][1]};
+                        int[] cur = {i, j};
+                        if (Arrays.equals(o_pos, cur)) {
+                            not_inside = false;
+                            break;
+                        }
+                    }
+                    if (not_inside) {
+                        int cost = Math.abs(Constant.END[0] - i) + Math.abs(Constant.END[1] - j);
+                        if (cost > highest_cost) {
+                            ex_pos = new int[]{i, j};
+                            highest_cost = cost;
+                        }
+                    }
+                }
+            }
+        }
+        return ex_pos;
     }
 
     private boolean obstacle_on_right(Robot robot, int[] obstacle) {
