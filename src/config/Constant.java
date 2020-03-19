@@ -14,14 +14,14 @@ public class Constant {
 	public static final int STARTPOINTWIDTH = 3;
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
-	public static final double[][] SENSOR_RANGES ={	{14.5, 24}, // 32 previously 
-													{10.5, 19}, // 34 previously
-													{15, 25.5}, // 36 previously 
+	public static final double[][] SENSOR_RANGES = {{13.54, 21.46},
+													{10.4, 19.35},
+													{12, 19.35},
 													{12.85, 22.7, 34.5}, 
 													{13.65, 25.25, 38.5},
-													{20.5, 26, 37, 46.5, 58.5, 70.5}}; // LAB
+													{19, 24, 32, 43, 51.5, 62.5}};
 	
-
+	// Unused sensor values
 	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.
 	public static final int SHORTSENSORMAXRANGE = 3; // This is in number of grid.
 	public static final int SHORTSENSOROFFSET = 3; // This is in cm.
