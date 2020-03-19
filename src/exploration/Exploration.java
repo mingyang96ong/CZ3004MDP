@@ -153,6 +153,10 @@ public class Exploration {
     private void ImageRecognition_Exploration(Robot robot) {
         robot.setDirection(2);
         int[][] checked_obstacles = {{0}};
+        boolean unexplored = false;
+        int[] need_take = null;
+        int[] go_to = null;
+        boolean move = false;
 
         do {
             checked_obstacles = move(robot, 1, checked_obstacles);
@@ -161,11 +165,14 @@ public class Exploration {
         } while (!at_pos(robot, Constant.START));
         
         corner_calibration(robot);
+        if (!this.image_stop) {
+            this.image_stop = robot.captureImage(new int[][] {{-1, -1, -1}, {-1, -1, -1}, {-1, -1, -1}});
+        }
 
-        boolean unexplored = false;
-        int[] need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
-        int[] go_to = next_to_obstacle(robot, need_take);
-        boolean move = false;
+        if (!this.image_stop) {
+            need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
+            go_to = next_to_obstacle(robot, need_take);
+        }
 
         if (go_to == null) {
             unexplored = true;
@@ -193,6 +200,11 @@ public class Exploration {
                     checked_obstacles = move(robot, 1, checked_obstacles);
                     System.out.println(Arrays.deepToString(checked_obstacles));
                 } while (!done(robot, go_to[0], go_to[1], facing));
+
+                // to corner calibrate after each "island"
+                go_to = nearest_corner(robot);
+                fp.FastestPath(robot, null, go_to, 1, true, true);
+                corner_calibration(robot);
             }
 
             unexplored = false;
@@ -398,9 +410,7 @@ public class Exploration {
                 }
             }
             checked_obstacles[0][0] = 0;
-            if (robot.captureImage(obs_pos)) {
-                this.image_stop = true;
-            }
+            this.image_stop = robot.captureImage(obs_pos);
         }
 
         return checked_obstacles;
@@ -564,6 +574,22 @@ public class Exploration {
         	robot.rotateLeft();
         	break;
         }
+    }
+
+    private int[] nearest_corner(Robot robot) {
+        int[] pos = robot.getPosition();
+        int[][] corners = new int[][] {{1,1}, {1, 13}, {18, 1}, {18, 13}};
+        int[] costs = new int[4];
+        int cheapest_index = 0;
+
+        for (int i=0; i<4; i++) {
+            costs[i] = Math.abs(pos[0] - corners[i][0]) + Math.abs(pos[1] - corners[i][1]);
+            if (costs[i] < costs[cheapest_index]) {
+                cheapest_index = i;
+            }
+        }
+
+        return corners[cheapest_index];
     }
 
     private boolean at_pos(Robot robot, int[] goal){
