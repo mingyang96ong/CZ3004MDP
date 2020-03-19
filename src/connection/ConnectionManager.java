@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import astarpathfinder.FastestPathThread;
 import config.Constant;
+import exploration.Exploration;
 import exploration.ExplorationThread;
 import robot.RealRobot;
 

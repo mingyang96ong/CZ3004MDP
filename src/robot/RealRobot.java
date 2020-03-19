@@ -218,7 +218,7 @@ public class RealRobot extends Robot{
 //		return false;
 //	}
 	
-	public void captureImage(int[][] image_pos) {
+	public boolean captureImage(int[][] image_pos) {
 //		connectionSocket.sendMessage("C[" + y + "," + x + "," + ((this.getDirection()+3) % 4) + "]"); // This is to do converting for Real Run
 		connectionSocket.sendMessage("C["+ image_pos[0][1] + "," + image_pos[0][0] + "|" + image_pos[1][1] + "," + image_pos[1][0] +
 				"|" + image_pos[2][1] + "," + image_pos[2][0] + "]"); // This is left middle right. x and y is inverted in Real Run.
@@ -229,8 +229,13 @@ public class RealRobot extends Robot{
 		while (!completed) {
 			s = connectionSocket.receiveMessage().trim();
 			completed = checkImageAcknowledge(s);
-			if (completed) {
-				break;
+			if (completed && s.equals(Constant.IMAGE_ACK)) {
+				System.out.println(s);
+				return false;
+			}
+			else if (completed && s.equals(Constant.IMAGE_STOP)){
+				System.out.println(s);
+				return true;
 			}
 			else {
 				for (int i = 0; i < buffer.size(); i++) {
@@ -241,11 +246,13 @@ public class RealRobot extends Robot{
 					}
 				}
 			}
+			System.out.println(s);
 		}
+		return false;
 	}
 	
 	private boolean checkImageAcknowledge(String s) {
-		if (s.equals(Constant.IMAGE_ACK)) {
+		if (s.equals(Constant.IMAGE_ACK) || s.equals(Constant.IMAGE_STOP)) {
 			return true;
 		}
 		return false;

@@ -1,6 +1,5 @@
 package exploration;
 
-import astarpathfinder.FastestPathThread;
 import config.Constant;
 import connection.ConnectionSocket;
 import robot.Robot;
