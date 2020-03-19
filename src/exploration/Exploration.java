@@ -120,7 +120,7 @@ public class Exploration {
 
         do {
             move(robot, 1, null);
-            corner_calibration(robot);
+//            corner_calibration(robot);
         } while (!at_pos(robot, Constant.START));
 
         int[] unexplored = unexplored(robot, robot.getPosition());
@@ -157,8 +157,10 @@ public class Exploration {
         do {
             checked_obstacles = move(robot, 1, checked_obstacles);
             System.out.println(Arrays.deepToString(checked_obstacles));
-            corner_calibration(robot);
+//            corner_calibration(robot);
         } while (!at_pos(robot, Constant.START));
+        
+        corner_calibration(robot);
 
         int[] need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
         int[] go_to = next_to_obstacle(robot, need_take);
@@ -522,6 +524,20 @@ public class Exploration {
             }
         }
         robot.calibrate();
+        int newdirection = robot.getDirection();
+        
+        switch(Math.abs(direction - newdirection + 4) % 4) {
+        case 1:
+        	robot.rotateRight();
+        	break;
+        case 2:
+        	robot.rotateRight();
+        	robot.rotateRight();
+        	break;
+        case 3:
+        	robot.rotateLeft();
+        	break;
+        }
     }
 
     private boolean at_pos(Robot robot, int[] goal){

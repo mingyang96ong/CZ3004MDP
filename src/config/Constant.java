@@ -5,7 +5,7 @@ public class Constant {
 	public static final int TIME = -1;
 	public static final int PERCENTAGE = 100;
 	public static final int SPEED = 1;
-	public static final boolean IMAGE_REC = false;
+	public static final boolean IMAGE_REC = true;
 
 	// Used for all Real and Simulator Events
 	public static final int BOARDWIDTH = 20; // By default, this should be 20. This must be greater than 3 as the Robot assumes to take 3x3 grid.
