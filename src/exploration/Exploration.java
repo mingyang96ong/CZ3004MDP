@@ -166,8 +166,8 @@ public class Exploration {
         }
 
         if (!this.image_stop) {
-//            need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
-            need_take = furthest(robot, checked_obstacles);
+            need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
+//            need_take = furthest(robot, checked_obstacles);
             go_to = next_to_obstacle(robot, need_take);
         }
 
@@ -196,12 +196,7 @@ public class Exploration {
                 do {
                     checked_obstacles = move(robot, 1, checked_obstacles);
                     System.out.println(Arrays.deepToString(checked_obstacles));
-                } while (!done(robot, go_to[0], go_to[1], facing));
-
-                // to corner calibrate after each "island"
-                go_to = nearest_corner(robot);
-                fp.FastestPath(robot, null, go_to, 1, true, true);
-                corner_calibration(robot);
+                } while ((!done(robot, go_to[0], go_to[1], facing)) && !image_stop);
             }
 
             unexplored = false;
@@ -212,6 +207,19 @@ public class Exploration {
                 unexplored = true;
                 need_take = null;
                 go_to = unexplored(robot, robot.getPosition());
+            }
+
+            if (go_to == null) {
+                // to return to start after each "island"
+                fp.FastestPath(robot, null, Constant.START, 1, true, true);
+                corner_calibration(robot);
+            } else {
+                // to corner calibrate after each "island"
+                fp.FastestPath(robot, null, nearest_corner(robot), 1, true, true);
+                corner_calibration(robot);
+                if (!this.image_stop) {
+                    this.image_stop = robot.captureImage(new int[][] {{-1, -1, -1}, {-1, -1, -1}, {-1, -1, -1}});
+                }
             }
 
             robot.updateMap();
