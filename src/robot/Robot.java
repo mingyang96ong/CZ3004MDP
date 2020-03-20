@@ -233,6 +233,9 @@ public abstract class Robot {
 //		return isObstacle;
 //	}
 
+	/**
+	 * @return
+	 */
 	public int[] updateMap() {
 		if (validObstacleValue) {
 			return this.isObstacle;
