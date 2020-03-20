@@ -337,7 +337,9 @@ public class Map{
 			MDFHexString[0] += Integer.toString(Integer.parseInt(MDFBitStringPart1.substring(i, i + 4), 2), 16);
 		}
 
-		MDFBitStringPart2 = "0".repeat(4 - (MDFBitStringPart2.length() % 4)) + MDFBitStringPart2 ;
+		if ((MDFBitStringPart2.length() % 4) != 0){ // Only pad if the MDF Bit string is not a multiple of 4
+			MDFBitStringPart2 = "0".repeat(4 - (MDFBitStringPart2.length() % 4)) + MDFBitStringPart2 ;
+		}
 
 //		MDFBitStringPart2 = "0".repeat(304 - MDFBitStringPart2.length()) + MDFBitStringPart2;
 		for (int i = 0; i < MDFBitStringPart2.length(); i += 4) {

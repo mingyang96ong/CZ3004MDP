@@ -17,10 +17,6 @@ public class Exploration {
     public void Exploration(Robot robot, int time, int percentage, int speed, boolean image_recognition){
         map = robot.getMap();
 
-        // Should be removed for actual run
-//        robot.calibrate();
-//        robot.rotateLeft();
-
         if ((speed == 1)&&(time == -1)&&(percentage == 100)) {
             if (image_recognition) {
                 image_stop = false;
@@ -171,13 +167,14 @@ public class Exploration {
 
         if (!this.image_stop) {
             need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
-            go_to = next_to_obstacle(robot, need_take); // return obstacle pos that is next to the robot
+//            need_take = furthest(robot, checked_obstacles);
+            go_to = next_to_obstacle(robot, need_take);
         }
 
-        if (go_to == null) { // if no obstacle next to the robot, find unexplored
+        if (go_to == null) {
             unexplored = true;
             need_take = null;
-            go_to = unexplored(robot, robot.getPosition()); // get the nearest unexplored otherwise return null
+            go_to = unexplored(robot, robot.getPosition());
         }
 
         while ((go_to != null) && !(this.image_stop)) {
@@ -199,22 +196,30 @@ public class Exploration {
                 do {
                     checked_obstacles = move(robot, 1, checked_obstacles);
                     System.out.println(Arrays.deepToString(checked_obstacles));
-                } while (!done(robot, go_to[0], go_to[1], facing));
-
-                // to corner calibrate after each "island"
-                go_to = nearest_corner(robot);
-                fp.FastestPath(robot, null, go_to, 1, true, true);
-                corner_calibration(robot);
+                } while ((!done(robot, go_to[0], go_to[1], facing)) && !image_stop);
             }
 
             unexplored = false;
             need_take = picture_taken(robot, robot.getPosition(), checked_obstacles);
-            go_to = next_to_obstacle(robot, need_take); // return obstacle pos that is next to the robot
+            go_to = next_to_obstacle(robot, need_take);
 
             if (go_to == null) {
                 unexplored = true;
                 need_take = null;
                 go_to = unexplored(robot, robot.getPosition());
+            }
+
+            if (go_to == null) {
+                // to return to start after each "island"
+                fp.FastestPath(robot, null, Constant.START, 1, true, true);
+                corner_calibration(robot);
+            } else {
+                // to corner calibrate after each "island"
+                fp.FastestPath(robot, null, nearest_corner(robot), 1, true, true);
+                corner_calibration(robot);
+                if (!this.image_stop) {
+                    this.image_stop = robot.captureImage(new int[][] {{-1, -1, -1}, {-1, -1, -1}, {-1, -1, -1}});
+                }
             }
 
             robot.updateMap();
@@ -662,6 +667,36 @@ public class Exploration {
             }
         }
         return cheapest_pos;
+    }
+
+    private int[] furthest(Robot robot, int[][] checked_obstacles) {
+        Map map = robot.getMap();
+        int highest_cost = -1;
+        int[] ex_pos = null;
+
+        for (int i=0; i<Constant.BOARDWIDTH; i++) {
+            for (int j=0; j<Constant.BOARDHEIGHT; j++) {
+                if (map.getGrid(i,j).equals(Constant.OBSTACLE)) {
+                    boolean not_inside = true;
+                    for (int k=1; k<checked_obstacles.length; k++) {
+                        int[] o_pos = {checked_obstacles[k][0], checked_obstacles[k][1]};
+                        int[] cur = {i, j};
+                        if (Arrays.equals(o_pos, cur)) {
+                            not_inside = false;
+                            break;
+                        }
+                    }
+                    if (not_inside) {
+                        int cost = Math.abs(Constant.END[0] - i) + Math.abs(Constant.END[1] - j);
+                        if (cost > highest_cost) {
+                            ex_pos = new int[]{i, j};
+                            highest_cost = cost;
+                        }
+                    }
+                }
+            }
+        }
+        return ex_pos;
     }
 
     private boolean obstacle_on_right(Robot robot, int[] obstacle) {
