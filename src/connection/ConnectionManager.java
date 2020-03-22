@@ -2,12 +2,10 @@ package connection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import astarpathfinder.FastestPathThread;
 import config.Constant;
-import exploration.Exploration;
 import exploration.ExplorationThread;
 import robot.RealRobot;
 
@@ -32,6 +30,10 @@ public class ConnectionManager extends Thread{
 	
 	public boolean connectToRPi() {
 		return connectionSocket.connectToRPI();
+	}
+	
+	public void disconnectFromRPI() {
+		connectionSocket.closeConnection();
 	}
 	
 	public void start() {

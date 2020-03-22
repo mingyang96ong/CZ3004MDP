@@ -124,9 +124,10 @@ public class Constant {
 //	public static final double TURNCOST_W = NORMALREWARD * 0.1; // -8
 
 	// Connection Constants
-//	public static final String IP_ADDRESS = "127.0.0.1";
-	public static final String IP_ADDRESS = "192.168.15.15";
+	public static final String IP_ADDRESS = "127.0.0.1";
+//	public static final String IP_ADDRESS = "192.168.15.15";
 	public static final int PORT = 8080;
+	public static final int BUFFER_SIZE = 512;
 
 	public static final String START_EXPLORATION = "ES|";
 	public static final String FASTEST_PATH = "FS|";

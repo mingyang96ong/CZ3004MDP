@@ -67,13 +67,13 @@ public class ConnectionServer {
     
     public String receiveMessage() {
     	String message = "";
-    	byte[] byteData = new byte[2048];
+    	byte[] byteData = new byte[Constant.BUFFER_SIZE];
     	try {
     		int size = 0;
     		input.read(byteData);
     		
     		// This is to get rid of junk bytes
-    		while (size < 2048) {
+    		while (size < Constant.BUFFER_SIZE) {
     			if (byteData[size] == 0) {
     				break;
     			}

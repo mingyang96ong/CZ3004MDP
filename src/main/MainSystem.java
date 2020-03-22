@@ -26,11 +26,23 @@ public class MainSystem {
 		
 		if (realRun) {
 			ConnectionManager connectionManager = ConnectionManager.getInstance();
+			Runtime.getRuntime().addShutdownHook(new Thread(){public void run(){
+			    	connectionManager.disconnectFromRPI();
+			        System.out.println("The client is shut down!");
+			}});
 			boolean connected = false;
 			while (!connected) {
 				connected = connectionManager.connectToRPi();
 			}
 			connectionManager.start();
+			try {
+				connectionManager.join();
+			}
+			catch(Exception e) {
+				System.out.println("Error in waiting thread in ConnectionManager");
+			}
+			connectionManager.disconnectFromRPI();
+			
 		}
 		else {
 			Simulator s = new Simulator();

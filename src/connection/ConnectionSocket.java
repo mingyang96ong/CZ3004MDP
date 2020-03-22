@@ -14,8 +14,6 @@ import config.Constant;
 public class ConnectionSocket {
     // initialize socket and input output streams 
     private Socket socket              = null; 
-    private DataInputStream  input     = null; 
-    private DataOutputStream output    = null;
     private InputStream  din     = null; 
     private PrintStream dout    = null;
     private static ConnectionSocket cs = null;
@@ -78,13 +76,13 @@ public class ConnectionSocket {
     
     public String receiveMessage() {
 //    	String message = "";
-    	byte[] byteData = new byte[2048];
+    	byte[] byteData = new byte[Constant.BUFFER_SIZE];
     	try {
     		int size = 0;
     		din.read(byteData);
     		
     		// This is to get rid of junk bytes
-    		while (size < 2048) {
+    		while (size < Constant.BUFFER_SIZE) {
     			if (byteData[size] == 0) {
     				break;
     			}
@@ -106,11 +104,12 @@ public class ConnectionSocket {
     	if (socket != null) {
     		try {
     			socket.close();
-    			input.close();
-    			output.close();
+    			din.close();
+    			dout.close();
     			socket = null;
-    			input = null;
-    			output = null;
+    			din = null;
+    			dout = null;
+    			System.out.println("Successfully closed the ConnectionSocket.");
     		}
     		catch (IOException IOEx) {
         		System.out.println("IOException in ConnectionSocket closeConnection Function");
