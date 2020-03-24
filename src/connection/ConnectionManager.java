@@ -2,6 +2,7 @@ package connection;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 import astarpathfinder.FastestPathThread;
@@ -15,6 +16,7 @@ public class ConnectionManager extends Thread{
 	private ConnectionSocket connectionSocket = ConnectionSocket.getInstance();
 	private static Thread thread = null;
 	private static ArrayList<String> buffer = new ArrayList<String>();
+	private static AtomicBoolean running = new AtomicBoolean(false);
 	private static String[] bufferableCommand = new String[] {Constant.FORWARD_ACK, Constant.IMAGE_ACK, Constant.LEFT_ACK, Constant.RIGHT_ACK};
 	private ConnectionManager() {
 		robot = RealRobot.getInstance();
@@ -33,11 +35,19 @@ public class ConnectionManager extends Thread{
 	}
 	
 	public void disconnectFromRPI() {
+		if (ExplorationThread.getRunning()) {
+			ExplorationThread.stopThread();
+		}
+		if (FastestPathThread.getRunning()) {
+			FastestPathThread.stopThread();
+		}
 		connectionSocket.closeConnection();
+		
 	}
 	
 	public void start() {
-		while(true) {
+		running.set(true);
+		while(running.get()) {
 			if (ExplorationThread.getRunning() || FastestPathThread.getRunning()) {
 				try {
 					thread.join();
@@ -51,6 +61,10 @@ public class ConnectionManager extends Thread{
 			}
 //			System.out.println("I am out");
 		}
+	}
+	
+	public void stopCM() {
+		running.set(false);
 	}
 	
 	public static ArrayList<String> getBuffer(){

@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import config.Constant;
 
@@ -17,6 +18,7 @@ public class ConnectionSocket {
     private InputStream  din     = null; 
     private PrintStream dout    = null;
     private static ConnectionSocket cs = null;
+    private static AtomicBoolean connected = new AtomicBoolean(false);
     
     private ConnectionSocket() {
     	
@@ -47,6 +49,7 @@ public class ConnectionSocket {
 //	    		output = new DataOutputStream(socket.getOutputStream());
 	    		din  = socket.getInputStream(); 
 	    		dout = new PrintStream(socket.getOutputStream()); 
+	    		connected.set(true);
 	    		
 	    	}
 	    	catch(UnknownHostException UHEx) { 
@@ -79,6 +82,14 @@ public class ConnectionSocket {
     	byte[] byteData = new byte[Constant.BUFFER_SIZE];
     	try {
     		int size = 0;
+    		while (din.available() == 0 && connected.get()) {
+    			try {
+    				ConnectionManager.getInstance().join(1);
+    			}
+    			catch(Exception e) {
+    				System.out.println("Error in receive message");
+    			}
+    		}
     		din.read(byteData);
     		
     		// This is to get rid of junk bytes
@@ -103,12 +114,13 @@ public class ConnectionSocket {
     public void closeConnection() {
     	if (socket != null) {
     		try {
+    			dout.close();
     			socket.close();
     			din.close();
-    			dout.close();
+    			dout = null;
     			socket = null;
     			din = null;
-    			dout = null;
+    			connected.set(false);
     			System.out.println("Successfully closed the ConnectionSocket.");
     		}
     		catch (IOException IOEx) {

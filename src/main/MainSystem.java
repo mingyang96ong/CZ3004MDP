@@ -1,8 +1,12 @@
 package main;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import config.Constant;
@@ -26,6 +30,35 @@ public class MainSystem {
 		
 		if (realRun) {
 			ConnectionManager connectionManager = ConnectionManager.getInstance();
+			JFrame frame = new JFrame("Real Run");
+			frame.setIconImage(new ImageIcon(Constant.SIMULATORICONIMAGEPATH).getImage().getScaledInstance(20, 20, Image.SCALE_DEFAULT));
+			frame.setLayout(null);
+			frame.setSize(200, 200);
+			
+			JButton stop = new JButton();
+			stop.setActionCommand("Stop");
+			stop.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String action = e.getActionCommand();
+					// TODO Auto-generated method stub
+					if (action.equals("Stop")) {
+						try {
+
+							connectionManager.disconnectFromRPI();
+							frame.dispose();
+						}
+						catch (Exception f) {
+							
+						}
+					}
+				}
+			});
+			frame.add(stop);
+			stop.setText("Stop");
+			stop.setBounds(50, 50, 100, 50);
+			stop.setVisible(true);
+			frame.setVisible(true);
+
 			Runtime.getRuntime().addShutdownHook(new Thread(){public void run(){
 			    	connectionManager.disconnectFromRPI();
 			        System.out.println("The client is shut down!");
@@ -34,14 +67,13 @@ public class MainSystem {
 			while (!connected) {
 				connected = connectionManager.connectToRPi();
 			}
-			connectionManager.start();
 			try {
-				connectionManager.join();
+				connectionManager.start();
 			}
-			catch(Exception e) {
-				System.out.println("Error in waiting thread in ConnectionManager");
+			catch (Exception e) {
+				connectionManager.stopCM();
+				System.out.println("ConnectionManager is stopped");
 			}
-			connectionManager.disconnectFromRPI();
 			
 		}
 		else {

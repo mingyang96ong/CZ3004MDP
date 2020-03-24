@@ -5,7 +5,7 @@ public class Constant {
 	public static final int TIME = -1;
 	public static final int PERCENTAGE = 100;
 	public static final int SPEED = 1;
-	public static final boolean IMAGE_REC = true;
+	public static final boolean IMAGE_REC = false;
 
 	// Used for all Real and Simulator Events
 	public static final int BOARDWIDTH = 20; // By default, this should be 20. This must be greater than 3 as the Robot assumes to take 3x3 grid.
@@ -124,8 +124,8 @@ public class Constant {
 //	public static final double TURNCOST_W = NORMALREWARD * 0.1; // -8
 
 	// Connection Constants
-	public static final String IP_ADDRESS = "127.0.0.1";
-//	public static final String IP_ADDRESS = "192.168.15.15";
+//	public static final String IP_ADDRESS = "127.0.0.1";
+	public static final String IP_ADDRESS = "192.168.15.15";
 	public static final int PORT = 8080;
 	public static final int BUFFER_SIZE = 512;
 
