@@ -13,6 +13,8 @@ public class Map{
 	private double[][] dist = new double[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
 	private int[][]    con  = new int[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
 	private int[] waypoint = new int[] {-1, -1};
+	private String[] MDPString = new String[3];
+	private boolean changed = true;
 	
 	
 	// Only used for simulation
@@ -183,6 +185,7 @@ public class Map{
 		
 		for (int i = 0; i < Constant.POSSIBLEGRIDLABELS.length; i++) {
 			if (command.toUpperCase().compareTo(Constant.POSSIBLEGRIDLABELS[i].toUpperCase()) == 0) {
+				changed = true;
 				if (i == 3) {
 					setWayPoint(x, y);
 				}
@@ -289,6 +292,11 @@ public class Map{
 	}
 	
 	public String[] getMDFString() {
+		if (changed == false) {
+			return this.MDPString;
+		}
+		
+		changed = false;
 		
 		StringBuilder MDFBitStringPart1 = new StringBuilder();
 		StringBuilder MDFBitStringPart2 = new StringBuilder();
@@ -339,7 +347,7 @@ public class Map{
 		
 		MDFHexString[1] = Integer.toString(length);
 		
-		
+		this.MDPString = MDFHexString;
 		return MDFHexString;
 
 	}

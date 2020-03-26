@@ -266,15 +266,15 @@ public class Exploration {
     private int[][] move(Robot robot, int speed, int[][] checked_obstacles) {
         System.out.println(Arrays.toString(robot.getPosition()));
         int[][] checked = checked_obstacles;
-        int[] sensors = robot.updateMap();
+//        robot.updateMap();
 
-        if (!connection.ConnectionSocket.checkConnection()) {
-            try {
-                TimeUnit.SECONDS.sleep(speed);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+//        if (!connection.ConnectionSocket.checkConnection()) {
+//            try {
+//                TimeUnit.SECONDS.sleep(speed);
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
 
         if (check_right_empty(robot)) {
             robot.rotateRight();
@@ -283,30 +283,30 @@ public class Exploration {
                 return checked;
             } else {
                 robot.rotateLeft();
-                if ((checked != null)&&(!right_wall(robot))) {
-                    checked = image_recognition(robot, checked);
-                }
+//                if ((checked != null)&&(!right_wall(robot))) {
+//                    checked = image_recognition(robot, checked);
+//                }
             }
-        } else if ((checked != null)&&(!right_wall(robot))&&(!((sensors[3] == -1)&&(check_front_empty(robot))))) {
-            checked = image_recognition(robot, checked);
+//        } else if ((checked != null)&&(!right_wall(robot))&&(!((sensors[3] == -1)&&(check_front_empty(robot))))) {
+//            checked = image_recognition(robot, checked);
         }
         if (check_front_empty(robot)) {
             robot.forward(1);
             return checked;
         } else {
             robot.rotateLeft();
-            if ((checked != null)&&(!right_wall(robot))) {
-                checked = image_recognition(robot, checked);
-            }
+//            if ((checked != null)&&(!right_wall(robot))) {
+//                checked = image_recognition(robot, checked);
+//            }
         }
         if (check_front_empty(robot)) {
             robot.forward(1);
             return checked;
         } else {
             robot.rotateLeft();
-            if ((checked != null)&&(!right_wall(robot))) {
-                checked = image_recognition(robot, checked);
-            }
+//            if ((checked != null)&&(!right_wall(robot))) {
+//                checked = image_recognition(robot, checked);
+//            }
         }
         if (check_front_empty(robot)) {
             robot.forward(1);

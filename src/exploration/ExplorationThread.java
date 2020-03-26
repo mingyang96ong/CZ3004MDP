@@ -39,6 +39,9 @@ public class ExplorationThread extends Thread{
 		}
 		stopThread();
 		if (ConnectionSocket.checkConnection()) {
+			String[] arr2 = r.getMDFString();
+			ConnectionSocket.getInstance().sendMessage("M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
+					"\"}]}");
 			ConnectionSocket.getInstance().sendMessage(Constant.END_TOUR);
 		}
 	}

@@ -19,6 +19,7 @@ public class ConnectionSocket {
     private PrintStream dout    = null;
     private static ConnectionSocket cs = null;
     private static AtomicBoolean connected = new AtomicBoolean(false);
+    private static final AtomicBoolean debug = new AtomicBoolean(false);
     
     private ConnectionSocket() {
     	
@@ -70,7 +71,9 @@ public class ConnectionSocket {
     		dout.flush();
 //    		output.writeUTF(message);
 //    		output.flush();
-    		System.out.println('"' + message + '"' + " sent successfully");
+    		if (debug.get()) {
+    			System.out.println('"' + message + '"' + " sent successfully");
+    		}
     	}
     	catch (IOException IOEx) {
     		System.out.println("IOException in ConnectionSocket sendMessage Function");
@@ -127,5 +130,13 @@ public class ConnectionSocket {
         		System.out.println("IOException in ConnectionSocket closeConnection Function");
         	}
     	}
+    }
+    
+    public static void setDebugTrue() {
+    	debug.set(true);
+    }
+    
+    public static boolean getDebug() {
+    	return debug.get();
     }
 }

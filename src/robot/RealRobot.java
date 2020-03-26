@@ -12,6 +12,7 @@ import sensor.RealSensor;
 public class RealRobot extends Robot{
 	private ConnectionSocket connectionSocket = ConnectionSocket.getInstance();
 	private static RealRobot r = null;
+	private static int numOfCount = 0;
 	
 	private RealRobot() {
 		super();
@@ -41,8 +42,8 @@ public class RealRobot extends Robot{
 		ArrayList<String> buffer = ConnectionManager.getBuffer();
 		while (!completed) {
 			s = connectionSocket.receiveMessage().trim();
-			System.out.println("In get sensor values");
-			System.out.println(s);
+//			System.out.println("In get sensor values");
+//			System.out.println(s);
 			if (sensorPattern.matcher(s).matches() || sensorPattern2.matcher(s).matches()) {
 				arr = s.split("\\|");
 				break;
@@ -80,6 +81,10 @@ public class RealRobot extends Robot{
 		ArrayList<String> buffer = ConnectionManager.getBuffer();
 		while (!completed) {
 			s = connectionSocket.receiveMessage().trim();
+			if (ConnectionSocket.getDebug()) {
+				System.out.println("In get sensor values");
+				System.out.println(s);
+			}
 			System.out.println("In get sensor values");
 			System.out.println(s);
 			if (sensorPattern.matcher(s).matches() || sensorPattern2.matcher(s).matches()) {
@@ -101,13 +106,6 @@ public class RealRobot extends Robot{
 			}
 		}
 		
-		System.out.print("The SensorValues received: \n");
-		for (int i = 0; i < 6; i ++) {
-			System.out.print(sensorValues[i]);
-			if (i != sensorValues.length - 1 ) {
-				System.out.print(" ");
-			}
-		}
 		
 		if (Integer.parseInt(arr[6]) == 1) {
 			System.arraycopy(arr, 0, sensorValues, 0, 6);
@@ -115,24 +113,42 @@ public class RealRobot extends Robot{
 			this.sensePosition[0] = x;
 			this.sensePosition[1] = y;
 			this.sensePosition[2] = getDirection();
-			String[] arr2 = this.getMDFString();
-			connectionSocket.sendMessage("M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
-					"\"}]}");
+			sendMDPString();
 			return true;
 		}
+		System.arraycopy(arr, 0, sensorValues, 0, 6);
+//		this.sensorValues = arr;
+		this.sensePosition[0] = x;
+		this.sensePosition[1] = y;
+		this.sensePosition[2] = getDirection();
+		sendMDPString();
 		return false;
 //		System.out.println("{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
 //				"\"}]}");
 		
 	}
+	
+	public void sendMDPString() {
+		if (this.numOfCount > 3) {
+			String[] arr2 = this.getMDFString();
+			connectionSocket.sendMessage("M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
+					"\"}]}");
+			this.numOfCount = 0;
+		}
+		else {
+			this.numOfCount++;
+		}
+	}
 
 	@Override
 	public void forward(int step) {
 		connectionSocket.sendMessage("W" + Integer.toString(step)+ "|");
+		this.x = checkValidX(this.x + Constant.SENSORDIRECTION[this.getDirection()][0]);
+		this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
 		toggleValid();
-		if (acknowledge()) {
-			this.x = checkValidX(this.x + Constant.SENSORDIRECTION[this.getDirection()][0]);
-			this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
+		if (!acknowledge()) {
+			this.x = checkValidX(this.x - Constant.SENSORDIRECTION[this.getDirection()][0]);
+			this.y = checkValidX(this.y - Constant.SENSORDIRECTION[this.getDirection()][1]);
 		}
 	}
 	

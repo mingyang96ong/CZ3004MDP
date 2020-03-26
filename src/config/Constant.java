@@ -17,8 +17,8 @@ public class Constant {
 	public static final double[][] SENSOR_RANGES = {{13.54, 21.46},
 													{10.0, 19.35},
 													{12, 21.555},
-													{12.85, 22.7, 34.5}, 
-													{13.65, 25.25, 38.5},
+													{12.85, 22.7}, 
+													{13.65, 25.25},
 													{19.4, 24.8, 32.15, 43, 51.75, 62.0}};
 	
 	// Unused sensor values
