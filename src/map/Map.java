@@ -290,58 +290,40 @@ public class Map{
 	
 	public String[] getMDFString() {
 		
-		String MDFBitStringPart1 = "11", MDFBitStringPart2 = "";
-		String temp1 = "", temp2 = "";
-		ArrayList <String> tempArr = new ArrayList<String> ();
-//		System.out.println("11");
+		StringBuilder MDFBitStringPart1 = new StringBuilder();
+		StringBuilder MDFBitStringPart2 = new StringBuilder();
+		
+		MDFBitStringPart1.append("11");
 		String[] MDFHexString = new String[] {"","",""};
+		
 		for (int j = 0; j < Constant.BOARDWIDTH; j++) {
 			for (int i = 0; i < Constant.BOARDHEIGHT; i++) {
 
 				if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[2])==0) { // Obstacle
-					MDFBitStringPart1 += "1";
-					MDFBitStringPart2 += "1";
-					temp1 += "1";
-					temp2 += "1";
+					MDFBitStringPart1.append("1");
+					MDFBitStringPart2.append("1");
 					
 				}
 				else if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) { // Unexplored
-					MDFBitStringPart1 += "0";
-					temp1 += "0";
+					MDFBitStringPart1.append("0");
 				}
 				else {
-					MDFBitStringPart1 += "1";
-					MDFBitStringPart2 += "0";
-					temp1 += "1";
-					temp2 += "0";
+					MDFBitStringPart1.append("1");
+					MDFBitStringPart2.append("0");
 				}
 				
 			}
-//			System.out.println(temp1);
-			tempArr.add(temp2);
-			temp1 = "";
-			temp2 = "";
 		}
-//		System.out.println("11\n");
-//		
-//		
-//		for (String s : tempArr) {
-//			System.out.println(s);
-//		}
-//		
-		MDFBitStringPart1 += "11";
+		MDFBitStringPart1.append("11");
 		
-		
-//		System.out.println(MDFBitStringPart2);
 		for (int i = 0; i < MDFBitStringPart1.length(); i += 4) {
 			MDFHexString[0] += Integer.toString(Integer.parseInt(MDFBitStringPart1.substring(i, i + 4), 2), 16);
 		}
-
+		
 		if ((MDFBitStringPart2.length() % 4) != 0){ // Only pad if the MDF Bit string is not a multiple of 4
-			MDFBitStringPart2 = "0".repeat(4 - (MDFBitStringPart2.length() % 4)) + MDFBitStringPart2 ;
+			MDFBitStringPart2.insert(0, "0".repeat(4 - (MDFBitStringPart2.length() % 4)));
 		}
-
-//		MDFBitStringPart2 = "0".repeat(304 - MDFBitStringPart2.length()) + MDFBitStringPart2;
+		
 		for (int i = 0; i < MDFBitStringPart2.length(); i += 4) {
 			MDFHexString[2] += Integer.toString(Integer.parseInt(MDFBitStringPart2.substring(i, i + 4), 2), 16);
 		}
@@ -354,6 +336,7 @@ public class Map{
 				}
 			}
 		}
+		
 		MDFHexString[1] = Integer.toString(length);
 		
 		

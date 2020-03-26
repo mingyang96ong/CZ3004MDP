@@ -250,7 +250,7 @@ public abstract class Robot {
 		int[] isObstacle = new int[] {-1, -1, -1, -1, -1, -1};
 
 		System.out.print("The SensorValues are: \n");
-		for (int i = 0; i < sensorValues.length; i ++) {
+		for (int i = 0; i < 6; i ++) {
 			System.out.print(sensorValues[i]);
 			if (i != sensorValues.length - 1 ) {
 				System.out.print(" ");
@@ -258,7 +258,7 @@ public abstract class Robot {
 		}
 		System.out.println("\n");
 		setGridDist(newMap);
-		for (int i = 0; i < sensorValues.length; i++) {
+		for (int i = 0; i < 6; i++) {
 			double value = Double.parseDouble(sensorValues[i]);
 			switch(i) {
 				case 0:
