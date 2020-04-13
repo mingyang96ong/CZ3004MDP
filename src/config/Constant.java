@@ -14,23 +14,20 @@ public class Constant {
 	public static final int STARTPOINTWIDTH = 3;
 	public static final int ENDPOINTHEIGHT = 3;
 	public static final int ENDPOINTWIDTH = 3;
-	public static final double[][] SENSOR_RANGES ={	{15.065, 24, 33.9}, 
-													{10.5, 19, 34.5},
-													{15, 25.5, 32.9}, 
-													{12, 22, 30}, 
-													{12, 22, 30},
-													{20, 27, 37, 46.5, 58.5, 70.5, 81}}; // LAB
 	
-
-	public static final int SHORTSENSORMINRANGE = 1; // This is in number of grid.
+	// You need to define your own range for your sensors
+	public static final double[][] SENSOR_RANGES = {{13.54, 21.46},
+													{10.0, 19.35},
+													{12, 21.555},
+													{12.85, 22.7}, 
+													{13.65, 25.25},
+													{19.4, 24.8, 32.15, 43, 51.75, 62.0}};
+	
+	// Sensor constants used only in Simulator
 	public static final int SHORTSENSORMAXRANGE = 3; // This is in number of grid.
 	public static final int SHORTSENSOROFFSET = 3; // This is in cm.
-	public static final int FARSENSORMINRANGE = 2; // This is in number of grid.
 	public static final int FARSENSORMAXRANGE = 7; // This is in number of grid.
 	public static final int FARSENSOROFFSET = 13; // This is in cm.
-
-	public static final int[][] SENSORPLACEMENTNORTH = new int[][]{{-1, -1}, {0, -1}, {1, -1},
-			{1, 1}, {1, -1}, {-1, -1}};
 
 	public static final int[][] SENSORDIRECTION = new int [][]{{0, -1},
 			{1, 0},
@@ -49,7 +46,8 @@ public class Constant {
 	public static final int DELAY = 15;
 
 
-	// For Generating Random Map for Simulator
+	// For Generating Random Map for Simulator. However, it does not guarantee a maneuverable map.
+	public static final boolean RANDOMMAP = false;
 	public static final int MAXOBSTACLECOUNT = 16;
 
 	// For UI Simulator Display
@@ -90,6 +88,7 @@ public class Constant {
 	public static final String ROBOTEIMAGEPATH = ".\\images\\robotE.png";
 	public static final String ROBOTSIMAGEPATH = ".\\images\\robotS.png";
 	public static final String ROBOTWIMAGEPATH = ".\\images\\robotW.png";
+	public static final String DIALOGICONIMAGEPATH = ".\\images\\letter-r.png";
 
 
 	public static final String[] GRIDIMAGEPATH = new String[]{UNEXPLOREDIMAGEPATH,
@@ -106,30 +105,21 @@ public class Constant {
 			ROBOTWIMAGEPATH};
 
 
-
 	// Avoid changing these values below
 	public static final int ROBOTHEIGHT = GRIDHEIGHT * 2; // By default, this should be twice of the grid height.
 	public static final int ROBOTWIDTH = GRIDWIDTH * 2; // By default, this should be twice of the grid width.
 	public static final int HEIGHT = BOARDHEIGHT * GRIDHEIGHT + MARGINTOP;
 	public static final int WIDTH = BOARDWIDTH * GRIDWIDTH + MARGINLEFT;
 
-//	// Values in PolicyIteration
-//	public static final double NORMALREWARD = -0.04;
-//	public static final double ENDREWARD = 100;
-//	public static final double WAYPOINTREWARD = ENDREWARD * 1.1; // 110
-//	public static final double OBSTACLEREWARD = -100 * ENDREWARD; // - 10 000
-//
-//	public static final double TURNCOST_NW = NORMALREWARD * 0.1; // -0.08
-//	//	public static final double TURNCOST_W = NORMALREWARD * 200; // -8
-//	public static final double TURNCOST_W = NORMALREWARD * 0.1; // -8
-
 	// Connection Constants
-//	public static final String IP_ADDRESS = "127.0.0.1";
-	public static final String IP_ADDRESS = "192.168.15.15";
+	public static final String IP_ADDRESS = "127.0.0.1";
+//	public static final String IP_ADDRESS = "192.168.15.15";
 	public static final int PORT = 8080;
+	public static final int BUFFER_SIZE = 512;
 
 	public static final String START_EXPLORATION = "ES|";
 	public static final String FASTEST_PATH = "FS|";
+	public static final String IMAGE_STOP = "I";
 	public static final String SEND_ARENA = "SendArena";
 	public static final String INITIALISING = "starting";
 	public static final String SETWAYPOINT = "waypoint";
@@ -137,11 +127,9 @@ public class Constant {
 	public static final String TURN_LEFT = "A|";
 	public static final String TURN_RIGHT = "D|";
 	public static final String CALIBRATE = "L|";
+	public static final String RIGHTALIGN = "B|";
 	public static final String END_TOUR = "N";
 
 	// Connection Acknowledge
-	public static final String FORWARD_ACK = "W D|";
-	public static final String LEFT_ACK = "A D|";
-	public static final String RIGHT_ACK = "D D|";
 	public static final String IMAGE_ACK = "D";
 }

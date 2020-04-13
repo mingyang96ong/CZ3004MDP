@@ -1,27 +1,30 @@
 package map;
-import java.util.ArrayList;
+
 import java.util.Random;
 
 import config.Constant;
 
 public class Map{
-		
+
 	// possibleGridLabels - 0 = unexplored, 1 = explored, 2 = obstacle, 3 = way point, 4 = start point and 5 = end point
 	// Note that grid is by x, y coordinate and this is opposite of the Array position in Java
 	
 	private String[][] grid = new String[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
 	private double[][] dist = new double[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
-	private int[][]    con  = new int[Constant.BOARDWIDTH][Constant.BOARDHEIGHT];
 	private int[] waypoint = new int[] {-1, -1};
+	private String[] MDPString = new String[3];
+	private boolean changed = true;
 	
 	
 	// Only used for simulation
 	public static Random r = new Random();
 	
+	// Initialise an unexplored map
 	public Map() {
 		resetMap();
 	}
 	
+	// Initialise map with grid String 2D array
 	public Map(String[][] grid) {
 		initializeMap(grid);
 	}
@@ -42,23 +45,6 @@ public class Map{
 	public Map copy() {
 		return new Map(this.grid);
 	}
-	
-//	public void print() {
-//		System.out.println("The current map is: \n");
-//
-//		for (int j = 0; j < Constant.BOARDHEIGHT; j++) {
-//			for (int i = 0; i < Constant.BOARDWIDTH; i++) {
-//				if (i != Constant.BOARDWIDTH - 1) {
-//					System.out.print(grid[i][j] + ", " );
-//				}
-//				else {
-//					System.out.print(grid[i][j]);
-//				}
-//			}
-//			System.out.println();
-//		}
-//		System.out.println("");
-//	}
 
 	public String print() {
 		String s = "";
@@ -101,8 +87,6 @@ public class Map{
 					}
 				}
 				else {
-//					s+=grid[i][j];
-//					System.out.print(grid[i][j]);
 					String temp = " ";
 					if(grid[i][j] == Constant.POSSIBLEGRIDLABELS[1]) {
 						temp = String.format("%3s|", " ");
@@ -138,7 +122,7 @@ public class Map{
 		}
 	}
 	
-	
+	// Creates an unexplored map
 	public void resetMap() {
 		
 		/* According to the algorithm_briefing_19S1(1).pdf, 
@@ -160,19 +144,23 @@ public class Map{
 					setDist(i, j, 0);
 				}
 				// Set the remaining grids unexplored
-				// Set dist to 999 to ensure all values will be overridden
+				// Set dist to 999999 to ensure all values will be overridden
 				else {
 					setGrid(i, j, Constant.POSSIBLEGRIDLABELS[0]);
-					setDist(i, j, 999);
+					setDist(i, j, 999999);
 				}
 			}
 		}
 	}
-
+	
+	// Set the distance of which the grid label is set
 	public void setDist(int x, int y, double value) {
-		dist[x][y] = value;
+		if ((x >= 0) && (x < Constant.BOARDWIDTH) && (y >= 0) && (y < Constant.BOARDHEIGHT)) {
+			dist[x][y] = value;
+		}
 	}
 	
+	// Set grid label 
 	public void setGrid(int x, int y, String command) {
 		
 		if (x < 0 || x >= Constant.BOARDWIDTH || y < 0 || y >= Constant.BOARDHEIGHT) {
@@ -181,6 +169,7 @@ public class Map{
 		
 		for (int i = 0; i < Constant.POSSIBLEGRIDLABELS.length; i++) {
 			if (command.toUpperCase().compareTo(Constant.POSSIBLEGRIDLABELS[i].toUpperCase()) == 0) {
+				changed = true;
 				if (i == 3) {
 					setWayPoint(x, y);
 				}
@@ -195,7 +184,8 @@ public class Map{
 		
 	}
 	
-	public void generateRandomMap() {
+	// Generate Random Map or Empty Map. Note that this does not guarantee a maneuverable map
+	public void generateMap(boolean rand) {
 		int k = 0;
 		
 		for (int i = 0; i< Constant.BOARDWIDTH; i++) {
@@ -215,44 +205,29 @@ public class Map{
 			}
 		}
 		
-		while (k <= Constant.MAXOBSTACLECOUNT) {
-			int x = r.nextInt(Constant.BOARDWIDTH);
-			int y = r.nextInt(Constant.BOARDHEIGHT);
-			if (getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[1]) == 0) {
-//				if (i == Constant.MAXOBSTACLECOUNT) {
-//					// Randomly set one way point
-//					setGrid(x, y, Constant.POSSIBLEGRIDLABELS[3]);
-//				}
-//				else {
-//					// Randomly set the obstacle
-//					setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
-//				}
-				setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
-				k++;
+		if (rand) {
+			while (k <= Constant.MAXOBSTACLECOUNT) {
+				int x = r.nextInt(Constant.BOARDWIDTH);
+				int y = r.nextInt(Constant.BOARDHEIGHT);
+				if (getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[1]) == 0) {
+					setGrid(x, y, Constant.POSSIBLEGRIDLABELS[2]);
+					k++;
+				}
+				
 			}
-			
 		}
-		
 		
 	}
 	
 	public void setWayPoint(int x, int y) {
 		if (x >= Constant.BOARDWIDTH - 1 || x <= 0 || y >= Constant.BOARDHEIGHT - 1 || y <= 0 
-			|| (getGrid(x, y) != null && getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[1]) != 0)) {
+			|| (getGrid(x, y) != null && getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[0]) != 0 && getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[1]) != 0)) {
 			return;
 		}
-		if (this.waypoint[0] == -1 && this.waypoint[1] == -1) {
-			grid[x][y] =  Constant.POSSIBLEGRIDLABELS[3];
-			this.waypoint[0] = x;
-			this.waypoint[1] = y;
-		}
-		else {
-			grid[this.waypoint[0]][this.waypoint[1]] =  Constant.POSSIBLEGRIDLABELS[1]; // This set to explored, assuming we set waypoint after exploration
-			grid[x][y] =  Constant.POSSIBLEGRIDLABELS[3];
-			this.waypoint[0] = x;
-			this.waypoint[1] = y;
-		}
-		
+		this.waypoint[0] = x;
+		this.waypoint[1] = y;
+		String s = "Successfully set the waypoint: " + x + "," + y;
+		System.out.println(s);
 	}
 	
 	public int[] getWayPoint() {
@@ -294,58 +269,48 @@ public class Map{
 		return true;
 	}
 	
+	// Check if the MDF string stored has changed and make the mdf string if it did change
 	public String[] getMDFString() {
+		if (changed == false) {
+			return this.MDPString;
+		}
 		
-		String MDFBitStringPart1 = "11", MDFBitStringPart2 = "";
-		String temp1 = "", temp2 = "";
-		ArrayList <String> tempArr = new ArrayList<String> ();
-		System.out.println("11");
+		changed = false;
+		
+		StringBuilder MDFBitStringPart1 = new StringBuilder();
+		StringBuilder MDFBitStringPart2 = new StringBuilder();
+		
+		MDFBitStringPart1.append("11");
 		String[] MDFHexString = new String[] {"","",""};
+		
 		for (int j = 0; j < Constant.BOARDWIDTH; j++) {
 			for (int i = 0; i < Constant.BOARDHEIGHT; i++) {
 
 				if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[2])==0) { // Obstacle
-					MDFBitStringPart1 += "1";
-					MDFBitStringPart2 += "1";
-					temp1 += "1";
-					temp2 += "1";
+					MDFBitStringPart1.append("1");
+					MDFBitStringPart2.append("1");
 					
 				}
 				else if (grid[j][i].compareTo(Constant.POSSIBLEGRIDLABELS[0]) == 0) { // Unexplored
-					MDFBitStringPart1 += "0";
-					temp1 += "0";
+					MDFBitStringPart1.append("0");
 				}
 				else {
-					MDFBitStringPart1 += "1";
-					MDFBitStringPart2 += "0";
-					temp1 += "1";
-					temp2 += "0";
+					MDFBitStringPart1.append("1");
+					MDFBitStringPart2.append("0");
 				}
 				
 			}
-			System.out.println(temp1);
-			tempArr.add(temp2);
-			temp1 = "";
-			temp2 = "";
 		}
-		System.out.println("11\n");
+		MDFBitStringPart1.append("11");
 		
-		
-		for (String s : tempArr) {
-			System.out.println(s);
-		}
-		
-		MDFBitStringPart1 += "11";
-		
-		
-		System.out.println(MDFBitStringPart2);
 		for (int i = 0; i < MDFBitStringPart1.length(); i += 4) {
 			MDFHexString[0] += Integer.toString(Integer.parseInt(MDFBitStringPart1.substring(i, i + 4), 2), 16);
 		}
-
-//		MDFBitStringPart2 += "0".repeat(8 - (MDFBitStringPart2.length() % 8));
-
-		MDFBitStringPart2 = "0".repeat(304 - MDFBitStringPart2.length()) + MDFBitStringPart2;
+		
+		if ((MDFBitStringPart2.length() % 4) != 0){ // Only pad if the MDF Bit string is not a multiple of 4
+			MDFBitStringPart2.insert(0, "0".repeat(4 - (MDFBitStringPart2.length() % 4)));
+		}
+		
 		for (int i = 0; i < MDFBitStringPart2.length(); i += 4) {
 			MDFHexString[2] += Integer.toString(Integer.parseInt(MDFBitStringPart2.substring(i, i + 4), 2), 16);
 		}
@@ -358,9 +323,10 @@ public class Map{
 				}
 			}
 		}
+		
 		MDFHexString[1] = Integer.toString(length);
 		
-		
+		this.MDPString = MDFHexString;
 		return MDFHexString;
 
 	}

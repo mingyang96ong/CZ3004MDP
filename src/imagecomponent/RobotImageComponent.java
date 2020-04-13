@@ -4,13 +4,13 @@ import config.Constant;
 public class RobotImageComponent extends ImageComponent{
 
 	private static final long serialVersionUID = 5944902400245422120L;
-
+	
+	// Create the image component for the robot
 	public RobotImageComponent(String path, int width, int height) {
 		super(path, width, height);
-		// TODO Auto-generated constructor stub
-		
 	}
 	
+	// Move in the direction by how many pixel, the smaller pixel will result in smoother movement
 	public void moveRight(int pixel) {
 		int x = (int) super.getLocation().getX();
 		int y = (int) super.getLocation().getY();

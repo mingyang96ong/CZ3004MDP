@@ -28,7 +28,7 @@ public class FastestPathThread extends Thread {
     public void run() {
     	running.set(true);
         FastestPath fp = new FastestPath();
-        fp.FastestPath(r, waypoint, speed);
+        fp.FastestPath(r, waypoint, Constant.END, speed, true, true);
         if (running.get()) {
         	completed.set(true);
         }

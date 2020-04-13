@@ -5,11 +5,9 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 
 import config.Constant;
-import exploration.ExplorationThread;
 import map.*;
 import imagecomponent.RobotImageComponent;
 import imagecomponent.ImageComponent;
-import sensor.Sensor;
 import sensor.SimulatorSensor;
 import simulator.AddJButtonActionListener;
 import timertask.MoveImageTask;
@@ -33,60 +31,55 @@ public class SimulatorRobot extends Robot{
 		 * Hence, initialiseRobotImage must run before SimulatorMap create the UI grid
 		 */
 		
+		// Place the robot image based on its coordinate in the grid
 		initialiseRobotImage(this.x, this.y);
+		
+		// Create an unexplored map for the robot
 		map = new Map();
+		
+		// Create the UI map for display with the robot map
 		smap = SimulatorMap.getInstance(frame, map.copy());
+		
+		// Add the buttons onto the UI
 		buttonListener = new AddJButtonActionListener(frame, this);
-		setDirection(direction);
+		
 	}
 	
+	// Takes the centre of the 3x3 grid where the robot is located
 	private void initialiseRobotImage(int x, int y) {
-		robotImage = new RobotImageComponent(Constant.ROBOTIMAGEPATH, Constant.ROBOTWIDTH, Constant.ROBOTHEIGHT);
+		robotImage = new RobotImageComponent(Constant.ROBOTIMAGEPATHS[this.getDirection()], Constant.ROBOTWIDTH, Constant.ROBOTHEIGHT);
 		frame.add(robotImage);
 		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
 	}
 	
+	
+	// Resets the robot position on the UI
 	public void resetRobotPositionOnUI() {
 		this.x = checkValidX(1);
 		this.y = checkValidY(1);
 		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
 		
 	}
-
+	
+	// Get the sensor values from the simulated environment
 	protected String[] getSensorValues() {
 		// FL, FM, FR, RB, RF, LF
 		String[] sensorValues = sensor.getAllSensorsValue(this.x, this.y, getDirection());
 		return sensorValues;
 	}
-
+	
+	// Set the robot direction and update the UI
 	public void setDirection(int direction) {
 		super.setDirection(direction);
 		robotImage.setImage(Constant.ROBOTIMAGEPATHS[direction]);
 	}
 	
+	// Update the map and display on the screen
 	public int[] updateMap() {
 		int[] isObstacle = super.updateMap();
 		smap.setMap(map);
 		return isObstacle;
 	}
-	
-	
-	
-//	public void moveUp() {
-//		// TODO Auto-generated method stub
-//		int step = 1;
-//		if (getDirection() == Constant.NORTH) {
-//			setDirection(Constant.NORTH);
-//			updateMap();
-//		}
-//		else {
-//			this.y = checkValidY(this.y - 1);
-//			for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
-//				t.schedule(new MoveImageTask(robotImage, "Up", 1), delay * (i + 1));
-//			}
-//			updateMap();
-//		}
-//	}
 	
 	public void setWaypoint(int x, int y) {
 		super.setWaypoint(x, y);
@@ -105,6 +98,7 @@ public class SimulatorRobot extends Robot{
 		}
 	}
 	
+	// Just for displaying the true map in the simulator
 	public String toggleMap() {
 		Map temp = sensor.getTrueMap();
 		if (Map.compare(temp, smap.getMap())) {
@@ -116,6 +110,8 @@ public class SimulatorRobot extends Robot{
 			return "simulated";
 		}
 	}
+	
+	// Reset the robot
 	public void restartRobot() {
 		this.x = checkValidX(0);
 		this.y = checkValidY(0);
@@ -125,7 +121,8 @@ public class SimulatorRobot extends Robot{
 		this.map = new Map();
 		smap.setMap(map);
 	}
-
+	
+	// Move the robot to move forward on the screen as well
 	@Override
 	public void forward(int step) {
 		String s;
@@ -152,7 +149,34 @@ public class SimulatorRobot extends Robot{
 			t.schedule(new MoveImageTask(robotImage, s, 1), delay * (i + 1));
 		}
 	}
-
+	
+	// Move the robot backward. Only used in real run in case of failed movement from Ardurino
+	public void backward(int step) {
+		String s;
+		this.x = checkValidX(this.x + Constant.SENSORDIRECTION[(this.getDirection()+2)%4][0]); // Move back without turning
+		this.y = checkValidX(this.y + Constant.SENSORDIRECTION[(this.getDirection()+2)%4][1]);
+		switch (this.getDirection()) {
+			case Constant.NORTH:
+				s = "Up";
+				break;
+			case Constant.EAST:
+				s = "Right";
+				break;
+			case Constant.SOUTH:
+				s = "Down";
+				break;
+			case Constant.WEST:
+				s = "Left";
+				break;
+			default:
+				s = "Error";
+		}
+		toggleValid();
+		for (int i = 0; i < step * Constant.GRIDWIDTH; i++) {
+			t.schedule(new MoveImageTask(robotImage, s, 1), delay * (i + 1));
+		}
+	}
+	
 	@Override
 	public void rotateRight() {
 		// In the actual robot, this will also send the command to rotate right
@@ -165,17 +189,21 @@ public class SimulatorRobot extends Robot{
 		setDirection((this.getDirection() + 3) % 4);
 	}
 	
+	// Set the map of the robot
 	public void setMap(Map map) {
 		this.map = map;
+		smap.setMap(map);
 	}
 	
+	// Restart the timer so it does not make the image move
 	public void restartRobotUI() {
 		t.cancel();
 		t.purge();
 		t = new Timer();
 	}
-
-	public void captureImage(int[][] image_pos) {
+	
+	// Simulate the delay in capturing image
+	public boolean captureImage(int[][] image_pos) {
 		buttonListener.enableLabel("image_cap");
 		try {
 			TimeUnit.SECONDS.sleep(2);
@@ -184,8 +212,10 @@ public class SimulatorRobot extends Robot{
 			System.out.println(e.getMessage());
 		}
 		buttonListener.disableLabel("image_cap");
+		return false;
 	}
-
+	
+	// Simulate the delay in calibration
 	public void calibrate() {
 		buttonListener.enableLabel("calibrating");
 		try {
@@ -195,5 +225,21 @@ public class SimulatorRobot extends Robot{
 			System.out.println(e.getMessage());
 		}
 		buttonListener.disableLabel("calibrating");
+	}
+	
+	// Simulate the delay in right_align
+	public void right_align() {
+		buttonListener.enableLabel("calibrating");
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+		}
+		buttonListener.disableLabel("calibrating");
+	}
+	
+	public Map getTrueMap(){
+		return sensor.getTrueMap();
 	}
 }

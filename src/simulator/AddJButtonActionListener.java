@@ -1,4 +1,5 @@
 package simulator;
+
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 
 import astarpathfinder.AStarPathFinder;
 import config.Constant;
+import connection.ConnectionSocket;
 import exploration.ExplorationThread;
 import robot.SimulatorRobot;
 import map.Map;
@@ -50,6 +52,7 @@ public class AddJButtonActionListener implements ActionListener{
 	private boolean image_recognition_chosen = false;
 
 
+	// This constructor initialises all the buttons
 	public AddJButtonActionListener(JFrame frame, SimulatorRobot r) {
 		this.frame = frame;
 		this.r = r;
@@ -320,6 +323,11 @@ public class AddJButtonActionListener implements ActionListener{
 		Labels.put("speed_label", speed_label);
 		Labels.put("image_cap", image_cap);
 		Labels.put("calibrating", calibrating);
+		
+		// Disable all button during the real runs as they are not meant to work for the Real Run
+		if (ConnectionSocket.checkConnection()) {
+			this.disableButtons();
+		}
 	}
 
 	private String[] create_seq_array(int min, int max){
@@ -331,67 +339,76 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 		return arr;
 	}
-
+	
+	// Reads all the txt file from the directory sample arena. Returns the array of the file name in the directory.
 	public String[] getArenaMapFileNames() {
 		File folder = new File("./sample arena");
 		filePath= new HashMap<String, String>();
 		for (File file: folder.listFiles()) {
 			if (file.getName().endsWith(".txt")) {
-//				System.out.println(file.getName());
 				filePath.put(file.getName().substring(0, file.getName().lastIndexOf(".txt")), file.getAbsolutePath());
 			}
 		}
-//		System.out.println(filePath.size());
 		String[] fileName = new String[filePath.size()];
 		int i = filePath.size()-1;
-//		System.out.println("Printing key....");
+
 		for (String key: filePath.keySet()) {
-//			if (i == 0) {
-//				fileName[i] = "Choose a map to load";
-//				break;
-//			}
-//			System.out.println(key);
 			fileName[i] = key;
 			i--;
 		}
 		Arrays.sort(fileName);
 		return fileName;
 	}
-
+	
+	// Convert the sample arena text file into map and return the map
 	public Map getGridfromFile(String path, String fileName, String[][] grid) throws Exception, FileNotFoundException, IOException{
 		FileReader fr = new FileReader(path);
 		BufferedReader br = new BufferedReader(fr);
 		String line = br.readLine();
 		int heightCount = 0;
+		
 		while (line != null) {
 			line = line.strip().toUpperCase();
-//			System.out.println(line);
+			
+			// Check for invalid map
 			if (line.length() != Constant.BOARDWIDTH) {
 				throw new Exception("The format of the " + fileName + " does not match the board format.");
 			}
 			for (int i = 0; i < line.length(); i++) {
 				switch(line.charAt(i)) {
-					case 'S':
+					case 'S': // Represent start grid
 						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[4];
 						break;
-					case 'U':
+						
+					case 'U': // Represent empty grid as end grid already used 'E'
 						// Here, we set to explored instead of Unexplored
 						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[1];
 						break;
-					case 'W':
-						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[3];
-						break;
-					case 'E':
+						
+//					case 'W':
+						/* We do not allow waypoint setting as there may be ambiguous situation 
+						 * 
+						 * For example, if user accidentally set wrongly, what should be the grid string after it resets as one
+						 * map should only have one waypoint?
+						 * 
+						 * This might affect the correctness of our mdf string.*/
+//						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[3];
+//						break;
+						
+					case 'E': // Represent end grid
 						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[5];
 						break;
-					case 'O':
+						
+					case 'O': // Represent obstacle grid
 						grid[i][heightCount] = Constant.POSSIBLEGRIDLABELS[2];
 						break;
+						
 					default:
-						throw new Exception("There is unrecognised character symbol in " + fileName + ".");
+						throw new Exception("There is unrecognised character symbol in " + fileName + ".\n" +
+					fileName + " failed to load into the program.");
 				}
 			}
-//			System.out.println(line);
+
 			heightCount++;
 			line = br.readLine();
 		}
@@ -400,15 +417,16 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 		br.close();
 		loadedMap = new Map(grid);
+		System.out.println(fileName + " has loaded successfully.");
 		return loadedMap;
 	}
-
-	public void disableButtons() {
+	
+	private void disableButtons() {
 		for (int i = 0; i < Buttons.size(); i++){
 			Buttons.get(i).setEnabled(false);
 		}
 	}
-
+	
 	public void enableButtons() {
 		for (int i = 0; i < Buttons.size(); i++){
 			Buttons.get(i).setEnabled(true);
@@ -422,11 +440,12 @@ public class AddJButtonActionListener implements ActionListener{
 	public void enableLabel(String label) {
 		Labels.get(label).setVisible(true);
 	}
-
+	
+	// Define all the action of all the button
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
-		// TODO Auto-generated method stub
+
 		if (action.equals("Right")) {
 			System.out.println("Right clicked");
 			disableButtons();
@@ -541,17 +560,24 @@ public class AddJButtonActionListener implements ActionListener{
 
 			disableLabel("MDF_label");
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
+			
 		}
 
 		if (action.contentEquals("Fastest Path")) {
+			
 			if (Arrays.equals(waypoint_chosen, new int[] {-1, -1})) {
 				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
 			}
-			FastestPathThread.getInstance(r, waypoint_chosen, speed_chosen);
+			int [] waypoint = r.getWaypoint();
+			if (!FastestPathThread.getRunning()) {
+				FastestPathThread.getInstance(r, waypoint, speed_chosen);
+			}
 		}
 
 		if (action.contentEquals("Exploration")) {
-			ExplorationThread.getInstance(r, time_chosen, percentage_chosen, speed_chosen, image_recognition_chosen);
+			if (!ExplorationThread.getRunning()) {
+				ExplorationThread.getInstance(r, time_chosen, percentage_chosen, speed_chosen, image_recognition_chosen);
+			}
 		}
 
 		if (action.contentEquals("Set x coordinate")) {
@@ -564,12 +590,8 @@ public class AddJButtonActionListener implements ActionListener{
 			else {
 				waypoint_chosen[0] = Integer.parseInt(selected_waypoint_x);
 			}
+			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
 
-			if (!astar.is_valid(r, waypoint_chosen)) {
-				enableLabel("invalid_waypoint");
-			} else {
-				disableLabel("invalid_waypoint");
-			}
 		}
 
 		if (action.contentEquals("Set y coordinate")) {
@@ -582,11 +604,8 @@ public class AddJButtonActionListener implements ActionListener{
 			else {
 				waypoint_chosen[1] = Integer.parseInt(selected_waypoint_y);
 			}
-			if (!astar.is_valid(r, waypoint_chosen)) {
-				enableLabel("invalid_waypoint");
-			} else {
-				disableLabel("invalid_waypoint");
-			}
+			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+
 		}
 
 		if (action.contentEquals("Set time limit")) {

@@ -1,6 +1,7 @@
 package connection;
 import java.util.Scanner;
 
+// This is used to test your connection between PC and Rpi
 public class Client {
 	public static void main(String arg[]) {
 		

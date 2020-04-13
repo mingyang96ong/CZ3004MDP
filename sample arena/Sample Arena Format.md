@@ -13,12 +13,10 @@
 
    c. ***E*** represents endpoint grid
 
-   d. ***W*** represents waypoint grid
-
    Below is the sample format:
 
    *SSSUUUUUUUOUUUUOUUUU
-   SSSUUUUUUUOUUUUOUUUU
+SSSUUUUUUUOUUUUOUUUU
    SSSUUUUUUUOUUUUOUUUU
    UUUUUUUUUOOUUUUOOUUU
    UUUUUUUUUUUUUUUUUUUU
@@ -27,9 +25,22 @@
    OUUUUOUUUUUUOOOUUUUU
    UUUUOOUUUUUUOOOUUUUU
    UUUUUUUUUUUUUUUUUUUU
-   UUUWUUUUUUUUUUUUUUUU
+   UUUUUUUUUUUUUUUUUUUU
    UUUUUUUUUUUUUUUUUEEE
    UUUUUUUUUUUUUUOUUEEE
    UUUUUOOOUUUUUUOUUEEE*
-
+   
 5. Please save the sample arena file in the **"sample arena" folder** in **'txt' file format**.
+
+<hr><h4>Important note</h4>
+
+The program will only display error message in the console when there is an invalid format of the arena text file. Please check the console if there is any error.
+
+
+
+
+
+
+
+
+

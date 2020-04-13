@@ -1,13 +1,17 @@
 package connection;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import config.Constant;
 
 public class Server {
+	// This server basically test communication for the main system
 	public static void main(String args[]) {
 		ConnectionServer server = ConnectionServer.getInstance();
 		String message = "";
+		String sensorMessage = "";
+		boolean acknowledge = true;
 		Scanner sc = new Scanner (System.in);
 		boolean exploring = false, completed = false, fastestpath = false;
 		int pos[] = new int[] {1,1};
@@ -28,48 +32,58 @@ public class Server {
 			}
 			while (exploring || fastestpath) {
 				message = server.receiveMessage();
+				acknowledge = true;
 				System.out.println("Message received: " + message);
 				Pattern p = Pattern.compile("W\\d+[|]");
 
 				if (p.matcher(message).matches()) {
-					server.sendMessage(Constant.FORWARD_ACK);
 					pos[0] = pos[0] + Constant.SENSORDIRECTION[direction][0];
 					pos[1] = pos[1] + Constant.SENSORDIRECTION[direction][1];
+					System.out.println(pos[0] + ", " + pos[1]);
+					
+//						System.out.println("Enter sensor value:");
+//						message = sc.nextLine();
 				}
 				else if (message.equals(Constant.TURN_LEFT)) {
-					server.sendMessage(Constant.LEFT_ACK);
 					direction = (direction + 3)%4;
 				}
 				else if (message.equals(Constant.TURN_RIGHT)) {
-					server.sendMessage(Constant.RIGHT_ACK);
 					direction = (direction + 1)%4;
 				}
-				else if(message.equals(Constant.SENSE_ALL)) {
+				else if(message.equals(Constant.SENSE_ALL) || message.equals(Constant.CALIBRATE) || message.equals(Constant.RIGHTALIGN)) {
 					System.out.println(pos[0] + ", " + pos[1]);
-					if ((pos[0] == 1 && pos[1] == 11) || (pos[0] == 16 && pos[1] == 13) || (pos[0] == 18 && pos[1] == 3) || (pos[0] == 3 && pos[1] == 1)) {
-						message = "23.0|23.0|23.0|3.0|3.0|84.0";
-					}
-					else if ((pos[0] == 1 && pos[1] == 12) || (pos[0] == 17 && pos[1] == 13) || (pos[0] == 18 && pos[1] == 2) || (pos[0] == 2 && pos[1] == 1)){
-						message = "13.0|13.0|13.0|3.0|3.0|84.0";
-					}
-					else if (((pos[0] == 1 && pos[1] == 13) || (pos[0] == 18 && pos[1] == 13) || (pos[0] == 18 && pos[1] == 1)) && count < 1){
-						message = "3.0|3.0|3.0|3.0|3.0|84.0";
-						count++;
-					}
-					else {
-						message = "84.0|84.0|84.0|3.0|3.0|84.0";
-						count = 0;
-					}
-//						System.out.println("Enter sensor value:");
-//						message = sc.nextLine();
-					server.sendMessage(message);
 				}
 				else if (message.equals(Constant.END_TOUR)) {
 					exploring = false;
 					fastestpath = false;
+					acknowledge = false;
 				}
 				else {
+					acknowledge = false;
 					System.out.println("Error.");
+				}
+				
+				if (acknowledge) {
+					if ((pos[0] == 1 && pos[1] == 12) || (pos[0] == 17 && pos[1] == 13) || (pos[0] == 18 && pos[1] == 2) || (pos[0] == 2 && pos[1] == 1)){
+						sensorMessage = "" + Constant.SENSOR_RANGES[0][1] + "|" + Constant.SENSOR_RANGES[1][1] + "|" + Constant.SENSOR_RANGES[2][1] + 
+								"|" + Constant.SENSOR_RANGES[3][1] + "|" + Constant.SENSOR_RANGES[4][1] + "|" + Constant.SENSOR_RANGES[5][1] + "|1";
+					}
+					else if (((pos[0] == 1 && pos[1] == 13) || (pos[0] == 18 && pos[1] == 13) || (pos[0] == 18 && pos[1] == 1)) && count < 1){
+						sensorMessage = "" + Constant.SENSOR_RANGES[0][0] + "|" + Constant.SENSOR_RANGES[1][0] + "|" + Constant.SENSOR_RANGES[2][0]
+								+ "|" + Constant.SENSOR_RANGES[3][0] + "|" + Constant.SENSOR_RANGES[4][0] + "|" + Constant.SENSOR_RANGES[5][0] + "|1";
+						count++;
+					}
+					else {
+						sensorMessage = "84.0|84.0|84.0|3.0|3.0|84.0|1";
+						count = 0;
+					}
+					try {
+						TimeUnit.SECONDS.sleep(1);
+					}
+					catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+					server.sendMessage(sensorMessage);
 				}
 			}
 		}
