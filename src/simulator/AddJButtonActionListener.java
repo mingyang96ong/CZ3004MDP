@@ -447,7 +447,7 @@ public class AddJButtonActionListener implements ActionListener{
 		String action = e.getActionCommand();
 
 		if (action.equals("Right")) {
-			System.out.println("Right clicked");
+			System.out.println("Rotate right clicked");
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
 				enableLabel("robotView");
@@ -458,7 +458,7 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 
 		if (action.equals("Left")) {
-			System.out.println("Left clicked");
+			System.out.println("Rotate left clicked");
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
 				enableLabel("robotView");
@@ -469,7 +469,7 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 
 		if (action.equals("Up")) {
-			System.out.println("Up clicked");
+			System.out.println("Forward clicked");
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
 				enableLabel("robotView");
@@ -503,8 +503,14 @@ public class AddJButtonActionListener implements ActionListener{
 		if (action.contentEquals("Toggle Map")) {
 			disableButtons();
 			if (r.toggleMap().compareTo("robot") == 0) {
-				enableLabel("robotView");
-				disableLabel("simulatedMap");
+				if (r.checkMap().equals("The maps are the same!") && Labels.get("robotView").isVisible()){
+					disableLabel("robotView");
+					enableLabel("simulatedMap");
+				}
+				else {
+					enableLabel("robotView");
+					disableLabel("simulatedMap");
+				}
 			}
 			else {
 				disableLabel("robotView");
@@ -569,14 +575,21 @@ public class AddJButtonActionListener implements ActionListener{
 				r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
 			}
 			int [] waypoint = r.getWaypoint();
-			if (!FastestPathThread.getRunning()) {
+			if (!FastestPathThread.getRunning() && ExplorationThread.getCompleted()) {
 				FastestPathThread.getInstance(r, waypoint, speed_chosen);
+				disableButtons();
+				t.schedule(new EnableButtonTask(this), 1);
+			}
+			else if (!ExplorationThread.getCompleted()) {
+				System.out.println("You need to run exploration first.");
 			}
 		}
 
 		if (action.contentEquals("Exploration")) {
 			if (!ExplorationThread.getRunning()) {
 				ExplorationThread.getInstance(r, time_chosen, percentage_chosen, speed_chosen, image_recognition_chosen);
+				disableButtons();
+				t.schedule(new EnableButtonTask(this), 1);
 			}
 		}
 
@@ -635,7 +648,6 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 
 		if (action.contentEquals("MDF String")) {
-			r.setMap(loadedMap);
 			MDFString = r.getMDFString();
 			System.out.println(MDFString[0]);
 			System.out.println(MDFString[2]);

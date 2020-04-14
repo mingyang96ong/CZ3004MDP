@@ -57,6 +57,7 @@ public class SimulatorRobot extends Robot{
 	public void resetRobotPositionOnUI() {
 		this.x = checkValidX(1);
 		this.y = checkValidY(1);
+		toggleValid();
 		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
 		
 	}
@@ -239,7 +240,4 @@ public class SimulatorRobot extends Robot{
 		buttonListener.disableLabel("calibrating");
 	}
 	
-	public Map getTrueMap(){
-		return sensor.getTrueMap();
-	}
 }

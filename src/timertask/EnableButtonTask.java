@@ -1,6 +1,9 @@
 package timertask;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
+import astarpathfinder.FastestPathThread;
+import exploration.ExplorationThread;
 import simulator.AddJButtonActionListener;
 
 public class EnableButtonTask extends TimerTask{
@@ -10,6 +13,14 @@ public class EnableButtonTask extends TimerTask{
 		this.AL = AL;
 	}
 	public void run() {
+		while (ExplorationThread.getRunning() || FastestPathThread.getRunning()) {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			}
+			catch(Exception e) {
+				System.out.println("Exception in EnableButtonTask.java");
+			}
+		}
 		AL.enableButtons();
 	}
 }

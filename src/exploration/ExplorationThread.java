@@ -17,7 +17,7 @@ public class ExplorationThread extends Thread{
 	private static final AtomicBoolean completed = new AtomicBoolean(false);
 	private static ExplorationThread thread = null;
 
-	public ExplorationThread(Robot r, int time, int percentage, int speed, boolean image_recognition) {
+	private ExplorationThread(Robot r, int time, int percentage, int speed, boolean image_recognition) {
 		super("ExplorationThread");
 		this.r = r;
 		this.time = time;

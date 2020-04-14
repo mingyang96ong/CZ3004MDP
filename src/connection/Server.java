@@ -77,12 +77,12 @@ public class Server {
 						sensorMessage = "84.0|84.0|84.0|3.0|3.0|84.0|1";
 						count = 0;
 					}
-					try {
-						TimeUnit.SECONDS.sleep(1);
-					}
-					catch (Exception e) {
-						System.out.println(e.getMessage());
-					}
+//					try {
+//						TimeUnit.MILLISECONDS.sleep(1000);
+//					}
+//					catch (Exception e) {
+//						System.out.println(e.getMessage());
+//					}
 					server.sendMessage(sensorMessage);
 				}
 			}

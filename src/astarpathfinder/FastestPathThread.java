@@ -17,7 +17,7 @@ public class FastestPathThread extends Thread {
     private static final AtomicBoolean completed = new AtomicBoolean(false);
     private static FastestPathThread thread = null;
 
-    public FastestPathThread(Robot r, int[] waypoint, int speed) {
+    private FastestPathThread(Robot r, int[] waypoint, int speed) {
         super("FastestPathThread");
         this.r = r;
         this.speed = speed;

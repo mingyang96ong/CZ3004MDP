@@ -268,13 +268,13 @@ public class Exploration {
         int[][] checked = checked_obstacles;
 //        robot.updateMap();
 
-//        if (!connection.ConnectionSocket.checkConnection()) {
-//            try {
-//                TimeUnit.SECONDS.sleep(speed);
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
+        if (!connection.ConnectionSocket.checkConnection()) {
+            try {
+                TimeUnit.SECONDS.sleep(speed);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
         if (check_right_empty(robot)) {
             robot.rotateRight();
