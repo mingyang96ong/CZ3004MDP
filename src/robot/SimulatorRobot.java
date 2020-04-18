@@ -1,4 +1,5 @@
 package robot;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 
@@ -83,8 +84,11 @@ public class SimulatorRobot extends Robot{
 	}
 	
 	public void setWaypoint(int x, int y) {
+		int [] old_waypoint = this.getWaypoint().clone();
 		super.setWaypoint(x, y);
-		smap.setMap(map);
+		if (!Arrays.equals(old_waypoint, this.getWaypoint())) {
+			smap.setMap(map);
+		}
 	}
 	
 	

@@ -604,6 +604,10 @@ public class AddJButtonActionListener implements ActionListener{
 				waypoint_chosen[0] = Integer.parseInt(selected_waypoint_x);
 			}
 			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
+			if (Arrays.equals(r.getWaypoint(), waypoint_chosen)){
+				enableLabel("robotView");
+				disableLabel("simulatedMap");
+			}
 
 		}
 
@@ -618,7 +622,10 @@ public class AddJButtonActionListener implements ActionListener{
 				waypoint_chosen[1] = Integer.parseInt(selected_waypoint_y);
 			}
 			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
-
+			if (Arrays.equals(r.getWaypoint(), waypoint_chosen)){
+				enableLabel("robotView");
+				disableLabel("simulatedMap");
+			}
 		}
 
 		if (action.contentEquals("Set time limit")) {

@@ -43,7 +43,9 @@ public class Map{
 	}
 	
 	public Map copy() {
-		return new Map(this.grid);
+		Map m = new Map(this.grid);
+		m.setWayPoint(this.waypoint[0], this.waypoint[1]);
+		return m;
 	}
 
 	public String print() {

@@ -51,7 +51,8 @@ public class FastestPath {
     }
 
     private void realFPmove(int[] path) {
-
+    	
+    	// Append all the movement message into one full string and send at once
         StringBuilder sb = new StringBuilder();
         int count = 0;
         for (int direction : path) {
@@ -84,7 +85,8 @@ public class FastestPath {
 
     private void move(Robot robot, int[] path, int speed) {
         Exploration ex = new Exploration();
-
+        
+        // Move the robot based on the path
         for (int direction : path) {
             if (!connection.ConnectionSocket.checkConnection()) {
                 try {
