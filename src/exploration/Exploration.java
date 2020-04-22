@@ -324,11 +324,12 @@ public class Exploration {
 //        int[] sensors = robot.updateMap();
         int x = robot.getPosition()[0];
         int y = robot.getPosition()[1];
-        int[] default_pos = new int[] {-1, -1, -1};
+        int[] default_pos = new int[] {-1, -1, -1}; // x , y and direction of the robot
         int[][] obs_pos = new int[][] {default_pos, default_pos, default_pos};
         boolean take_pic = false;
         int direction = robot.getDirection();
-
+        
+        // Checking the 9x9 grid on the right of the robot based on where it is facing
         switch (direction) {
             case Constant.NORTH:
 //                obs_pos = new int[][] {{x+1+sensors[0], y+1, Constant.NORTH},
@@ -380,6 +381,7 @@ public class Exploration {
                 break;
         }
 
+        // Check if they are the default values or wall or checked obstacles
         for (int k=0; k<3; k++) {
             if (!within_map(obs_pos[k][0], obs_pos[k][1])) {
                 obs_pos[k] = default_pos;
@@ -393,7 +395,9 @@ public class Exploration {
             }
         }
 
+        
         for (int m=0; m<3; m++) {
+        	// There is an obstacle
             if (!(Arrays.equals(obs_pos[m], default_pos))) {
                 if (check_front_empty(robot)) {
                     checked_obstacles[0][0] = m + 1;

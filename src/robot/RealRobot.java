@@ -35,6 +35,7 @@ public class RealRobot extends Robot{
 			frame.setSize(Constant.MARGINLEFT + Constant.GRIDWIDTH * Constant.BOARDWIDTH + 100, Constant.MARGINTOP + Constant.GRIDHEIGHT * Constant.BOARDHEIGHT + 100);
 			sr = new SimulatorRobot(frame, this.x, this.y, this.getDirection());
 			frame.setVisible(true);
+			sr.displayMessage("Disabled all buttons for the real run.", 2);
 		}
 	}
 	
@@ -56,6 +57,9 @@ public class RealRobot extends Robot{
 		String s;
 		String[] arr = null;
 		connectionSocket.sendMessage(Constant.SENSE_ALL);
+		if (sr != null) {
+			sr.displayMessage("Sent message: " + Constant.SENSE_ALL, 1);
+		}
 		boolean completed = false;
 
 		while (!completed) {
@@ -87,8 +91,9 @@ public class RealRobot extends Robot{
 				System.out.println("In get sensor values");
 				System.out.println(s);
 			}
-			System.out.println("In get sensor values");
-			System.out.println(s);
+			if (sr != null) {
+				sr.displayMessage("Received Message: " + s, 1);
+			}
 			if (sensorPattern.matcher(s).matches() || sensorPattern2.matcher(s).matches()) {
 				arr = s.split("\\|");
 				break;
@@ -122,6 +127,10 @@ public class RealRobot extends Robot{
 			String[] arr2 = this.getMDFString();
 			connectionSocket.sendMessage("M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
 					"\"}]}");
+			if (sr != null) {
+				sr.displayMessage("Sent message: M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
+					"\"}]}", 1);
+			}
 			this.numOfCount = 0;
 		}
 		else {
@@ -137,6 +146,7 @@ public class RealRobot extends Robot{
 		this.y = checkValidX(this.y + Constant.SENSORDIRECTION[this.getDirection()][1]);
 		if (sr != null) {
 			sr.forward(step);
+			sr.displayMessage("Sent message: W" + Integer.toString(step)+ "|", 1);
 		}
 		toggleValid();
 		if (!acknowledge()) {
@@ -155,6 +165,7 @@ public class RealRobot extends Robot{
 		setDirection((this.getDirection() + 1) % 4);
 		if (sr != null) {
 			sr.rotateRight();
+			sr.displayMessage("Sent message: " + Constant.TURN_RIGHT, 1);
 		}
 		acknowledge();
 	}
@@ -166,6 +177,7 @@ public class RealRobot extends Robot{
 		setDirection((this.getDirection() + 3) % 4);
 		if (sr != null) {
 			sr.rotateLeft();
+			sr.displayMessage("Sent message: " + Constant.TURN_LEFT, 1);
 		}
 		acknowledge();
 	}
@@ -174,7 +186,12 @@ public class RealRobot extends Robot{
 	public boolean captureImage(int[][] image_pos) {
 		connectionSocket.sendMessage("C["+ image_pos[0][1] + "," + image_pos[0][0] + "|" + image_pos[1][1] + "," + image_pos[1][0] +
 				"|" + image_pos[2][1] + "," + image_pos[2][0] + "]"); // This is left middle right. x and y is inverted in Real Run.
-
+		
+		if (sr != null) {
+			sr.captureImage(image_pos);
+			sr.displayMessage("Sent message: C["+ image_pos[0][1] + "," + image_pos[0][0] + "|" + image_pos[1][1] + "," + image_pos[1][0] +
+				"|" + image_pos[2][1] + "," + image_pos[2][0] + "]", 1);
+		}
 		boolean completed = false;
 		String s;
 		ArrayList <String> buffer = ConnectionManager.getBuffer();
@@ -214,12 +231,18 @@ public class RealRobot extends Robot{
 	// Send the calibrate command
 	public void calibrate() {
 		connectionSocket.sendMessage(Constant.CALIBRATE);
+		if (sr != null) {
+			sr.displayMessage("Sent message: " + Constant.CALIBRATE, 1);
+		}
 		acknowledge();
 	}
 
 	// Send the right align command
 	public void right_align() {
 		connectionSocket.sendMessage(Constant.RIGHTALIGN);
+		if (sr != null) {
+			sr.displayMessage("Sent message: " + Constant.RIGHTALIGN, 1);
+		}
 		acknowledge();
 	}
 	
@@ -232,5 +255,14 @@ public class RealRobot extends Robot{
 			sr.setMap(this.getMap());
 		}
 		return isObstacle;
+	}
+	
+	public void displayMessage(String s, int mode) {
+		if (sr != null) {
+			sr.displayMessage(s, mode);
+		}
+		else {
+			System.out.println(s);
+		}
 	}
 }

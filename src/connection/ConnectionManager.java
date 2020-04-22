@@ -86,10 +86,9 @@ public class ConnectionManager extends Thread{
 		
 		// Check if received a valid message
 		while (!complete) {
-			System.out.println("Waiting for orders");
+			robot.displayMessage("Waiting for orders", 2);
 			s = this.connectionSocket.receiveMessage().trim();
-			System.out.print("Received message: ");
-			System.out.println(s);
+			robot.displayMessage("Received message: " + s, 2);
 			
 			// Set the robot position only if the correct message is received and the program is not running exploration and fastest path
 			if (!ExplorationThread.getRunning() && !FastestPathThread.getRunning() && s.contains(Constant.INITIALISING)) {
@@ -105,7 +104,7 @@ public class ConnectionManager extends Thread{
 					robot.initialise(Integer.parseInt(arr[1]), Integer.parseInt(arr[0]), (Integer.parseInt(arr[2]) + 1 ) % 4);
 					s = "Successfully set the robot's position: " + Integer.parseInt(arr[0]) + 
 						"," + Integer.parseInt(arr[1]) + "," + Integer.parseInt(arr[2]);
-					System.out.println(s);
+					robot.displayMessage(s, 2);
 				}
 			}
 			
@@ -156,7 +155,7 @@ public class ConnectionManager extends Thread{
 					robot.setWaypoint(Integer.parseInt(arr[1]), Integer.parseInt(arr[0]));
 					s = "Successfully received the waypoint: " + Integer.parseInt(arr[0]) + 
 							"," + Integer.parseInt(arr[1]);
-					System.out.println(s);
+					robot.displayMessage(s, 2);
 				}
 			}
 			
@@ -165,6 +164,8 @@ public class ConnectionManager extends Thread{
 				String[] arr = robot.getMDFString();
 				connectionSocket.sendMessage("{\"map\":[{\"explored\": \"" + arr[0] + "\",\"length\":" + arr[1] + ",\"obstacle\":\"" + arr[2] +
 						"\"}]}");
+				robot.displayMessage("{\"map\":[{\"explored\": \"" + arr[0] + "\",\"length\":" + arr[1] + ",\"obstacle\":\"" + arr[2] +
+						"\"}]}", 2);
 				complete = true;
 			}
 			

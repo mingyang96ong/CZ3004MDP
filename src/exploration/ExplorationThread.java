@@ -3,6 +3,7 @@ package exploration;
 import config.Constant;
 import connection.ConnectionSocket;
 import robot.Robot;
+import robot.SimulatorRobot;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -29,6 +30,9 @@ public class ExplorationThread extends Thread{
 	
 	public void run() {
 		running.set(true);
+		
+		// Check if it is the simulator mode
+		boolean isSimulated = r.getClass().equals(SimulatorRobot.class);
 		Exploration e = new Exploration();
 		e.Exploration(r, time, percentage, speed, image_recognition);
 		if (running.get()) {
@@ -39,10 +43,18 @@ public class ExplorationThread extends Thread{
 		}
 		stopThread();
 		if (ConnectionSocket.checkConnection()) {
+			// Send the MDF String at the end when it is completed
 			String[] arr2 = r.getMDFString();
 			ConnectionSocket.getInstance().sendMessage("M{\"map\":[{\"explored\": \"" + arr2[0] + "\",\"length\":" + arr2[1] + ",\"obstacle\":\"" + arr2[2] +
 					"\"}]}");
 			ConnectionSocket.getInstance().sendMessage(Constant.END_TOUR);
+		}
+		else {
+			// Display onto the User Interface, it is completed when it is the simulator
+			if (isSimulated) {
+				SimulatorRobot sr = (SimulatorRobot) r;
+				sr.displayMessage("Exploration Completed", 1);
+			}
 		}
 	}
 

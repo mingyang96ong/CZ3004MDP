@@ -222,14 +222,24 @@ public class Map{
 	}
 	
 	public void setWayPoint(int x, int y) {
+		boolean verbose = new Exception().getStackTrace()[1].getClassName().equals("robot.Robot");
+		
 		if (x >= Constant.BOARDWIDTH - 1 || x <= 0 || y >= Constant.BOARDHEIGHT - 1 || y <= 0 
 			|| (getGrid(x, y) != null && getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[0]) != 0 && getGrid(x, y).compareTo(Constant.POSSIBLEGRIDLABELS[1]) != 0)) {
+			if (!(waypoint[0] == -1 && waypoint[1] == -1)) {
+				this.waypoint[0] = -1;
+				this.waypoint[1] = -1;
+				if (verbose) {
+					System.out.println("The current waypoint is set as: " + "-1" + "," + "-1");
+				}
+			}
 			return;
 		}
 		this.waypoint[0] = x;
 		this.waypoint[1] = y;
-		String s = "Successfully set the waypoint: " + x + "," + y;
-		System.out.println(s);
+		if (verbose) {
+			System.out.println("Successfully set the waypoint: " + x + "," + y);
+		}
 	}
 	
 	public int[] getWayPoint() {

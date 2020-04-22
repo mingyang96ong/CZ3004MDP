@@ -31,8 +31,8 @@ public class SimulatorMap{
 		for (int i = 0; i < axis.length; i++) {
 			if (i < Constant.BOARDWIDTH) {
 				axis[i] = new JLabel("" + i);
-				axis[i].setBounds(Constant.MARGINLEFT + 15 + i * Constant.GRIDWIDTH, Constant.MARGINTOP - 30, 20, 20);
-				axis[i].setLocation(Constant.MARGINLEFT + 15 + i * Constant.GRIDWIDTH, Constant.MARGINTOP - 30);
+				axis[i].setBounds(Constant.MARGINLEFT + (int) (Constant.GRIDWIDTH * 3/8) + i * Constant.GRIDWIDTH, Constant.MARGINTOP - 30, 20, 20);
+				axis[i].setLocation(Constant.MARGINLEFT + (int) (Constant.GRIDWIDTH * 3/8) + i * Constant.GRIDWIDTH, Constant.MARGINTOP - 30);
 			}
 			else {
 				axis[i] = new JLabel("" + (i-Constant.BOARDWIDTH));

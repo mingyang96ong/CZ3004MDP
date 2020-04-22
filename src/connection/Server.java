@@ -53,7 +53,8 @@ public class Server {
 				else if(message.equals(Constant.SENSE_ALL) || message.equals(Constant.CALIBRATE) || message.equals(Constant.RIGHTALIGN)) {
 					System.out.println(pos[0] + ", " + pos[1]);
 				}
-				else if (message.equals(Constant.END_TOUR)) {
+ 				else if (message.equals(Constant.END_TOUR) || message.contains("N")) {
+
 					exploring = false;
 					fastestpath = false;
 					acknowledge = false;
@@ -77,17 +78,16 @@ public class Server {
 						sensorMessage = "84.0|84.0|84.0|3.0|3.0|84.0|1";
 						count = 0;
 					}
-//					try {
-//						TimeUnit.MILLISECONDS.sleep(1000);
-//					}
-//					catch (Exception e) {
-//						System.out.println(e.getMessage());
-//					}
+					try {
+						TimeUnit.MILLISECONDS.sleep(1000);
+					}
+					catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
 					server.sendMessage(sensorMessage);
 				}
 			}
 		}
-//		server.sendMessage(Constant.SEND_ARENA);
 		System.out.println(server.receiveMessage());
 	}
 }

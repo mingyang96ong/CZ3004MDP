@@ -50,7 +50,7 @@ public class SimulatorRobot extends Robot{
 	private void initialiseRobotImage(int x, int y) {
 		robotImage = new RobotImageComponent(Constant.ROBOTIMAGEPATHS[this.getDirection()], Constant.ROBOTWIDTH, Constant.ROBOTHEIGHT);
 		frame.add(robotImage);
-		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
+		robotImage.setLocation(Constant.MARGINLEFT + (Constant.GRIDWIDTH * 3 - Constant.ROBOTWIDTH)/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + (Constant.GRIDHEIGHT * 3 - Constant.ROBOTHEIGHT)/2 + (y-1) * Constant.GRIDHEIGHT);
 	}
 	
 	
@@ -59,7 +59,7 @@ public class SimulatorRobot extends Robot{
 		this.x = checkValidX(1);
 		this.y = checkValidY(1);
 		toggleValid();
-		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
+		robotImage.setLocation(Constant.MARGINLEFT + (Constant.GRIDWIDTH * 3 - Constant.ROBOTWIDTH)/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + (Constant.GRIDHEIGHT * 3 - Constant.ROBOTHEIGHT)/2 + (y-1) * Constant.GRIDHEIGHT);
 		
 	}
 	
@@ -88,6 +88,12 @@ public class SimulatorRobot extends Robot{
 		super.setWaypoint(x, y);
 		if (!Arrays.equals(old_waypoint, this.getWaypoint())) {
 			smap.setMap(map);
+			if (Arrays.equals(new int[] {-1, -1}, this.getWaypoint())) {
+				buttonListener.displayMessage("Removed waypoint.", 1);
+			}
+			else {
+				buttonListener.displayMessage("Successfully set the waypoint: " + x + ", " + y, 1);
+			}
 		}
 	}
 	
@@ -120,7 +126,7 @@ public class SimulatorRobot extends Robot{
 	public void restartRobot() {
 		this.x = checkValidX(0);
 		this.y = checkValidY(0);
-		robotImage.setLocation(Constant.MARGINLEFT + Constant.GRIDWIDTH/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + Constant.GRIDHEIGHT/2 + (y-1) * Constant.GRIDHEIGHT);
+		robotImage.setLocation(Constant.MARGINLEFT + (Constant.GRIDWIDTH * 3 - Constant.ROBOTWIDTH)/2 + (x-1) * Constant.GRIDWIDTH, Constant.MARGINTOP + (Constant.GRIDHEIGHT * 3 - Constant.ROBOTHEIGHT)/2 + (y-1) * Constant.GRIDHEIGHT);
 		setDirection(Constant.SOUTH);
 		this.sensor = new SimulatorSensor();
 		this.map = new Map();
@@ -209,39 +215,39 @@ public class SimulatorRobot extends Robot{
 	
 	// Simulate the delay in capturing image
 	public boolean captureImage(int[][] image_pos) {
-		buttonListener.enableLabel("image_cap");
+		buttonListener.displayMessage("Capturing image now", 1);
 		try {
 			TimeUnit.SECONDS.sleep(2);
 		}
 		catch (Exception e){
 			System.out.println(e.getMessage());
 		}
-		buttonListener.disableLabel("image_cap");
 		return false;
 	}
 	
 	// Simulate the delay in calibration
 	public void calibrate() {
-		buttonListener.enableLabel("calibrating");
+		buttonListener.displayMessage("Calibrating", 1);
 		try {
 			TimeUnit.SECONDS.sleep(2);
 		}
 		catch (Exception e){
 			System.out.println(e.getMessage());
 		}
-		buttonListener.disableLabel("calibrating");
 	}
 	
 	// Simulate the delay in right_align
 	public void right_align() {
-		buttonListener.enableLabel("calibrating");
+		buttonListener.displayMessage("Calibrating", 1);
 		try {
 			TimeUnit.SECONDS.sleep(1);
 		}
 		catch (Exception e){
 			System.out.println(e.getMessage());
 		}
-		buttonListener.disableLabel("calibrating");
 	}
 	
+	public void displayMessage(String s, int mode) {
+		buttonListener.displayMessage(s, mode);
+	}
 }

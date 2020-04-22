@@ -1,15 +1,18 @@
 package simulator;
 
+import java.awt.Adjustable;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +20,10 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.text.DefaultCaret;
 
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +57,8 @@ public class AddJButtonActionListener implements ActionListener{
 	private String[] MDFString = {null, null};
 	private int speed_chosen = 1;
 	private boolean image_recognition_chosen = false;
+	private JTextArea message = null;
+	private JScrollPane scrollPane = null;
 
 
 	// This constructor initialises all the buttons
@@ -57,13 +66,12 @@ public class AddJButtonActionListener implements ActionListener{
 		this.frame = frame;
 		this.r = r;
 		String[] arr = getArenaMapFileNames();
-		String[] waypoint_x_pos = create_seq_array(1, 19);
-		String[] waypoint_y_pos = create_seq_array(1, 14);
+		String[] waypoint_x_pos = create_seq_array(1, Constant.BOARDWIDTH-1);
+		String[] waypoint_y_pos = create_seq_array(1, Constant.BOARDHEIGHT-1);
 		String[] time_arr = create_seq_array(0, 121);
 		String[] percentage_arr = create_seq_array(0, 101);
 		String[] speed_arr = create_seq_array(1, 6);
 		String[] image_rec_arr = new String[] {"No Image Recognition", "With Image Recognition"};
-
 
 		// Create the UI Component
 		JLabel mcLabel = new JLabel("Manual Control:");
@@ -90,12 +98,22 @@ public class AddJButtonActionListener implements ActionListener{
 		JLabel percentage_label = new JLabel("Set exploration coverage limit (%): ");
 		JButton returnToStart = new JButton();
 		JButton printMDF = new JButton();
-		JLabel MDF_label = new JLabel(MDFString[1]);
 		JLabel speed_label = new JLabel("Set speed (secs/step): ");
 		JComboBox <String> speed = new JComboBox<>(speed_arr);
 		JComboBox <String> image_rec = new JComboBox<>(image_rec_arr);
-		JLabel image_cap = new JLabel("Capturing image now");
-		JLabel calibrating = new JLabel("Calibrating");
+		JLabel status = new JLabel("Status");
+		message = new JTextArea("\n".repeat(7) + "Initialising the User Interface...");
+		scrollPane = new JScrollPane(message);
+		
+//		scrollPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+//	        public void adjustmentValueChanged(AdjustmentEvent e) {  
+//	            e.getAdjustable().setValue(e.getAdjustable().getMaximum());
+//	            
+//	        }
+//	    });
+//		
+		scrollPane.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		// Set Icon or Image to the UI Component
 		right.setIcon(new ImageIcon(new ImageIcon(".\\images\\right.png").getImage().getScaledInstance(Constant.GRIDWIDTH, Constant.GRIDHEIGHT, Image.SCALE_DEFAULT)));
@@ -143,7 +161,7 @@ public class AddJButtonActionListener implements ActionListener{
 		time.setSelectedIndex(-1); //  This line will print null in console
 		percentage.addActionListener(this);
 		percentage.setActionCommand("Set % limit");
-		percentage.setSelectedIndex(100);
+		percentage.setSelectedIndex(101);
 		returnToStart.addActionListener(this);
 		returnToStart.setActionCommand("Return");
 		printMDF.addActionListener(this);
@@ -172,8 +190,8 @@ public class AddJButtonActionListener implements ActionListener{
 		exploration.setBounds(x, y + 50, 110, 50);
 		fastestPath.setBounds(x + 150, y + 50, 110, 50);
 		arenaMap.setBounds(x + 200, y + 175, 120, 30);
-		waypoint_x.setBounds(x + 100 , y + 125, 50, 30);
-		waypoint_y.setBounds(x + 175, y + 125, 50, 30);
+		waypoint_x.setBounds(x + 85 , y + 125, 50, 30);
+		waypoint_y.setBounds(x + 150, y + 125, 50, 30);
 		set_waypoint_label.setBounds(x, y + 125, 300, 30);
 		invalid_waypoint.setBounds(x + 150, y + 125, 300, 30);
 		time.setBounds(x + 200, y + 225, 50, 30);
@@ -183,16 +201,28 @@ public class AddJButtonActionListener implements ActionListener{
 		speed.setBounds(x + 150, y + 325, 50, 30);
 		speed_label.setBounds(x, y + 325, 200, 30);
 		returnToStart.setBounds(x + 300, y + 50, 140, 50);
-		printMDF.setBounds(x, y + 425, 100, 50);
-		MDF_label.setBounds(x, y + 475, 500, 30);
-		image_rec.setBounds(x, y + 375, 175, 30);
-		image_cap.setBounds(x + 200, y + 375, 175, 30);
-		calibrating.setBounds(x + 200, y + 375, 175, 30);
+		printMDF.setBounds(x + 275, y + 305, 100, 50);
+		image_rec.setBounds(x + 275, y + 225, 175, 30);
+		status.setBounds(x, y + 360, 50, 30);
+		scrollPane.setBounds(x, y + 390, 500, 163);
+		
 
 		// Set fonts for the labels
 		mcLabel.setFont(new Font(mcLabel.getFont().getName(), Font.ITALIC, 13));
 		robotView.setFont(new Font(robotView.getFont().getName(), Font.BOLD, 30));
 		simulatedMap.setFont(new Font(simulatedMap.getFont().getName(), Font.BOLD, 30));
+		status.setFont(new Font(simulatedMap.getFont().getName(), Font.BOLD, 15));
+		message.setFont(new Font(simulatedMap.getFont().getName(), Font.ITALIC, 15));
+		
+		// Set background colour of components
+		message.setBackground(Color.WHITE);
+		
+		// Set edittable of components
+		message.setEditable(false);
+		
+		// Set max row of message
+		message.setLineWrap(true);
+		message.setWrapStyleWord(true);
 
 		// Set location of the UI component
 		mcLabel.setLocation(x, y - 100);
@@ -209,8 +239,8 @@ public class AddJButtonActionListener implements ActionListener{
 		exploration.setLocation(x, y + 50);
 		fastestPath.setLocation(x + 150, y + 50);
 		arenaMap.setLocation(x + 200, y + 175);
-		waypoint_x.setLocation(x + 100, y + 125);
-		waypoint_y.setLocation(x + 175, y + 125);
+		waypoint_x.setLocation(x + 85, y + 125);
+		waypoint_y.setLocation(x + 150, y + 125);
 		set_waypoint_label.setLocation(x, y + 125);
 		invalid_waypoint.setLocation(x + 250, y + 125);
 		time.setLocation(x + 200 , y + 225);
@@ -220,11 +250,10 @@ public class AddJButtonActionListener implements ActionListener{
 		speed.setLocation(x + 150, y + 325);
 		speed_label.setLocation(x, y + 325);
 		returnToStart.setLocation(x + 300, y + 50);
-		printMDF.setLocation(x, y + 425);
-		MDF_label.setLocation(x, y + 475);
-		image_rec.setLocation(x, y + 375);
-		image_cap.setLocation(x + 200, y + 375);
-		calibrating.setLocation(x + 200, y + 375);
+		printMDF.setLocation(x + 275, y + 305);
+		image_rec.setLocation(x + 275, y + 225);
+		status.setLocation(x, y + 360);
+		scrollPane.setLocation(x, y + 390);
 
 		// Add the UI component to the frame
 		frame.add(mcLabel);
@@ -251,12 +280,11 @@ public class AddJButtonActionListener implements ActionListener{
 		frame.add(percentage_label);
 		frame.add(returnToStart);
 		frame.add(printMDF);
-		frame.add(MDF_label);
 		frame.add(speed);
 		frame.add(speed_label);
 		frame.add(image_rec);
-		frame.add(image_cap);
-		frame.add(calibrating);
+		frame.add(status);
+		frame.add(scrollPane);
 
 		// Set Visibility of UI Component
 		mcLabel.setVisible(true);
@@ -283,12 +311,12 @@ public class AddJButtonActionListener implements ActionListener{
 		percentage_label.setVisible(true);
 		returnToStart.setVisible(true);
 		printMDF.setVisible(true);
-		MDF_label.setVisible(false);
 		speed.setVisible(true);
 		speed_label.setVisible(true);
 		image_rec.setVisible(true);
-		image_cap.setVisible(false);
-		calibrating.setVisible(false);
+		status.setVisible(true);
+		message.setVisible(true);
+		scrollPane.setVisible(true);
 
 		// Add button to the list of buttons
 		Buttons.add(right);
@@ -319,20 +347,80 @@ public class AddJButtonActionListener implements ActionListener{
 		Labels.put("invalid_waypoint", invalid_waypoint);
 		Labels.put("time_label", time_label);
 		Labels.put("percentage_label", percentage_label);
-		Labels.put("MDF_label", MDF_label);
 		Labels.put("speed_label", speed_label);
-		Labels.put("image_cap", image_cap);
-		Labels.put("calibrating", calibrating);
+//		Labels.put("image_cap", image_cap);
+//		Labels.put("calibrating", calibrating);
 		
 		// Disable all button during the real runs as they are not meant to work for the Real Run
 		if (ConnectionSocket.checkConnection()) {
 			this.disableButtons();
 		}
 	}
+	
+	public void displayMessage(String s, int mode) {
+		// Mode 0 only print the message, Mode 1 display onto the console, Mode 2 does both
+		JScrollBar vbar = scrollPane.getVerticalScrollBar();
+		switch(mode) {
+			case 0:
+				System.out.println(s);
+				break;
+			case 1:
+				message.append("\n" + s);
+				try {
+					String messageText = message.getDocument().getText(0, message.getDocument().getLength());
+					if (messageText.charAt(0) == '\n') {
+						message.setText(message.getDocument().getText(0, message.getDocument().getLength()).replaceFirst("\n", ""));
+					}
+					String [] arr = messageText.split("\n");
+					if (arr.length > 100) {
+						message.setText(message.getDocument().getText(0, message.getDocument().getLength()).replaceFirst(arr[0] + "\n", ""));
+					}
+				}
+				catch (Exception e) {
+					System.out.println("Error in displayMessage");
+				}
+				vbar.addAdjustmentListener( new AdjustmentListener() {
+			        @Override
+			        public void adjustmentValueChanged(AdjustmentEvent e) {
+			            Adjustable adjustable = e.getAdjustable();
+			            adjustable.setValue(adjustable.getMaximum());
+			            // This is so that the user can scroll down afterwards
+			            vbar.removeAdjustmentListener(this);
+			        }
+			    });
+		        break;
+			case 2:
+				System.out.println(s);
+				message.append("\n" + s);
+				try {
+					String messageText = message.getDocument().getText(0, message.getDocument().getLength());
+					if (messageText.charAt(0) == '\n') {
+						message.setText(message.getDocument().getText(0, message.getDocument().getLength()).replaceFirst("\n", ""));
+					}
+					String [] arr = messageText.split("\n");
+					if (arr.length > 100) {
+						message.setText(message.getDocument().getText(0, message.getDocument().getLength()).replaceFirst(arr[0] + "\n", ""));
+					}
+				}
+				catch (Exception e) {
+					System.out.println("Error in displayMessage");
+				}
+				vbar.addAdjustmentListener( new AdjustmentListener() {
+			        @Override
+			        public void adjustmentValueChanged(AdjustmentEvent e) {
+			            Adjustable adjustable = e.getAdjustable();
+			            adjustable.setValue(adjustable.getMaximum());
+			            // This is so that the user can scroll down afterwards
+			            vbar.removeAdjustmentListener(this);
+			        }
+			    });
+		        break;
+		}	
+	}
 
 	private String[] create_seq_array(int min, int max){
 		String[] arr = new String[max-min+1];
-		int count = 0;
+		int count = 1;
 		for (int i=min; i<max; i++) {
 			arr[count] = Integer.toString(i);
 			count ++;
@@ -372,6 +460,7 @@ public class AddJButtonActionListener implements ActionListener{
 			
 			// Check for invalid map
 			if (line.length() != Constant.BOARDWIDTH) {
+				displayMessage("The format of the " + fileName + " does not match the board format.", 1);
 				throw new Exception("The format of the " + fileName + " does not match the board format.");
 			}
 			for (int i = 0; i < line.length(); i++) {
@@ -404,6 +493,8 @@ public class AddJButtonActionListener implements ActionListener{
 						break;
 						
 					default:
+						displayMessage("There is unrecognised character symbol in " + fileName + ".\n" +
+					fileName + " failed to load into the program.", 1);
 						throw new Exception("There is unrecognised character symbol in " + fileName + ".\n" +
 					fileName + " failed to load into the program.");
 				}
@@ -417,7 +508,7 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 		br.close();
 		loadedMap = new Map(grid);
-		System.out.println(fileName + " has loaded successfully.");
+		displayMessage(fileName + " has loaded successfully.", 2);
 		return loadedMap;
 	}
 	
@@ -447,7 +538,7 @@ public class AddJButtonActionListener implements ActionListener{
 		String action = e.getActionCommand();
 
 		if (action.equals("Right")) {
-			System.out.println("Rotate right clicked");
+			displayMessage("Rotate right button clicked", 2);
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
 				enableLabel("robotView");
@@ -458,7 +549,7 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 
 		if (action.equals("Left")) {
-			System.out.println("Rotate left clicked");
+			displayMessage("Rotate left button clicked", 2);
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
 				enableLabel("robotView");
@@ -469,7 +560,7 @@ public class AddJButtonActionListener implements ActionListener{
 		}
 
 		if (action.equals("Up")) {
-			System.out.println("Forward clicked");
+			displayMessage("Forward button clicked", 2);
 			disableButtons();
 			if (!Labels.get("robotView").isVisible()) {
 				enableLabel("robotView");
@@ -534,6 +625,7 @@ public class AddJButtonActionListener implements ActionListener{
 			}
 			r.restartRobot();
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
+			displayMessage("Restarted the Robot", 2);
 		}
 
 		if (action.contentEquals("Load Map")) {
@@ -564,7 +656,6 @@ public class AddJButtonActionListener implements ActionListener{
 				System.out.println(eX.getMessage());
 			}
 
-			disableLabel("MDF_label");
 			t.schedule(new EnableButtonTask(this), Constant.DELAY * (step * Constant.GRIDWIDTH + 1));
 			
 		}
@@ -576,17 +667,19 @@ public class AddJButtonActionListener implements ActionListener{
 			}
 			int [] waypoint = r.getWaypoint();
 			if (!FastestPathThread.getRunning() && ExplorationThread.getCompleted()) {
+				displayMessage("Fastest Path Started", 1);
 				FastestPathThread.getInstance(r, waypoint, speed_chosen);
 				disableButtons();
 				t.schedule(new EnableButtonTask(this), 1);
 			}
 			else if (!ExplorationThread.getCompleted()) {
-				System.out.println("You need to run exploration first.");
+				displayMessage("You need to run exploration first.", 2);
 			}
 		}
 
 		if (action.contentEquals("Exploration")) {
 			if (!ExplorationThread.getRunning()) {
+				displayMessage("Exploration Started", 1);
 				ExplorationThread.getInstance(r, time_chosen, percentage_chosen, speed_chosen, image_recognition_chosen);
 				disableButtons();
 				t.schedule(new EnableButtonTask(this), 1);
@@ -598,13 +691,14 @@ public class AddJButtonActionListener implements ActionListener{
 			JComboBox <String> waypoint_x = (JComboBox <String>)e.getSource();
 			String selected_waypoint_x = (String) waypoint_x.getSelectedItem();
 			if (selected_waypoint_x == null) {
-				return;
+				waypoint_chosen[0] = -1;
 			}
 			else {
 				waypoint_chosen[0] = Integer.parseInt(selected_waypoint_x);
 			}
+			int[] old_waypoint = r.getWaypoint();
 			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
-			if (Arrays.equals(r.getWaypoint(), waypoint_chosen)){
+			if (!Arrays.equals(old_waypoint, r.getWaypoint())){
 				enableLabel("robotView");
 				disableLabel("simulatedMap");
 			}
@@ -616,13 +710,14 @@ public class AddJButtonActionListener implements ActionListener{
 			JComboBox <String> waypoint_y = (JComboBox <String>)e.getSource();
 			String selected_waypoint_y = (String) waypoint_y.getSelectedItem();
 			if (selected_waypoint_y == null) {
-				return;
+				waypoint_chosen[1] = -1;
 			}
 			else {
 				waypoint_chosen[1] = Integer.parseInt(selected_waypoint_y);
 			}
+			int[] old_waypoint = r.getWaypoint();
 			r.setWaypoint(waypoint_chosen[0], waypoint_chosen[1]);
-			if (Arrays.equals(r.getWaypoint(), waypoint_chosen)){
+			if (!Arrays.equals(old_waypoint, r.getWaypoint())){
 				enableLabel("robotView");
 				disableLabel("simulatedMap");
 			}
@@ -656,10 +751,9 @@ public class AddJButtonActionListener implements ActionListener{
 
 		if (action.contentEquals("MDF String")) {
 			MDFString = r.getMDFString();
-			System.out.println(MDFString[0]);
-			System.out.println(MDFString[2]);
-			Labels.get("MDF_label").setText(MDFString[2]);
-			enableLabel("MDF_label");
+			displayMessage("The MDF String is: ", 2);
+			displayMessage("Part 1: "  + MDFString[0], 2);
+			displayMessage("Part 2: " + MDFString[2], 2);
 		}
 
 		if (action.contentEquals("Set speed")) {

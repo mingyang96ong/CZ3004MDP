@@ -106,8 +106,8 @@ public class Constant {
 
 
 	// Avoid changing these values below
-	public static final int ROBOTHEIGHT = GRIDHEIGHT * 2; // By default, this should be twice of the grid height.
-	public static final int ROBOTWIDTH = GRIDWIDTH * 2; // By default, this should be twice of the grid width.
+	public static final int ROBOTHEIGHT = GRIDHEIGHT * 2; // By default, this should be twice of the grid height. GRIDHEIGHT * 2
+	public static final int ROBOTWIDTH = GRIDWIDTH * 2; // By default, this should be twice of the grid width. GRIDWIDTH * 2
 	public static final int HEIGHT = BOARDHEIGHT * GRIDHEIGHT + MARGINTOP;
 	public static final int WIDTH = BOARDWIDTH * GRIDWIDTH + MARGINLEFT;
 

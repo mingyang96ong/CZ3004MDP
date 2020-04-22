@@ -14,7 +14,7 @@ public class RobotImageComponent extends ImageComponent{
 	public void moveRight(int pixel) {
 		int x = (int) super.getLocation().getX();
 		int y = (int) super.getLocation().getY();
-		if (x + pixel < Constant.WIDTH - Constant.GRIDWIDTH/2 - super.getWidth()) {
+		if (x + pixel < Constant.WIDTH - (Constant.GRIDWIDTH * 3 - Constant.ROBOTWIDTH)/2) {
 			setLocation(x + pixel, y);
 		}
 	}
@@ -22,7 +22,7 @@ public class RobotImageComponent extends ImageComponent{
 	public void moveLeft(int pixel) {
 		int x = (int) super.getLocation().getX();
 		int y = (int) super.getLocation().getY();
-		if (x - pixel >= Constant.MARGINLEFT + Constant.GRIDWIDTH/2) {
+		if (x - pixel >= Constant.MARGINLEFT + (Constant.GRIDWIDTH * 3 - Constant.ROBOTWIDTH)/2) {
 			setLocation(x - pixel, y);
 		}
 	}
@@ -30,7 +30,7 @@ public class RobotImageComponent extends ImageComponent{
 	public void moveUp(int pixel) {
 		int x = (int) super.getLocation().getX();
 		int y = (int) super.getLocation().getY();
-		if (y - pixel >= Constant.MARGINTOP + Constant.GRIDHEIGHT/2) {
+		if (y - pixel >= Constant.MARGINTOP + (Constant.GRIDHEIGHT * 3 - Constant.ROBOTHEIGHT)/2) {
 			setLocation(x, y - pixel);
 		}
 	}
@@ -38,7 +38,7 @@ public class RobotImageComponent extends ImageComponent{
 	public void moveDown(int pixel) {
 		int x = (int) super.getLocation().getX();
 		int y = (int) super.getLocation().getY();
-		if (y  + pixel < Constant.HEIGHT - Constant.GRIDHEIGHT/2 - super.getHeight()) {
+		if (y  + pixel < Constant.HEIGHT - (Constant.GRIDHEIGHT * 3 - Constant.ROBOTHEIGHT)/2) {
 			setLocation(x, y + pixel);
 		}
 	}
