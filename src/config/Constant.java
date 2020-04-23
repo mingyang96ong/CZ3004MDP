@@ -84,10 +84,10 @@ public class Constant {
 	public static final String STARTPOINTIMAGEPATH = ".\\images\\start_grid.png";
 	public static final String ENDPOINTIMAGEPATH = ".\\images\\end_grid.png";
 	public static final String ROBOTIMAGEPATH = ".\\images\\robot.png";
-	public static final String ROBOTNIMAGEPATH = ".\\images\\robotN.png";
-	public static final String ROBOTEIMAGEPATH = ".\\images\\robotE.png";
-	public static final String ROBOTSIMAGEPATH = ".\\images\\robotS.png";
-	public static final String ROBOTWIMAGEPATH = ".\\images\\robotW.png";
+	public static final String ROBOTNIMAGEPATH = ".\\images\\pikachuN.gif";
+	public static final String ROBOTEIMAGEPATH = ".\\images\\pikachuE.gif";
+	public static final String ROBOTSIMAGEPATH = ".\\images\\pikachuS.gif";
+	public static final String ROBOTWIMAGEPATH = ".\\images\\pikachuW.gif";
 	public static final String DIALOGICONIMAGEPATH = ".\\images\\letter-r.png";
 
 
@@ -106,8 +106,8 @@ public class Constant {
 
 
 	// Avoid changing these values below
-	public static final int ROBOTHEIGHT = GRIDHEIGHT * 2; // By default, this should be twice of the grid height. GRIDHEIGHT * 2
-	public static final int ROBOTWIDTH = GRIDWIDTH * 2; // By default, this should be twice of the grid width. GRIDWIDTH * 2
+	public static final int ROBOTHEIGHT = 100; // By default, this should be twice of the grid height. GRIDHEIGHT * 2
+	public static final int ROBOTWIDTH = 100; // By default, this should be twice of the grid width. GRIDWIDTH * 2
 	public static final int HEIGHT = BOARDHEIGHT * GRIDHEIGHT + MARGINTOP;
 	public static final int WIDTH = BOARDWIDTH * GRIDWIDTH + MARGINLEFT;
 
