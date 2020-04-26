@@ -215,7 +215,8 @@ public class SimulatorRobot extends Robot{
 	
 	// Simulate the delay in capturing image
 	public boolean captureImage(int[][] image_pos) {
-		buttonListener.displayMessage("Capturing image now", 1);
+		buttonListener.displayMessage("Capturing image at " + Arrays.toString(getPosition()) + " now", 1);
+		System.out.println("Capturing Image");
 		try {
 			TimeUnit.SECONDS.sleep(2);
 		}

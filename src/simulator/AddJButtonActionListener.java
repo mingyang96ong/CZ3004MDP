@@ -769,6 +769,7 @@ public class AddJButtonActionListener implements ActionListener{
 			String irc = (String) ir.getSelectedItem();
 			if (irc != null) {
 				image_recognition_chosen = irc.equals("With Image Recognition");
+				System.out.println("Image Rec: " + image_recognition_chosen);
 			}
 		}
 	}
